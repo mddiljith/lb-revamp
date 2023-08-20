@@ -1,8 +1,8 @@
-import SignInForm from "@/Components/ui/SigninForm";
+import SignInForm from "@/Components/Auth/SigninForm";
 import React from "react";
 
 function login() {
-  return <SignInForm/>;
+  return <SignInForm />;
 }
 
 export default login;

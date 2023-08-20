@@ -8,9 +8,12 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { useSignup } from "@/hooks/useSignup";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 function SignUpForm() {
   const { signup, isLoading } = useSignup();
+  const router = useRouter();
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
   const errorMessage =
@@ -19,13 +22,16 @@ function SignUpForm() {
     errors?.password?.message ||
     errors?.passwordConfirm?.message;
 
-  const onSubmit = ({ name, email, password }) => {
+  const onSubmit = ({ full_name, email, password }) => {
+    console.log(full_name, email, password);
     signup(
-      { name, email, password },
+      { full_name, email, password },
       {
         onSettled: () => reset(),
       }
     );
+
+    router.push("/");
   };
 
   // Email regex: /\S+@\S+\.\S+/
@@ -48,8 +54,8 @@ function SignUpForm() {
             type="text"
             label="Name"
             disabled={isLoading}
-            error={errors?.name?.message}
-            {...register("name", { required: "This field is required" })}
+            error={errors?.fullname?.message}
+            {...register("full_name", { required: "This field is required" })}
           />
           <Input
             size="lg"
@@ -69,6 +75,7 @@ function SignUpForm() {
             type="password"
             size="lg"
             label="Password"
+            disabled={isLoading}
             error={errors?.password?.message}
             {...register("password", {
               required: "This field is required",
@@ -110,13 +117,19 @@ function SignUpForm() {
             </Typography>
           }
           containerProps={{ className: "-ml-2.5" }}
+          disabled={isLoading}
+          {...register("terms-conditions", {
+            required: "Acknowledge Terms & conditions",
+          })}
         />
 
-        <Typography variant="small" color="gray">
-          {errors && errorMessage}
-        </Typography>
+        {errors && (
+          <Typography variant="small" color="gray">
+            {errorMessage}
+          </Typography>
+        )}
 
-        <Button className="mt-6" fullWidth>
+        <Button className="mt-6" type="submit" fullWidth disabled={isLoading}>
           Register
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
