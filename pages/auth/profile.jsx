@@ -1,11 +1,11 @@
 import React from "react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
-function profile() {
+function Profile() {
   return <div>profile</div>;
 }
 
-export default profile;
+export default Profile;
 
 export const getServerSideProps = async (ctx) => {
   // Create authenticated Supabase Client
