@@ -1,8 +1,14 @@
-import SignUpForm from "@/Components/Auth/SignUpForm";
+// import SignUpForm from "@/Components/Auth/SignUpForm";
 import React from "react";
 
 function SignUp() {
-  return <SignUpForm />;
+  return (
+    <>
+      <p>signup form</p>
+      {/* <SignUpForm /> */}
+      <p>get sign</p>
+    </>
+  );
 }
 
 export default SignUp;

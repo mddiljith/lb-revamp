@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <Link href={"/auth/signup"}>SignUp</Link>
+      <Link href={"/auth/signUp"}>SignUp</Link>
       <Link href={"/auth/login"}>SignIn</Link>
       <Button onClick={login} disabled={isLoading2}>
         signin with google
