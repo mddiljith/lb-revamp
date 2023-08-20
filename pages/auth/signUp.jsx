@@ -2,13 +2,7 @@
 import React from "react";
 
 function SignUp() {
-  return (
-    <>
-      <p>signup form</p>
-      {/* <SignUpForm /> */}
-      <p>get sign</p>
-    </>
-  );
+  return <SignUpForm />;
 }
 
 export default SignUp;
