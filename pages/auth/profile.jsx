@@ -1,8 +1,9 @@
 import React from "react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
-function Profile() {
-  return <div>profile</div>;
+function Profile({ user }) {
+  console.log(user);
+  return <div>{user.email}</div>;
 }
 
 export default Profile;
