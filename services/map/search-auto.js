@@ -1,5 +1,5 @@
 export const getAddressList = async (query) => {
-  const res = await fetch("/api/map/search?searchtext=" + query, {
+  const res = await fetch("/api/map/autosuggest?query=" + query, {
     headers: {
       "Content-Type": "application/json",
     },

@@ -19,6 +19,7 @@ function SearchForm() {
       setAddressList([]);
       const result = await getAddressList(query);
       setAddressList(result);
+      console.log(result);
     }, 1000);
     return () => clearTimeout(delayDebounceFn);
   }, [source, destination]);
@@ -49,21 +50,21 @@ function SearchForm() {
           }}
         />
 
-        {addressList?.suggestions && sourceChange ? (
+        {addressList?.suggestedLocations && sourceChange ? (
           <div
             className="shadow-md p-1 rounded-md
             absolute w-full bg-white z-20 mt-12"
           >
-            {addressList?.suggestions.map((item, index) => (
+            {addressList?.suggestedLocations.slice(0, 5).map((item, index) => (
               <h2
-                key={index}
+                key={item.eLoc}
                 className="p-3 hover:bg-gray-100
                 cursor-pointer"
                 // onClick={() => {
                 //   onSourceAddressClick(item);
                 // }}
               >
-                {`${item.name} , ${item.place_formatted}`}
+                {`${item.placeName} , ${item.placeAddress}`}
               </h2>
             ))}
           </div>

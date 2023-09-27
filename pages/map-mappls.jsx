@@ -6,15 +6,14 @@ import { useState } from "react";
 function MapView() {
   const { isLoading, position, error, getPosition } = useGeolocation();
   const [searchResult, setSearchResult] = useState([]);
-  
+
   console.log(position);
 
   async function getCordinates() {
-    const _url = "http://localhost:3000/api/map/direction"
+    const _url = "http://localhost:3000/api/map/direction";
     const result = await fetch(_url, {});
-
+    //http://localhost:3000/api/map/direction?source=eloc1&destination=eloc2
     setSearchResult(await result.json());
-    
   }
 
   return (
