@@ -1,19 +1,19 @@
-import Map from "@/Components/Map_Mappls/Map";
+import Map from "@/Components/Map/Map";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { Button } from "@material-tailwind/react";
 import { useState } from "react";
 
 function MapView() {
   const { isLoading, position, error, getPosition } = useGeolocation();
-  const [searchResult, setSearchResult] = useState([]);
+  const [path, setPath] = useState([]);
 
   console.log(position);
 
   async function getCordinates() {
-    const _url = "http://localhost:3000/api/map/direction";
+    const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/map/direction`;
     const result = await fetch(_url, {});
     //http://localhost:3000/api/map/direction?source=eloc1&destination=eloc2
-    setSearchResult(await result.json());
+    setPath(await result.json());
   }
 
   return (
@@ -21,7 +21,7 @@ function MapView() {
       <p> MAP </p>
       {!isLoading && position && (
         <div className="h-1/2 w-1/2">
-          <Map position={position} path={searchResult} />
+          <Map position={position} path={path} />
         </div>
       )}
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useLoginGoogle } from "@/hooks/useLoginGoogle";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
+import Navbar from "@/Components/ui/Navbar";
 
 export default function Home() {
   // const router = useRouter();
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <>
+      <Navbar />
       <Link href={"/auth/signUp"}>SignUp</Link>
       <Link href={"/auth/login"}>SignIn</Link>
       <Button onClick={login} disabled={isLoading2}>

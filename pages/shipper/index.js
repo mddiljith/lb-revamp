@@ -1,8 +1,14 @@
-import SearchForm from "@/Components/Shipper/SearchForm";
+import SearchForm from "@/Components/Shipper/SearchFormOld";
+import Navbar from "@/Components/ui/Navbar";
 import React from "react";
 
 function Shipper() {
-  return <SearchForm />;
+  return (
+    <>
+      <Navbar />
+      <SearchForm />
+    </>
+  );
 }
 
 export default Shipper;

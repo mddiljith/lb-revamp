@@ -2,7 +2,7 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { getAddressList } from "@/services/map/search-auto";
 
-function SearchForm() {
+function SearchFormOld() {
   const [source, setSource] = useState();
   const [sourceChange, setSourceChange] = useState(false);
   const [destination, setDistination] = useState();
@@ -113,4 +113,4 @@ function SearchForm() {
   );
 }
 
-export default SearchForm;
+export default SearchFormOld;

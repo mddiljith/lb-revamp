@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import userimg from "@/public/user.png";
 import { useLogout } from "@/hooks/useLogout";
 import {
   HiOutlineLogout,
@@ -15,6 +16,8 @@ import {
   MenuList,
   MenuItem,
   IconButton,
+  Navbar,
+  MobileNav,
 } from "@material-tailwind/react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
@@ -35,7 +38,7 @@ function Navbar() {
   console.log(user?.user_metadata);
 
   return (
-    <nav className="flex justify-between p-1 items-center shadow-lg">
+    <Navbar className="mx-auto max-w-screen-xl flex justify-between py-2 px-4 lg:px-8 lg:py-4 items-center shadow-lg">
       <h3 className="font-bold text-xl text-blue-800 p-4">
         <Link href="/">
           <Avatar src="./shipping.png" size="sm" color="blue-gray" />
@@ -49,7 +52,7 @@ function Navbar() {
                   variant="circular"
                   size="md"
                   className="border border-gray-900 p-0.5"
-                  src={user?.user_metadata?.avatar_url}
+                  src={user?.user_metadata?.avatar_url || userimg}
                   //find a way to add image for nongoogle user
                 />
               </MenuHandler>
@@ -88,7 +91,7 @@ function Navbar() {
           </IconButton>
         </Link>
       </h3>
-    </nav>
+    </Navbar>
   );
 }
 

@@ -27,11 +27,11 @@ function SignUpForm() {
     signup(
       { full_name, email, password },
       {
-        onSettled: () => reset(),
+        onSettled: () => {
+          reset();
+        },
       }
     );
-
-    router.push("/");
   };
 
   // Email regex: /\S+@\S+\.\S+/
