@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export function useTrips() {
   const {
     isLoading,
-    data: Trips,
+    data: trips,
     error,
   } = useQuery({
-    queryKey: ["tripsbyshipper"],
+    queryKey: ["trips"],
     queryFn: getTrips,
 
     onError: (err) => {
@@ -15,7 +16,7 @@ export function useTrips() {
     },
   });
 
-  return { isLoading, error, cabins };
+  return { isLoading, error, trips };
 }
 
 const getTrips = async () => {

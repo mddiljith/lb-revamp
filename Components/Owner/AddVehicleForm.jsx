@@ -1,17 +1,16 @@
 import { Avatar, Button, Card, Input, Radio } from "@material-tailwind/react";
 import React, { useState } from "react";
-
+import { useForm } from "react-hook-form";
 import { FiUpload, FiPlus } from "react-icons/fi";
 // import {
 //   createVehicleState,
 //   showVehicleAddState,
 // } from "../../context/VehicleAtom";
 import { useSetRecoilState, useRecoilState, useResetRecoilState } from "recoil";
-import { useSWRConfig } from "swr";
-import Loading from "../ui/Loader";
-import { toast } from "react-toastify";
+import Spinner from "@material-tailwind/react";
 
 function Addvehicle() {
+  const { register, handleSubmit, formState, getValues, reset } = useForm();
   //mutate the create vehicle
 
   // const [vehicleData, setVehicleData] = useRecoilState(createVehicleState);
@@ -48,11 +47,15 @@ function Addvehicle() {
   //   mutate(cacheKey);
   // }
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setIsloading(true);
+  const onSubmit = async ({
+    model,
+    model_year,
+    registrtion_number,
+    rc_photo,
+    truck_type,
+  }) => {
     await createVehicle();
-    setIsloading(false);
+
     setVehicleData({
       model: "",
       model_year: "",
@@ -63,7 +66,7 @@ function Addvehicle() {
       vehicle_photo: "",
       owner_id: "",
     });
-    setShowForm(false);
+    // setShowForm(false);
     // toast("Succesfully created your truck ");
   };
 
@@ -78,7 +81,10 @@ function Addvehicle() {
   return (
     <>
       <Card className="px-3 my-2 pb-2">
-        <form className="flex flex-col gap-1 p-2 mt-5 " onSubmit={onSubmit}>
+        <form
+          className="flex flex-col gap-1 p-2 mt-5 "
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="grid grid-cols-3 gap-2">
             {isLoading ? (
               <Loading />
@@ -91,47 +97,59 @@ function Addvehicle() {
                     name="truck_type"
                     label="Open"
                     value="Open"
-                    checked={vehicleData.truck_type === "Open"}
-                    onChange={handleChange}
+                    checked={getValues().truck_type === "Open"}
+                    {...register("truck_type", {
+                      required: "This field is required",
+                    })}
                   />
                   <Radio
                     id="truck-mini"
                     name="truck_type"
                     label="Small Truck"
                     value="Small Truck"
-                    checked={vehicleData.truck_type === "Small Truck"}
-                    onChange={handleChange}
+                    checked={getValues().truck_type === "Small Truck"}
+                    {...register("truck_type", {
+                      required: "This field is required",
+                    })}
                   />
                   <Radio
                     id="truck-container"
                     name="truck_type"
                     label="Container"
                     value="Container"
-                    checked={vehicleData.truck_type === "Container"}
-                    onChange={handleChange}
+                    checked={getValues().truck_type === "Container"}
+                    {...register("truck_type", {
+                      required: "This field is required",
+                    })}
                   />
                 </div>
                 <Input
                   variant="static"
                   label="Vehicle model"
-                  defaultValue={vehicleData.model}
+                  // defaultValue={getValues().model}
                   name="model"
-                  onChange={handleChange}
+                  {...register("model", {
+                    required: "This field is required",
+                  })}
                 />
                 <Input
                   variant="static"
                   label="Model year"
-                  defaultValue={vehicleData.model_year}
+                  // defaultValue={getValues().model_year}
                   name="model_year"
-                  onChange={handleChange}
+                  {...register("model_year", {
+                    required: "This field is required",
+                  })}
                 />
                 <Input
                   variant="static"
                   label="Registration Number"
                   placeholder="e.g. TN75AA7106"
-                  defaultValue={vehicleData.plate_number}
+                  // defaultValue={getValues().plate_number}
                   name="plate_number"
-                  onChange={handleChange}
+                  {...register("registration_number", {
+                    required: "This field is required",
+                  })}
                 />
               </div>
             )}
@@ -142,8 +160,8 @@ function Addvehicle() {
                 type="file"
                 hidden
                 name="vehicle_photo"
-                defaultValue={vehicleData.vehicle_photo}
-                onChange={handleChange}
+                // defaultValue={vehicleData.vehicle_photo}
+                {...register("vehicle_photo")}
               />
 
               <label htmlFor="vehicleImage" className="text-sm ">
@@ -164,7 +182,14 @@ function Addvehicle() {
             </div>
           </label>
 
-          <input id="doc" type="file" hidden />
+          <input
+            id="doc"
+            type="file"
+            hidden
+            {...register("rc_photo", {
+              required: "This field is required",
+            })}
+          />
 
           <div className="flex gap-5 mt-5">
             <Button type="submit" color="blue-gray" disabled={isLoading}>
@@ -174,7 +199,7 @@ function Addvehicle() {
               type="reset"
               variant="outlined"
               color="blue-gray"
-              onClick={() => setShowForm(false)}
+              onClick={() => reset()}
             >
               Cancel
             </Button>

@@ -2,7 +2,7 @@ import React from "react";
 import Table from "@/Components/ui/Table";
 
 import { Typography } from "@material-tailwind/react";
-import TripRowOwner from "./TripRowVehicle";
+import TripRowOwner from "./TripRowOwner";
 
 const TRIP_HEAD = [
   "Date",
@@ -14,7 +14,7 @@ const TRIP_HEAD = [
   " ",
 ];
 
-function TripTableShipper({ trips }) {
+function TripTableOwner({ trips }) {
   return (
     <Table
       topCard={
@@ -43,4 +43,4 @@ function TripTableShipper({ trips }) {
   );
 }
 
-export default TripTableShipper;
+export default TripTableOwner;
