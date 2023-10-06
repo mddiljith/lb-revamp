@@ -41,7 +41,7 @@ function Trips() {
                 )}
               </TabPanel>
               <TabPanel value={2}>
-                <p>//tripupcoming to be pasted here</p>
+                <p>tripupcoming to be pasted here</p>
               </TabPanel>
             </TabsBody>
           </Tabs>
