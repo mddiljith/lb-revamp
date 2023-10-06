@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useLoginGoogle } from "@/hooks/useLoginGoogle";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
-import Navbar from "@/Components/ui/Navbar";
+import Navbar from "@/Components/ui/NavbarMain";
 
 export default function Home() {
   // const router = useRouter();

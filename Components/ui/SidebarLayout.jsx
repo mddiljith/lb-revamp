@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./NavbarMain";
 import { useRouter } from "next/router";
 
 function SidebarLayout({ sidelinks }) {

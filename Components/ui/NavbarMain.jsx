@@ -32,7 +32,7 @@ const navList = (
   </ul>
 );
 
-function Navbar() {
+function NavbarMain() {
   const user = useUser();
   const { logout, isLoading } = useLogout();
   console.log(user?.user_metadata);
@@ -95,4 +95,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarMain;

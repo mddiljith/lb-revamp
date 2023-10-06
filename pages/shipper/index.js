@@ -1,5 +1,5 @@
 import SearchForm from "@/Components/Shipper/SearchFormOld";
-import Navbar from "@/Components/ui/Navbar";
+import Navbar from "@/Components/ui/NavbarMain";
 import React from "react";
 
 function Shipper() {
