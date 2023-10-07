@@ -1,6 +1,7 @@
 import React from "react";
 import VehicleRow from "./VehicleRow";
 import Table from "../ui/Table";
+import { Typography } from "@material-tailwind/react";
 
 const VEHICLE_HEAD = [
   "Vehicle id",
@@ -9,11 +10,10 @@ const VEHICLE_HEAD = [
   "Year",
   "Vehicle Number",
   "Status",
-  "Owner",
   " ",
 ];
 
-function VehicleTable() {
+function VehicleTable({ vehicleData }) {
   return (
     <Table
       topCard={
@@ -33,9 +33,9 @@ function VehicleTable() {
     >
       <Table.Header header={VEHICLE_HEAD} />
       <Table.Body
-        data={vehicles}
+        data={vehicleData}
         render={(vehicle, i) => (
-          <VehicleRow row={vehicle} key={vehicle.f_id} index={i} />
+          <VehicleRow row={vehicle} key={vehicle.id} index={i} />
         )}
       />
     </Table>

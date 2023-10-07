@@ -61,12 +61,12 @@ function SignInForm() {
               className="flex items-center font-normal"
             >
               I agree the
-              <a
+              <Link
                 href="#"
                 className="font-medium transition-colors hover:text-gray-900"
               >
                 &nbsp;Terms and Conditions
-              </a>
+              </Link>
             </Typography>
           }
           containerProps={{ className: "-ml-2.5" }}

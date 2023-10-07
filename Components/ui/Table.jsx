@@ -73,7 +73,7 @@ function Body({ data, render }) {
 
   return (
     <TableContext.Provider value={{ length }}>
-      <tbody>{data.map(render)}</tbody>
+      <tbody>{data?.map(render)}</tbody>
     </TableContext.Provider>
   );
 }

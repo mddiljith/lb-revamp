@@ -3,8 +3,8 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useVehicles } from "@/hooks/vehicles/useVehicles";
 import { Card, Spinner } from "@material-tailwind/react";
 import VehicleTable from "@/Components/Owner/VehicleTable";
-import SidebarLayout from "@/Components/ui/SidebarLayout";
-import { OWNER_SIDELINKS } from "@/lib/const/SidelinksConst";
+
+import OwnerLayout from "@/Components/Owner/OwnerLayout";
 
 function Trucks({ user, role }) {
   const { isLoading, error, vehicles } = useVehicles();
@@ -12,7 +12,11 @@ function Trucks({ user, role }) {
   console.log(vehicles);
   return (
     <Card className="p-2">
-      {isLoading && !error ? <Spinner /> : <VehicleTable />}
+      {isLoading && !error ? (
+        <Spinner />
+      ) : (
+        <VehicleTable vehicleData={vehicles} />
+      )}
     </Card>
   );
 }
@@ -20,7 +24,9 @@ function Trucks({ user, role }) {
 export default Trucks;
 
 Trucks.getLayout = function getLayout(page) {
-  return <SidebarLayout sidelinks={OWNER_SIDELINKS}>{page}</SidebarLayout>;
+  return <OwnerLayout>{page}</OwnerLayout>;
+
+  // <SidebarLayout sidelinks={OWNER_SIDELINKS}>{page}</SidebarLayout>;
 };
 
 export const getServerSideProps = async (ctx) => {

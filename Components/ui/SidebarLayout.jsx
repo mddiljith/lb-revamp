@@ -11,7 +11,7 @@ function SidebarLayout({ sidelinks, children }) {
       <main className="flex-1 bg-[#e5e5e5]  px-1">
         <Navbar />
         {/* <Suspense fallback={<h1>Loading....</h1>}> */}
-          <section>{children}</section>
+        <section>{children}</section>
         {/* </Suspense> */}
       </main>
     </div>
