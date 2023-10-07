@@ -1,16 +1,18 @@
 import React from "react";
 import Navbar from "./NavbarMain";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { Button } from "@material-tailwind/react";
 
-function SidebarLayout({ sidelinks }) {
+function SidebarLayout({ sidelinks, children }) {
   return (
     <div className=" flex flex-row justify-start ">
       <Sidebar sidelinks={sidelinks} />
       <main className="flex-1 bg-[#e5e5e5]  px-1">
         <Navbar />
-        <Suspense fallback={<h1>Loading....</h1>}>
+        {/* <Suspense fallback={<h1>Loading....</h1>}> */}
           <section>{children}</section>
-        </Suspense>
+        {/* </Suspense> */}
       </main>
     </div>
   );

@@ -11,7 +11,8 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 
-import TripTable from "../../components/User/TripTable";
+// import TripTable from "../../components/User/TripTable";
+import TripTableOwner from "@/Components/Owner/TripTableOwner";
 
 import { useTrips } from "@/hooks/trips/useTrips";
 
@@ -37,7 +38,7 @@ function Trips() {
                 {isLoading ? (
                   <Spinner color="blue" />
                 ) : (
-                  <TripTable trips={data} />
+                  <TripTableOwner trips={data} />
                 )}
               </TabPanel>
               <TabPanel value={2}>

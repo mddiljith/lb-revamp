@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 // import { createEditCabin } from "../../services/apiCabins";
 
-export function useCreateCabin() {
+export function useAddVehicle() {
   const queryClient = useQueryClient();
 
   const { mutate: createTruck, isLoading: isCreating } = useMutation({

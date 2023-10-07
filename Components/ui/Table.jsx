@@ -6,7 +6,7 @@ import {
   CardBody,
   CardFooter,
 } from "@material-tailwind/react";
-import Empty from "./Empty";
+// import Empty from "./Empty";
 
 const TableContext = createContext();
 const TableContext1 = createContext();
@@ -69,7 +69,7 @@ function RowItem({ children }) {
 function Body({ data, render }) {
   const length = data?.length;
 
-  if (!length) return <Empty resourceName="data" />;
+  // if (!length) return <Empty resourceName="data" />;
 
   return (
     <TableContext.Provider value={{ length }}>

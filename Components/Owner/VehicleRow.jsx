@@ -4,38 +4,38 @@ import React from "react";
 function VehicleRow(row, index) {
   const { deleteTruck } = useDeleteVehicle();
 
-  const { f_id, f_type, f_model, f_model_year, f_plate_number, f_status } = row;
+  const { id, types, model, model_year, plate_number, statuses } = row;
 
   return (
     <Table.Row index={index}>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {f_id}
+          {id}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {f_type}
+          {types.name}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {f_model}
+          {model}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {f_model_year}
+          {model_year}
         </Typography>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {f_plate_number}
+          {plate_number}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
         <Chip
           variant="gradient"
-          color={f_status === "Active" ? "green" : "blue-gray"}
-          value={f_status}
+          color={statuses.name === "Active" ? "green" : "blue-gray"}
+          value={statuses.name}
           className="py-0.5 px-2 text-[11px] font-medium"
         />
       </Table.RowItem>
@@ -54,9 +54,9 @@ function VehicleRow(row, index) {
               Update Status
             </MenuItem>
             <MenuItem>Edit</MenuItem>
-            <MenuItem onClick={() => deleteTruck(f_id)}>Delete</MenuItem>
+            <MenuItem onClick={() => deleteTruck(id)}>Delete</MenuItem>
             <MenuItem>
-              <Link href={`/vehicle/${f_id}`}>
+              <Link href={`/vehicle/${id}`}>
                 <div className="flex  gap-1">
                   More
                   <span className="align-bottom">
