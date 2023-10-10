@@ -1,15 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import userimg from "@/public/user.png";
-import { useLogout } from "@/hooks/useLogout";
-import {
-  HiOutlineLogout,
-  HiOutlineCash,
-  HiOutlineUserCircle,
-  HiMenu,
-  HiBell,
-} from "react-icons/hi";
+// import userimg from "@/public/user.png";
+import { useLogout } from "@/hooks/auth/useLogout";
+import { HiOutlineLogout, HiBell } from "react-icons/hi";
 import {
   Button,
   Avatar,
@@ -21,7 +15,7 @@ import {
   Navbar,
   MobileNav,
 } from "@material-tailwind/react";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const navList = (
   <ul className="flex justify-between p-4 items-center gap-8">
@@ -38,7 +32,7 @@ function NavbarMain() {
   const user = useUser();
   const router = useRouter();
   const { logout, isLoading } = useLogout();
-  console.log(user?.user_metadata);
+  console.log(user);
 
   return (
     <Navbar
@@ -52,7 +46,7 @@ function NavbarMain() {
         {user ? (
           <Menu placement="bottom-end">
             <MenuHandler>
-              <Avatar src={user?.user_metadata?.avatal_url || userimg} />
+              <Avatar src={user?.user_metadata?.avatal_url} />
             </MenuHandler>
             <MenuList>
               <MenuItem>

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import { useSignup } from "@/hooks/useSignup";
+import { useSignup } from "@/hooks/auth/useSignup";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
