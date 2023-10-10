@@ -16,6 +16,8 @@ export default function Home() {
   // const { user, userRole } = useUserRole();
   const { login, isLoading: isLoading2 } = useLoginGoogle();
   const { logout, isLoading } = useLogout();
+  const user = useUserRole();
+  console.log('User from HOOK', user)
 
   const handleclick = async () => {
     const { data: session } = await supabase.auth.getSession();

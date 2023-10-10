@@ -9,7 +9,7 @@ import OwnerLayout from "@/Components/Owner/OwnerLayout";
 function Trucks({ user, role }) {
   const { isLoading, error, vehicles } = useVehicles();
 
-  console.log(vehicles);
+  console.log('Vehicles loading from Trucks.js', vehicles);
   return (
     <Card className="p-2">
       {isLoading && !error ? (

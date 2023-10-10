@@ -3,14 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export function useUserRole() {
-  const id_ = user.id;
   const {
     isLoading,
-    data: userRole,
+    data: user,
     error,
   } = useQuery({
     queryKey: ["user"],
-    queryFn: getUserRole,
+    queryFn: getUser,
 
     onError: (err) => {
       console.log("ERROR", err);
@@ -18,16 +17,11 @@ export function useUserRole() {
     },
   });
 
-  return { isLoading, user, userRole };
+  return { isLoading, user };
 }
 
-const getUserRole = async () => {
-  const supabase = useSupabaseClient();
-  const user = useUser();
-  let { data: role, error } = await supabase
-    .from("users")
-    .select("role_meta_data")
-    .eq("id", user.id);
-
-  return { user, role };
+const getUser = async () => {
+  const _url = `${process.env.NEXT_PUBLIC_URL}/api/auth/user`;
+  const res = await fetch(_url);
+  return res.json(); 
 };

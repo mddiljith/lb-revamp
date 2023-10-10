@@ -14,7 +14,16 @@ export default async function handler(req, res) {
     if (req.method == "GET") {
       let { data, error } = await supabase
         .from("vehicles")
-        .select("*")
+        .select(`
+          id,
+          model,
+          model_year,
+          plate_number,
+          types(name),
+          statuses(name),
+          driver_id,
+          owner_id
+        `)
         .eq("id", vehicleId);
       res.status(200).json(data);
     } else if (req.method == "PUT") {
