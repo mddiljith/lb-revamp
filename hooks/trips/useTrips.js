@@ -7,12 +7,12 @@ export function useTrips() {
     data: trips,
     error,
   } = useQuery({
-    queryKey: ["trips"],
+    queryKey: ["Trips"],
     queryFn: getTrips,
 
     onError: (err) => {
       console.log("ERROR", err);
-      toast.error("Error in fetching trips details");
+      toast.error(err.message);
     },
   });
 
@@ -21,6 +21,6 @@ export function useTrips() {
 
 const getTrips = async () => {
   const _url = `${process.env.NEXT_PUBLIC_URL}/api/trips`;
-  const res = await fetch(_url);
-  return res.json();
+  const response = await fetch(_url);
+  return response.json();
 };

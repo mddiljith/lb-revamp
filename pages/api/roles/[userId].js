@@ -6,15 +6,17 @@ module.exports = async (req, res) => {
     res,
   });
 
-  console.log('Role js', req.params)
+  const roleData = await getUserRole(req.query.userId);
 
   // Get role
-  // async function getUserRole(user_id) {
-  //   let { data: role, error } = await supabaseServerClient
-  //   .from('users')
-  //   .select('role_meta_data')
-  //   .eq('id', user_id)
+  async function getUserRole(user_id) {
+    let { data: role, error } = await supabaseServerClient
+    .from('users')
+    .select('role_meta_data')
+    .eq('id', user_id)
   
-  //   return role
-  // }
+    return role
+  }
+
+  res.status(200).json(roleData)
 }

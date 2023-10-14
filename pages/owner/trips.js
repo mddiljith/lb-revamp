@@ -17,7 +17,7 @@ import TripTableOwner from "@/Components/Owner/TripTableOwner";
 import { useTrips } from "@/hooks/trips/useTrips";
 
 function Trips() {
-  const { data, error, isLoading } = useTrips();
+  const { isLoading, error, trips } = useTrips();
 
   return (
     <div className="mt-8 mb-8 flex flex-col gap-12 p-3">
@@ -38,7 +38,7 @@ function Trips() {
                 {isLoading ? (
                   <Spinner color="blue" />
                 ) : (
-                  <TripTableOwner trips={data} />
+                  <TripTableOwner trips={trips} />
                 )}
               </TabPanel>
               <TabPanel value={2}>
