@@ -1,7 +1,14 @@
 import React from "react";
 import VehicleRow from "./VehicleRow";
 import Table from "../ui/Table";
-import { Typography } from "@material-tailwind/react";
+import {
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Typography,
+} from "@material-tailwind/react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const VEHICLE_HEAD = [
   "Vehicle id",

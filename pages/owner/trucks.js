@@ -5,13 +5,16 @@ import { Card, Spinner } from "@material-tailwind/react";
 import VehicleTable from "@/Components/Owner/VehicleTable";
 
 import OwnerLayout from "@/Components/Owner/OwnerLayout";
+import { useRouter } from "next/router";
 
 function Trucks({ user, role }) {
+  const router = useRouter();
   const { isLoading, error, vehicles } = useVehicles();
 
-  console.log('Vehicles loading from Trucks.js', vehicles);
+  console.log("Vehicles loading from Trucks.js", vehicles);
+
   return (
-    <Card className="p-2">
+    <Card className="p-2 mt-6">
       {isLoading && !error ? (
         <Spinner />
       ) : (

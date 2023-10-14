@@ -50,6 +50,7 @@ function Header({ header }) {
 
 function Row({ children, index }) {
   const { length } = useContext(TableContext);
+
   const isLast = index === length - 1;
   const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -63,7 +64,11 @@ function Row({ children, index }) {
 function RowItem({ children }) {
   const { classes } = useContext(TableContext1);
 
-  return <td className={classes}>{children}</td>;
+  return (
+    <>
+      <td className={classes}>{children}</td>
+    </>
+  );
 }
 
 function Body({ data, render }) {
@@ -115,7 +120,9 @@ export default Table;
     <Table.Row key=data.id index=i>
     <Table.RowItem>item1 </Table.RowItem>
     <Table.RowItem>item2 </Table.RowItem>
-    </Table.Row>)}/>
+    </Table.Row>)
+  fixeditem = <Table.RowItem>item in a row</Table.RowItem>
+  }/>
 
     
 </Table>; */

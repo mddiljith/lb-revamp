@@ -34,6 +34,7 @@ function Sidebar({ sidelinks }) {
           >
             <Link href={item.path}>
               <Button
+                color="blue-gray"
                 variant={router.pathname === item.path ? "filled" : "text"}
                 className="flex items-center gap-1 px-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-200"
               >

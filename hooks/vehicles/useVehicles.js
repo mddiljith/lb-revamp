@@ -20,7 +20,7 @@ export function useVehicles() {
 }
 
 const getVehicles = async () => {
-  const _url = `${process.env.NEXT_PUBLIC_URL}/api/vehicles`;
+  const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/vehicles`;
   const res = await fetch(_url);
   return res.json();
 };

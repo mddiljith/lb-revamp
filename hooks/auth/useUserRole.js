@@ -21,7 +21,7 @@ export function useUserRole() {
 }
 
 const getUser = async () => {
-  const _url = `${process.env.NEXT_PUBLIC_URL}/api/auth/user`;
+  const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/user`;
   const res = await fetch(_url);
-  return res.json(); 
+  return res.json();
 };

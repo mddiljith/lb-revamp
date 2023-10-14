@@ -1,34 +1,33 @@
 import { useDeleteVehicle } from "@/hooks/vehicles/useDeleteVehicle";
-import React from "react";
-import Table from "../ui/Table"
+import React, { useEffect, useState } from "react";
+import Table from "../ui/Table";
 import {
   Typography,
-  Chip, 
+  Chip,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
-  Link 
+  Link,
 } from "@material-tailwind/react";
-import { BsThreeDotsVertical,
-  IoIosArrowForward } from "react-icons/bs";
-
+import { BsThreeDotsVertical, IoIosArrowForward } from "react-icons/bs";
 
 function VehicleRow(row, index) {
   const { deleteTruck } = useDeleteVehicle();
-  console.log('Printing row inside VehicleRows', row)
-  const { id, types, model, model_year, plate_number, statuses } = row;
+  const [value, setValue] = useState(row);
+
+  const { id, types, model, model_year, plate_number, statuses } = value.row;
 
   return (
     <Table.Row index={index}>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {id}
+          {`${model}`}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
-          {}
+          {types.name}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
@@ -40,34 +39,36 @@ function VehicleRow(row, index) {
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
           {model_year}
         </Typography>
+      </Table.RowItem>
+      <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
           {plate_number}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        {/* <Chip
+        <Chip
           variant="gradient"
           color={statuses.name === "Active" ? "green" : "blue-gray"}
           value={statuses.name}
           className="py-0.5 px-2 text-[11px] font-medium"
-        /> */}
+        />
       </Table.RowItem>
-
-      <Table.RowItem>
-        <Menu placement="left-end">
-          <MenuHandler>
+      <Menu placement="left-end">
+        <MenuHandler>
+          <td>
             <BsThreeDotsVertical />
-          </MenuHandler>
-          <MenuList>
-            <MenuItem
-            // onClick={() => {
-            //   dialogHandler();
-            // }}
-            >
-              Update Status
-            </MenuItem>
-            <MenuItem>Edit</MenuItem>
-            <MenuItem onClick={() => deleteTruck(id)}>Delete</MenuItem>
+          </td>
+        </MenuHandler>
+        <MenuList>
+          <MenuItem
+          // onClick={() => {
+          //   dialogHandler();
+          // }}
+          >
+            Update Status
+          </MenuItem>
+          <MenuItem>Edit</MenuItem>
+          {/* <MenuItem onClick={() => deleteTruck(id)}>Delete</MenuItem>
             <MenuItem>
               <Link href={`/vehicle/${id}`}>
                 <div className="flex  gap-1">
@@ -77,10 +78,9 @@ function VehicleRow(row, index) {
                   </span>
                 </div>
               </Link>
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Table.RowItem>
+            </MenuItem> */}
+        </MenuList>
+      </Menu>
     </Table.Row>
   );
 }
