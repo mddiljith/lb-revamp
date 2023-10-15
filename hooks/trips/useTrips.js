@@ -20,7 +20,7 @@ export function useTrips() {
 }
 
 const getTrips = async () => {
-  const _url = `${process.env.NEXT_PUBLIC_URL}/api/trips`;
+  const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/trips`;
   const res = await fetch(_url);
   return res.json();
 };

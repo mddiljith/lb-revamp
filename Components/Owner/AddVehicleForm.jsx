@@ -1,51 +1,16 @@
 import { Avatar, Button, Card, Input, Radio } from "@material-tailwind/react";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiUpload, FiPlus } from "react-icons/fi";
-// import {
-//   createVehicleState,
-//   showVehicleAddState,
-// } from "../../context/VehicleAtom";
-import { useSetRecoilState, useRecoilState, useResetRecoilState } from "recoil";
+import { FiUpload } from "react-icons/fi";
+import { useSetRecoilState } from "recoil";
 import Spinner from "@material-tailwind/react";
+import { useAddVehicle } from "@/hooks/vehicles/useAddVehicle";
+import { showAddvehicleState } from "@/context/VehicleAtom";
 
-function Addvehicle() {
+function AddvehicleForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
-  //mutate the create vehicle
 
-  // const [vehicleData, setVehicleData] = useRecoilState(createVehicleState);
-  // const [vehicleData, setVehicleData] = useState({
-  //   model: "",
-  //   model_year: "",
-  //   plate_number: "",
-  //   truck_type: "",
-  //   status_id: "",
-  //   rc_photo: "",
-  //   vehicle_photo: "",
-  //   owner_id: "",
-  // });
-  // const setShowForm = useSetRecoilState(showVehicleAddState);
-
-  // const { mutate } = useSWRConfig();
-  // console.log(cacheKey);
-
-  // async function createVehicle() {
-  //   const requestParams = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ data: vehicleData }),
-  //   };
-  //   await fetch("../api/vehicles", requestParams)
-  //     .then((data) => {
-  //       return data;
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       toast("Oops! vehcile is not created  ");
-  //     });
-
-  //   mutate(cacheKey);
-  // }
+  const { isCreating, createTruck } = useAddVehicle();
+  const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
 
   const onSubmit = async ({
     model,
@@ -54,7 +19,7 @@ function Addvehicle() {
     rc_photo,
     truck_type,
   }) => {
-    await createVehicle();
+    createTruck();
 
     setVehicleData({
       model: "",
@@ -66,18 +31,10 @@ function Addvehicle() {
       vehicle_photo: "",
       owner_id: "",
     });
-    // setShowForm(false);
-    // toast("Succesfully created your truck ");
+    setShowAddVehicle(false);
+    reset();
   };
 
-  const handleChange = (e) => {
-    setVehicleData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
   return (
     <>
       <Card className="px-3 my-2 pb-2">
@@ -86,8 +43,8 @@ function Addvehicle() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="grid grid-cols-3 gap-2">
-            {isLoading ? (
-              <Loading />
+            {isCreating ? (
+              <Spinner />
             ) : (
               <div className="flex flex-col gap-4 col-span-2">
                 <div className="mb-6">
@@ -192,14 +149,17 @@ function Addvehicle() {
           />
 
           <div className="flex gap-5 mt-5">
-            <Button type="submit" color="blue-gray" disabled={isLoading}>
-              {isLoading ? "Loading.." : "Submit"}
+            <Button type="submit" color="blue-gray" disabled={isCreating}>
+              {isCreating ? "Loading.." : "Submit"}
             </Button>
             <Button
               type="reset"
               variant="outlined"
               color="blue-gray"
-              onClick={() => reset()}
+              onClick={() => {
+                setShowAddVehicle(false);
+                reset();
+              }}
             >
               Cancel
             </Button>
@@ -210,4 +170,4 @@ function Addvehicle() {
   );
 }
 
-export default Addvehicle;
+export default AddvehicleForm;

@@ -13,3 +13,8 @@ export const createVehicleState = atom({
     owner_id: "",
   },
 });
+
+export const showAddvehicleState = atom({
+  key: "showAddvehicle",
+  default: false,
+});

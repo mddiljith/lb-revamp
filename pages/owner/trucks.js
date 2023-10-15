@@ -1,24 +1,32 @@
 import React from "react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import { useVehicles } from "@/hooks/vehicles/useVehicles";
-import { Card, Spinner } from "@material-tailwind/react";
+import { Button, Card, Spinner } from "@material-tailwind/react";
 import VehicleTable from "@/Components/Owner/VehicleTable";
-
 import OwnerLayout from "@/Components/Owner/OwnerLayout";
 import { useRouter } from "next/router";
+import { FaPlusCircle } from "react-icons/fa";
+import AddvehicleForm from "@/Components/Owner/AddVehicleForm";
+import { useRecoilState } from "recoil";
+import { showAddvehicleState } from "@/context/VehicleAtom";
 
 function Trucks({ user, role }) {
   const router = useRouter();
+  const [showAddvehicle, setShowAddVehicle] =
+    useRecoilState(showAddvehicleState);
   const { isLoading, error, vehicles } = useVehicles();
 
   console.log("Vehicles loading from Trucks.js", vehicles);
 
   return (
-    <Card className="p-2 mt-6">
+    <Card className="p-2 mt-6 w-full">
       {isLoading && !error ? (
         <Spinner />
       ) : (
-        <VehicleTable vehicleData={vehicles} />
+        <>
+          {showAddvehicle && <AddvehicleForm />}
+          <VehicleTable vehicleData={vehicles} />
+        </>
       )}
     </Card>
   );

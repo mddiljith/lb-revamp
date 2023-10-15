@@ -18,6 +18,7 @@ import { useTrips } from "@/hooks/trips/useTrips";
 
 function Trips() {
   const { data, error, isLoading } = useTrips();
+  console.log(data);
 
   return (
     <div className="mt-8 mb-8 flex flex-col gap-12 p-3">
