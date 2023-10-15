@@ -16,8 +16,6 @@ function Trucks({ user, role }) {
     useRecoilState(showAddvehicleState);
   const { isLoading, error, vehicles } = useVehicles();
 
-  console.log("Vehicles loading from Trucks.js", vehicles);
-
   return (
     <Card className="p-2 mt-6 w-full">
       {isLoading && !error ? (

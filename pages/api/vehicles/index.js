@@ -6,10 +6,6 @@ module.exports = async (req, res) => {
     res,
   });
 
-  // const {
-  //   data: { user },
-  // } = await supabaseServerClient.auth.getUser();
-
   const {
     data: { session },
   } = await supabaseServerClient.auth.getSession();

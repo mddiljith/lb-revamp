@@ -32,7 +32,7 @@ function NavbarMain() {
   const user = useUser();
   const router = useRouter();
   const { logout, isLoading } = useLogout();
-  console.log(user);
+  // console.log(user);
 
   return (
     <Navbar
