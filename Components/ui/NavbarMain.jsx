@@ -14,6 +14,7 @@ import {
   IconButton,
   Navbar,
   MobileNav,
+  Chip
 } from "@material-tailwind/react";
 import { useUser } from "@supabase/auth-helpers-react";
 
@@ -32,16 +33,33 @@ function NavbarMain() {
   const user = useUser();
   const router = useRouter();
   const { logout, isLoading } = useLogout();
-  // console.log(user);
+  console.log(user);
 
   return (
     <Navbar
       role="nav"
-      className="flex justify-between px-10 w-full rounded-xl transition-all sticky top-1 z-40 py-3 shadow-md shadow-blue-gray-500/5"
+      className="flex justify-between w-full transition-all sticky top-1 z-40 py-3 border border-gray-300 border-solid p-4 shadow-none text-gray-900"
       fullWidth
       blurred
     >
-      {navList}
+      <div className="flex gap-2">
+        {user ? (
+          <>
+          <span className="font-semibold text-xl py-2">{user.user_metadata.full_name}</span>
+          <span className="py-2">
+            <Chip
+              variant="ghost"
+              color="green"
+              size="sm"
+              value="Role"
+            />
+          </span>
+          </>
+        ):(
+          <div>None</div>
+        )}
+      </div>
+      {/* {navList} */}
       <div className="flex items-center gap-1">
         {user ? (
           <Menu placement="bottom-end">
