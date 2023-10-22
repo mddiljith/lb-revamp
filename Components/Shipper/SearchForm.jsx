@@ -11,7 +11,8 @@ function SearchForm() {
   const onSubmit = async () => {
     // e.preventDefault();
     const path = await getDirection(mapData.source, mapData.destination);
-
+    // get eloc pass this to global context
+    
     SetShowSearch(false);
 
     //1. router push
