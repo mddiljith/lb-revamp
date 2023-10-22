@@ -1,5 +1,5 @@
 import Map from "@/Components/Map/Map";
-import { useGeolocation } from "@/hooks/useGeolocation";
+import { useGeolocation } from "@/hooks/map/useGeolocation";
 import { Button } from "@material-tailwind/react";
 import { useState } from "react";
 

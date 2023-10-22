@@ -1,11 +1,22 @@
 import { Button, Typography } from "@material-tailwind/react";
 import AutocompleteInput from "./AutocompleteInput";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { mapState, showSearchState } from "@/context/SearchAtom";
+import { getDirection } from "@/services/map/getDirection";
 
 function SearchForm() {
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const [mapData, setMapData] = useRecoilState(mapState);
+  const SetShowSearch = useSetRecoilState(showSearchState);
+
+  const onSubmit = async () => {
+    // e.preventDefault();
+    const path = await getDirection(mapData.source, mapData.destination);
+
+    SetShowSearch(false);
+
     //1. router push
-    //2. put all source destination in the Global context
+    //2. states are updated in global context via component
+    //3.get the distance and other details from the map and put in map context
   };
   return (
     <section className="p-2 bg-neutral-500 rounded-lg">

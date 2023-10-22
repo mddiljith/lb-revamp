@@ -8,7 +8,7 @@ function AutocompleteInput({ label, placeholder, name }) {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const setMapLocations = useSetRecoilState(mapState);
-  const setSearcReq = useSetRecoilState(searchReqState);
+  const setSearchReq = useSetRecoilState(searchReqState);
 
   const handleClick = (item) => {
     setValue(item.placeName);
@@ -20,7 +20,7 @@ function AutocompleteInput({ label, placeholder, name }) {
       };
     });
 
-    setSearcReq((prev) => {
+    setSearchReq((prev) => {
       return {
         ...prev,
         name: item.placeName,
@@ -37,15 +37,6 @@ function AutocompleteInput({ label, placeholder, name }) {
     console.log(result);
   };
 
-  // useEffect(() => {
-  //   const delayDebounceFn = setTimeout(async () => {
-  //     setSuggestions([]);
-  //     const result = await getAddressList(value);
-  //     setSuggestions(result);
-  //     console.log(result);
-  //   }, 1000);
-  //   return () => clearTimeout(delayDebounceFn);
-  // }, [value]);
   return (
     <>
       <Input
@@ -64,7 +55,7 @@ function AutocompleteInput({ label, placeholder, name }) {
       />
 
       <List className="absolute">
-        {suggestions?.suggestedLocations.slice(0, 5).map((item) => (
+        {suggestions?.suggestedLocations?.slice(0, 5).map((item) => (
           <ListItem key={item.eLoc} onClick={() => handleClick(item)}>
             {`${item.placeName} , ${item.placeAddress}`}
           </ListItem>

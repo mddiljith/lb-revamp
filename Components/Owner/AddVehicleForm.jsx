@@ -11,26 +11,20 @@ function AddvehicleForm() {
 
   const { isCreating, createTruck } = useAddVehicle();
   const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
+  const { errors } = formState;
+  const onSubmit = async (newTruck) => {
+    createTruck(newTruck);
 
-  const onSubmit = async ({
-    model,
-    model_year,
-    registrtion_number,
-    rc_photo,
-    truck_type,
-  }) => {
-    createTruck();
-
-    setVehicleData({
-      model: "",
-      model_year: "",
-      plate_number: "",
-      truck_type: "",
-      status_id: "",
-      rc_photo: "",
-      vehicle_photo: "",
-      owner_id: "",
-    });
+    // setVehicleData({
+    //   model: "",
+    //   model_year: "",
+    //   plate_number: "",
+    //   truck_type: "",
+    //   status_id: "",
+    //   rc_photo: "",
+    //   vehicle_photo: "",
+    //   owner_id: "",
+    // });
     setShowAddVehicle(false);
     reset();
   };
@@ -85,6 +79,7 @@ function AddvehicleForm() {
                   label="Vehicle model"
                   // defaultValue={getValues().model}
                   name="model"
+                  error={errors?.model?.message}
                   {...register("model", {
                     required: "This field is required",
                   })}
@@ -94,6 +89,7 @@ function AddvehicleForm() {
                   label="Model year"
                   // defaultValue={getValues().model_year}
                   name="model_year"
+                  error={errors?.model_year?.message}
                   {...register("model_year", {
                     required: "This field is required",
                   })}
@@ -104,15 +100,21 @@ function AddvehicleForm() {
                   placeholder="e.g. TN75AA7106"
                   // defaultValue={getValues().plate_number}
                   name="plate_number"
+                  error={errors?.plate_number?.message}
                   {...register("registration_number", {
                     required: "This field is required",
+                    pattern: {
+                      value:
+                        /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/,
+                      message: "Please provide a valid Registration number",
+                    },
                   })}
                 />
               </div>
             )}
 
             <div>
-              <input
+              <Input
                 id="vehicleImage"
                 type="file"
                 hidden

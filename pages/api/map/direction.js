@@ -28,4 +28,6 @@ export default async function GET(req, res) {
   });
   //console.log('Search result', searchResultData);
   res.status(200).json(searchResultData);
+
+  // other data like distance, time and path is required
 }
