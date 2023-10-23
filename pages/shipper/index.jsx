@@ -27,7 +27,7 @@ function Shipper() {
         <div className=" top-10 bg-white w-96 ml-5 rounded-lg p-4 shadow-md">
           {showSearch && false && <SearchForm />}
           {/* {!showSearch && showTruckSearch && <TruckSearch />} */}
-          {true && <TruckSelection />}
+          {!showSearch && showTruckSearch && <TruckSelection />}
 
           {!showSearch && !showTruckSearch && <Schedule />}
         </div>
