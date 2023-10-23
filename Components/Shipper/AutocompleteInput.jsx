@@ -1,31 +1,39 @@
 import React, { useState } from "react";
-import { Input, List, ListItem } from "@material-tailwind/react";
+import { Card, Input, List, ListItem } from "@material-tailwind/react";
 import { getAddressList } from "@/services/map/search-auto";
 import { useSetRecoilState } from "recoil";
 import { mapState, searchReqState } from "@/context/SearchAtom";
 
 function AutocompleteInput({ label, placeholder, name }) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState({ place: "", field: "" });
+  const [selectedItem, setselectedItem] = useState({});
   const [suggestions, setSuggestions] = useState([]);
   const setMapLocations = useSetRecoilState(mapState);
   const setSearchReq = useSetRecoilState(searchReqState);
 
   const handleClick = (item) => {
-    setValue(item.placeName);
+    setValue((prev) => {
+      return {
+        ...prev,
+        place: item.placeName,
+      };
+    });
 
     setMapLocations((prev) => {
       return {
         ...prev,
-        name: item,
+        [value.field]: item,
       };
     });
 
     setSearchReq((prev) => {
       return {
         ...prev,
-        name: item.placeName,
+        [value.field]: item.placeName,
       };
     });
+
+    setSuggestions([]);
   };
 
   const handleSuggestion = async (value) => {
@@ -47,19 +55,23 @@ function AutocompleteInput({ label, placeholder, name }) {
         placeholder={placeholder}
         name={name} //name should be same as the context name,ie source or destination
         containerProps={{ className: "relative" }}
-        value={value}
+        value={value?.place}
         onChange={(e) => {
-          setValue(e.target.value);
+          e.preventDefault();
+          setValue({ place: e.target.value, field: e.target.name });
+
           handleSuggestion(e.target.value);
         }}
       />
 
-      <List className="absolute">
-        {suggestions?.suggestedLocations?.slice(0, 5).map((item) => (
-          <ListItem key={item.eLoc} onClick={() => handleClick(item)}>
-            {`${item.placeName} , ${item.placeAddress}`}
-          </ListItem>
-        ))}
+      <List className="">
+        <Card>
+          {suggestions?.suggestedLocations?.slice(0, 5).map((item) => (
+            <ListItem key={item.eLoc} onClick={() => handleClick(item)}>
+              {`${item.placeName} , ${item.placeAddress}`}
+            </ListItem>
+          ))}
+        </Card>
       </List>
     </>
   );
