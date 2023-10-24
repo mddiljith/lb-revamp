@@ -14,9 +14,10 @@ import {
   IconButton,
   Navbar,
   MobileNav,
-  Chip
+  Chip,
 } from "@material-tailwind/react";
-import { useUser } from "@supabase/auth-helpers-react";
+
+import { useUserRole } from "@/hooks/auth/useUserRole";
 
 const navList = (
   <ul className="flex justify-between p-4 items-center gap-8">
@@ -30,10 +31,11 @@ const navList = (
 );
 
 function NavbarMain() {
-  const user = useUser();
+  const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
   const { logout, isLoading } = useLogout();
-  console.log(user);
+  // const { user_metadata, role_meta_data } = user;
+  console.log(user_metadata, role_meta_data);
 
   return (
     <Navbar
@@ -45,17 +47,19 @@ function NavbarMain() {
       <div className="flex gap-2">
         {user ? (
           <>
-          <span className="font-semibold text-xl py-2">{user.user_metadata.full_name}</span>
-          <span className="py-2">
-            <Chip
-              variant="ghost"
-              color="green"
-              size="sm"
-              value="Role"
-            />
-          </span>
+            <span className="font-semibold text-xl py-2">
+              {user?.user_metadata?.full_name}
+            </span>
+            <span className="py-2">
+              <Chip
+                variant="ghost"
+                color="green"
+                size="sm"
+                value={user?.role_meta_data[0]?.role_meta_data.role_descr}
+              />
+            </span>
           </>
-        ):(
+        ) : (
           <div>None</div>
         )}
       </div>

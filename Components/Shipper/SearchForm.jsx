@@ -1,13 +1,18 @@
 import { Button, Typography } from "@material-tailwind/react";
 import AutocompleteInput from "./AutocompleteInput";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { mapState, showSearchState } from "@/context/SearchAtom";
+import {
+  mapState,
+  showSearchState,
+  showTruckSearchState,
+} from "@/context/SearchAtom";
 import { getDirection } from "@/services/map/getDirection";
 // import { sub } from "date-fns";
 
 function SearchForm() {
   const [mapData, setMapData] = useRecoilState(mapState);
   const SetShowSearch = useSetRecoilState(showSearchState);
+  const setshowTruckSearch = useSetRecoilState(showTruckSearchState);
 
   const onSubmit = async (e) => {
     console.log(e);
@@ -19,7 +24,7 @@ function SearchForm() {
     console.log(eloc1);
     if (eloc1 && eloc2) {
       const path = await getDirection(eloc1, eloc2);
-
+      console.log(path);
       setMapData((prev) => {
         return {
           ...prev,
@@ -31,6 +36,7 @@ function SearchForm() {
     // get eloc pass this to global context
 
     SetShowSearch(false);
+    setshowTruckSearch(true);
 
     //1. router push
     //2. states are updated in global context via component

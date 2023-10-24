@@ -10,11 +10,12 @@ import {
 } from "@material-tailwind/react";
 
 import { useSetRecoilState } from "recoil";
-import { searchReqState } from "@/context/SearchAtom";
+import { searchReqState, showTruckSearchState } from "@/context/SearchAtom";
 import { useForm } from "react-hook-form";
 
 function TruckSelection() {
   const setSearchReq = useSetRecoilState(searchReqState);
+  const setshowTruckSearch = useSetRecoilState(showTruckSearchState);
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
@@ -22,13 +23,15 @@ function TruckSelection() {
   const onSubmit = (truckReq) => {
     // e.PreventDefault();
     console.log(truckReq);
-    console.log(truckReq);
+
     setSearchReq((prev) => {
       return {
         ...prev,
         ...truckReq,
       };
     });
+
+    setshowTruckSearch(false);
   };
 
   return (
@@ -79,7 +82,7 @@ function TruckSelection() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <Select
+            {/* <Select
               variant="static"
               label="Material Type"
               name="materialType"
@@ -93,7 +96,7 @@ function TruckSelection() {
               <option value="PSL">Plastic /Steel/Raw material</option>
               <Option value="FUR"> Furniture </Option>
               <Option value="OTH">other</Option>
-            </Select>
+            </Select> */}
             <Input
               variant="static"
               color="indigo"
@@ -149,7 +152,7 @@ function TruckSelection() {
               name="truckLength"
               label="17ft" //map through the database
               value="17ft"
-              {...register("truck_type", {
+              {...register("truckLength", {
                 required: "This field is required",
               })}
               // checked={search.truck_length === "Open"}

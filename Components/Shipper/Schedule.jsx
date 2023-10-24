@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchReqState } from "@/context/SearchAtom";
+import {
+  Button,
+  Input,
+  Option,
+  Select,
+  Typography,
+} from "@material-tailwind/react";
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
@@ -29,6 +36,10 @@ function Schedule() {
         };
       });
     }
+
+    //1. data push to searchReq.  - > search reqid
+    // push searrc/[searchId]  ---> search confirmation -->  pricing calculation api search req -> pay now
+    //2. background - trip create , driver assigned , payment status true
   };
   return (
     <>
