@@ -3,16 +3,33 @@ import AutocompleteInput from "./AutocompleteInput";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { mapState, showSearchState } from "@/context/SearchAtom";
 import { getDirection } from "@/services/map/getDirection";
+// import { sub } from "date-fns";
 
 function SearchForm() {
   const [mapData, setMapData] = useRecoilState(mapState);
   const SetShowSearch = useSetRecoilState(showSearchState);
 
-  const onSubmit = async () => {
-    // e.preventDefault();
-    const path = await getDirection(mapData.source, mapData.destination);
+  const onSubmit = async (e) => {
+    console.log(e);
+    e.preventDefault();
+
+    console.log(mapData?.source.eLoc, mapData?.destination.eLoc);
+    let eloc1 = mapData?.source.eLoc;
+    let eloc2 = mapData?.destination.eLoc;
+    console.log(eloc1);
+    if (eloc1 && eloc2) {
+      const path = await getDirection(eloc1, eloc2);
+
+      setMapData((prev) => {
+        return {
+          ...prev,
+          route_path: path,
+        };
+      });
+    }
+
     // get eloc pass this to global context
-    
+
     SetShowSearch(false);
 
     //1. router push
@@ -24,7 +41,7 @@ function SearchForm() {
       <Typography variant="h3" className="py-5 mb-3">
         Book your Truck!
       </Typography>
-      <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+      <form className="flex flex-col gap-5">
         <AutocompleteInput
           label="Pickup"
           name="source"
@@ -36,7 +53,7 @@ function SearchForm() {
           name="destination"
           placeholder="e.g. Delhi"
         />
-        <Button type="submit" color="deep-purple" className="mt-5">
+        <Button onClick={onSubmit} color="deep-purple" className="mt-5">
           <span>Get Quote</span>
         </Button>
       </form>
