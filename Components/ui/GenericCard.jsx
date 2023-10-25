@@ -11,7 +11,7 @@ const GenericCard = (props) => {
   return (
     <Card className="flex-2 md:flex-1 m-4 mt-6 w-96">
       <CardBody className="p-0">
-        <Typography variant="h5" color="blue-gray" className="mb-2 bg-cyan-500 text-white text-md font-normal text-center py-4 rounded-lg overflow-hidden w-full">
+        <Typography variant="h5" color="blue-gray" className="mb-2 bg-cyan-500 text-white text-md font-normal text-center py-4 rounded-t-lg overflow-hidden w-full">
           {props.title}
         </Typography>
         <Typography variant="h1" className="text-center p-5">
