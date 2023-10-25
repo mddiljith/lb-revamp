@@ -33,7 +33,7 @@ function Shipper() {
           {!showSearch && !showTruckSearch && <Schedule />}
           {/* <Schedule /> */}
         </div>
-        <div className="h-1/2 w-1/2">
+        <div className="h-full w-full">
           {!showSearch && route_path && <Map path={route_path} />}
         </div>
       </main>

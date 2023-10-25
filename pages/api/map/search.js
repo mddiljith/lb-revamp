@@ -2,7 +2,8 @@ const BASE_URL = "https://api.mapbox.com/search/searchbox/v1/suggest";
 
 export default async function GET(req, res) {
   const { searchtext } = req.query;
-
+  res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
+  
   const result = await fetch(
     BASE_URL +
       "?q=" +

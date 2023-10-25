@@ -15,20 +15,21 @@
     "@supabase/supabase-js": "^2.32.0",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
-    "autoprefixer": "10.4.15",
+    "autoprefixer": "^9.8.8",
     "date-fns": "^2.30.0",
     "eslint-config-next": "13.4.13",
     "mappls-web-maps": "^3.0.4",
     "next": "13.4.12",
-    "postcss": "8.4.27",
+    "postcss": "^8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
     "react-map-gl": "^7.1.4",
+    "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.3",
     "recoil": "^0.7.7",
     "sharp": "^0.32.6",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "^3.3.3"
   }
 }

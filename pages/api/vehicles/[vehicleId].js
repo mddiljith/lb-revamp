@@ -5,6 +5,8 @@ export default async function handler(req, res) {
     req,
     res,
   });
+  res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
+  
   const { vehicleId } = req.query;
   try {
     // if(!session) {

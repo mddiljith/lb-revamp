@@ -7,8 +7,8 @@ const headers = {
 };
 const fixedParams = "&region=IND&pod=CITY";
 export default async function GET(req, res) {
+  res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
   const searchtext = req.query.query;
-  console.log({ searchtext });
   let _url = `${BASE_URL}?query=${searchtext}`;
   const result = await fetch(_url, headers);
 
