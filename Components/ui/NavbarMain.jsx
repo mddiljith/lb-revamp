@@ -34,8 +34,6 @@ function NavbarMain() {
   const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
   const { logout, isLoading } = useLogout();
-  // const { user_metadata, role_meta_data } = user;
-  console.log(user_metadata, role_meta_data);
 
   return (
     <Navbar
@@ -55,7 +53,7 @@ function NavbarMain() {
                 variant="ghost"
                 color="green"
                 size="sm"
-                value={user?.role_meta_data[0]?.role_meta_data.role_descr}
+                value={user['role_meta_data'][0].role_meta_data.role_descr}
               />
             </span>
           </>
