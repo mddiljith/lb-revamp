@@ -11,22 +11,29 @@ export default async function GET(req, res) {
   const eloc1 = req.query.source;
   const eloc2 = req.query.destination;
   const fixedParams = `/17ad22773438f5b91de7ef095b9aa1dc/route_adv/driving/${eloc1};${eloc2}?alternatives=true&rtype=0&geometries=polyline&overview=full&exclude=&steps=true&region=ind`;
+  // const fixedParams = `/17ad22773438f5b91de7ef095b9aa1dc/route_adv/driving/WLC2GM;VX2UJC?alternatives=true&rtype=0&geometries=polyline&overview=full&exclude=&steps=true&region=ind`;
 
   let _url = `${BASE_URL}${fixedParams}`;
   const result = await fetch(_url, headers);
 
   const searchResult = await result.json();
-  const searchResultData = [];
+  const searchResultData = {path: []};
+  console.log('direction result', searchResult);
   console.log(searchResult.routes[0]);
+  let directionResponse = {
+    duration: searchResult.routes[0].duration,
+    distance: searchResult.routes[0].distance
+  }
   searchResult.routes[0].legs[0].steps.map((step) => {
     step.intersections.map((intersection) => {
-      searchResultData.push({
+      searchResultData.path.push({
         lat: intersection.location[1],
         lng: intersection.location[0],
       });
     });
   });
-  //console.log('Search result', searchResultData);
+  
+  console.log('Search result', {...directionResponse, ...searchResultData});
   res.status(200).json(searchResultData);
 
   // other data like distance, time and path is required

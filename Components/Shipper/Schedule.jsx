@@ -12,10 +12,21 @@ import {
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const [option, setOption] = useState();
+  const [searchRequest, setSearchRequest] = useState([]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    //update here
+    console.log(search);
+    const requestParams = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ search }),
+    };
+    const searchRequestResp = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
+      requestParams
+    );
+    setSearchRequest(searchRequestResp)
   };
 
   const handleChange = (e) => {

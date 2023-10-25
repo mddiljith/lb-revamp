@@ -26,12 +26,12 @@ function Shipper() {
         className="flex flex-row justify-between  bg-fixed bg-bottom bg-cover  h-screen"
       >
         <div className=" top-10 bg-white w-96 ml-5 rounded-lg p-4 shadow-md">
-          {/* {showSearch && <SearchForm />}
+          {showSearch && <SearchForm />}
        
           {!showSearch && showTruckSearch && <TruckSelection />}
 
-          {!showSearch && !showTruckSearch && <Schedule />} */}
-          <Schedule />
+          {!showSearch && !showTruckSearch && <Schedule />}
+          {/* <Schedule /> */}
         </div>
         <div className="h-1/2 w-1/2">
           {!showSearch && route_path && <Map path={route_path} />}

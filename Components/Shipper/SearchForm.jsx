@@ -15,20 +15,18 @@ function SearchForm() {
   const setshowTruckSearch = useSetRecoilState(showTruckSearchState);
 
   const onSubmit = async (e) => {
-    console.log(e);
     e.preventDefault();
 
-    console.log(mapData?.source.eLoc, mapData?.destination.eLoc);
     let eloc1 = mapData?.source.eLoc;
     let eloc2 = mapData?.destination.eLoc;
-    console.log(eloc1);
     if (eloc1 && eloc2) {
-      const path = await getDirection(eloc1, eloc2);
-      console.log(path);
+      const {duration, distance, path} = await getDirection(eloc1, eloc2);
       setMapData((prev) => {
         return {
           ...prev,
           route_path: path,
+          duration,
+          distance,
         };
       });
     }
