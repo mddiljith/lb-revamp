@@ -31,9 +31,30 @@ module.exports = async (req, res) => {
 
   if(req.method == "GET") {
     tripResponse = await ownerTrips(userId);
+  } else if (req.method == "POST") {
+    tripResponse = await createTrips(trip);
   }
 
-  async function ownerTrips(userId) {
+  const createTrips = async (trip) => {
+    const s_r_id = req.body.search_request_id;
+    const vehicles = await getVehicles();
+    let selected_vehicle = vehicles[Math.floor(Math.random() * vehicles.length)]
+    const trackingId = generateTrackingId();
+    let { data, error } = await supabase
+      .from('trips')
+      .insert({
+        search_request_id: s_r_id,
+        vehicle_id: selected_vehicle.id,
+        distance: 100,
+        tracking_id: trackingId
+      }).select();
+      console.log("Error in Trip create******");
+      console.log(error);
+      console.log("Data in Trip create******");
+      console.log(data);
+  }
+
+  const ownerTrips = async (userId) => {
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -79,43 +100,11 @@ module.exports = async (req, res) => {
     return role
   }
 
-  //   else if(driverId) {
-  //     console.info('driverId', driverId);
-  //     let { data, error } = await supabase
-  //       .from('trips')
-  //       .select(`
-  //       tracking_id, 
-  //       status_id, 
-  //       payment_status(
-  //         id,
-  //         statuses(
-  //           id,
-  //           name
-  //         )
-  //       ), 
-  //       vehicles(
-  //         id, 
-  //         driver_id
-  //       ),   
-  //       search_requests(
-  //         id,
-  //         source,destination,
-  //         users(
-  //           id,
-  //           email,
-  //           name
-  //         ))`
-  //       ).eq('vehicles.driver_id', driverId)
-  //       .eq('status_id', parseInt(statusId));
-  //     console.log("ERROR", error);
-  //     console.log('Trips', data);
-  //     //if(error != null) {
-  //     res.status(200).json(data);
-  //     //}
-  //   } else {
-  //     res.status(500).json({"error": "error"});
-  //     res.end();
-  //   }
+  const generateTrackingId = () => {
+    return Math.floor(Math.random() * 999999);
+  }
+
+  
   // } else if(req.method == 'POST') {
   //   console.log('POST API');
   // } else if(req.method == 'PUT') {

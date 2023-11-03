@@ -4,7 +4,7 @@ import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
 
 function SearchConfirmation() {
-  const { Price } = usePrice();
+  const { price } = usePrice();
   const { searchData } = useSearch();
 
   // 1.create a hook for featching the search request data from router query

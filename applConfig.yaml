@@ -1,0 +1,9 @@
+api:
+  mappls:
+    token_api:
+      url: https://outpost.mapmyindia.com/api/security/oauth/token
+      grant_type: client_credentials
+      client_id: 33OkryzDZsKQgUZOhY9rLY3JOsy_8VYy59GHEUSyC07x2GeaxOn8Ynt7FcITT8u9YUWqI_3VO6bplpRBqphPRg==
+      client_secret: lrFxI-iSEg_AL9sYtJo6XedufJKlBpHQmnOpVZiOo99u4QICrfX2rDkC9r5GGe1BcCt7LSjKPjKAhsZpY75eSjt1PXBSVB2n
+settings:
+  debug: true

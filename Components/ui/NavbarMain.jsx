@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // import userimg from "@/public/user.png";
@@ -39,7 +39,7 @@ function NavbarMain() {
   useEffect(() => {
     setAvatar(user?.user_metadata?.avatal_url);
     console.log(avatar);
-  }, [third]);
+  }, []);
 
   return (
     <Navbar

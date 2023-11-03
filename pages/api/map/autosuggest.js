@@ -1,8 +1,11 @@
+//import { getAccessToken } from '../../../services/map/tokenService'
+
 const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
+//const accessToken = getAccessToken();
 const headers = {
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Bearer b7afd9cd-5d8c-42f3-b734-b0dc9c3e13cd",
+    "Authorization": `Bearer 9ac32361-5500-44a5-badb-338da2f45860`,
   },
 };
 const fixedParams = "&region=IND&pod=CITY";
