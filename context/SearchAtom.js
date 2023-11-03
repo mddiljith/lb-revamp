@@ -22,6 +22,7 @@ export const searchReqState = atom({
     length: "",
     scheduled_at: "",
     scheduled_time: "",
+    price: "",
   }, // default value (aka initial value)
 });
 

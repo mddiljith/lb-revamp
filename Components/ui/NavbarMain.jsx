@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 // import userimg from "@/public/user.png";
@@ -33,7 +33,13 @@ const navList = (
 function NavbarMain() {
   const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
+  const [avatar, setAvatar] = useState();
   const { logout, isLoading } = useLogout();
+
+  useEffect(() => {
+    setAvatar(user?.user_metadata?.avatal_url);
+    console.log(avatar);
+  }, [third]);
 
   return (
     <Navbar
@@ -53,7 +59,7 @@ function NavbarMain() {
                 variant="ghost"
                 color="green"
                 size="sm"
-                value={user['role_meta_data'][0].role_meta_data.role_descr}
+                value={user["role_meta_data"][0].role_meta_data.role_descr}
               />
             </span>
           </>
@@ -61,12 +67,12 @@ function NavbarMain() {
           <div>None</div>
         )}
       </div>
-      {/* {navList} */}
+      {navList}
       <div className="flex items-center gap-1">
         {user ? (
           <Menu placement="bottom-end">
             <MenuHandler>
-              <Avatar src={user?.user_metadata?.avatal_url} />
+              <Avatar src={avatar} />
             </MenuHandler>
             <MenuList>
               <MenuItem>

@@ -24,9 +24,9 @@ const createVehicle = async (newTruck) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ newTruck }),
   };
-  await fetch(
+  const res = await fetch(
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/vehicles`,
     requestParams
   );
-  return data;
+  return res;
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { searchReqState } from "@/context/SearchAtom";
 import {
   Button,
@@ -8,25 +8,33 @@ import {
   Select,
   Typography,
 } from "@material-tailwind/react";
+// import { format } from "date-fns";
+import { useCreateSearch } from "@/hooks/search/useCreateSearch";
+import { useRouter } from "next/router";
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
+  const mapData = useRecoilValue(searchReqState);
   const [option, setOption] = useState();
-  const [searchRequest, setSearchRequest] = useState([]);
+  const { CreateSearch, isCreating } = useCreateSearch();
+  const router = useRouter();
+  // const [searchRequest, setSearchRequest] = useState([]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(search);
-    const requestParams = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ search }),
-    };
-    const searchRequestResp = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
-      requestParams
+    const { distance, duration } = mapData;
+    CreateSearch(
+      { search, distance, duration },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+          router.push(`shipper/${data.id}`);
+        },
+      }
     );
-    setSearchRequest(searchRequestResp)
+
+    // setSearchRequest(searchRequestResp)
   };
 
   const handleChange = (e) => {
@@ -34,8 +42,8 @@ function Schedule() {
       setSearch((prev) => {
         return {
           ...prev,
-          scheduled_at: new Date().toJSON().slice(0, 10),
-          // scheduled_time: new Date().toLocaleTimeString(),
+          scheduled_at: new Date().toJSON().slice(0, 10), //format(new Date(), "MM/dd/yyyy"), //
+          scheduled_time: new Date().toLocaleTimeString(), //format(new Date(), "h `:` mm aaa "), //
         };
       });
     } else {
@@ -61,8 +69,8 @@ function Schedule() {
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
           <div className="flex flex-col gap-5">
             <Select onChange={() => setOption} value={option} label="Schedule">
-              <Option value={1}>Pickup Now</Option>
-              <Option value={0}>Schedule later</Option>
+              <Option value={true}>Pickup Now</Option>
+              <Option value={false}>Schedule later</Option>
             </Select>
             <Input
               type="date"
