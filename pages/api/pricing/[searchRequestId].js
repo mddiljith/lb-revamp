@@ -14,13 +14,13 @@ module.exports = async (req, res) => {
   const { searchRequestId } = req.query
   try {
     if(req.method == "POST") {
-      let { data, error } = await supabase
+      let { data, error } = await supabaseServerClient
           .from('search_requests')
+          .select('*')
           .eq('id', searchRequestId)
-          .select();
-
-      const distance = data.distance
-      //const duration = data.distance
+      console.log(data);
+      const searchRequest = data[0];
+      const distance = searchRequest.distance
 
       res.status(200).json({ estimate: distance * 50 });
     }

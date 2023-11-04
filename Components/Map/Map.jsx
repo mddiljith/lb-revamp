@@ -4,7 +4,7 @@ import { mappls, mappls_plugin } from "mappls-web-maps";
 //multiple marker setup
 
 function Map({ position, path }) {
-  console.log("path", path)
+  // console.log("path", path)
   let geoData = {
     type: "FeatureCollection",
     features: [

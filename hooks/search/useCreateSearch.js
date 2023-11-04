@@ -20,8 +20,6 @@ export function useCreateSearch() {
 }
 
 const createSearchReq = async (search, distance, duration) => {
-  console.log("Search Data in hook")
-  console.log({search})
   const requestParams = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -32,6 +30,6 @@ const createSearchReq = async (search, distance, duration) => {
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
     requestParams
   );
-
+  console.log('Response in Hook1', res);
   return res;
 };

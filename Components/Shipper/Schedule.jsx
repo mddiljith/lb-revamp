@@ -8,17 +8,16 @@ import {
   Select,
   Typography,
 } from "@material-tailwind/react";
-// import { format } from "date-fns";
 import { useCreateSearch } from "@/hooks/search/useCreateSearch";
 import { useRouter } from "next/router";
+import { callApi } from "@/lib/utils/api"
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(searchReqState);
   const [option, setOption] = useState();
-  const { CreateSearch, isCreating } = useCreateSearch();
   const router = useRouter();
-  // const [searchRequest, setSearchRequest] = useState([]);
+  
   const handleScheduleOption = (value) => {
     setOption(value);
   }
@@ -27,17 +26,16 @@ function Schedule() {
     e.preventDefault();
     console.log(search);
     const { distance, duration } = mapData;
-    CreateSearch(
-      { search, distance, duration },
-      {
-        onSuccess: (data) => {
-          console.log(data);
-          router.push(`shipper/${data.data.id}`);
-        },
-      }
-    );
 
-    // setSearchRequest(searchRequestResp)
+    const requestParams = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...search, distance, duration }),
+    };
+    
+    const {search_request} = await callApi('/api/search_requests', requestParams);
+
+    router.push(`shipper/${search_request.id}`);
   };
  
   const handleChange = (e) => {
@@ -54,12 +52,10 @@ function Schedule() {
         return {
           ...prev,
           [e.target.name]: e.target.value,
-          // scheduled_time: new Date().toLocaleTimeString(),
         };
       });
     }
 
-    //1. data push to searchReq.  - > search reqid
     // push searrc/[searchId]  ---> search confirmation -->  pricing calculation api search req -> pay now
     //2. background - trip create , driver assigned , payment status true
   };

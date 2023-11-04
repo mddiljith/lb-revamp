@@ -15,8 +15,6 @@ module.exports = async (req, res) => {
   const userId = session.user.id
 
   if(req.method == "POST") {
-    console.log("I'm in the POST API");
-    console.log("I get the body %o", req.body);
     try {
       const truckId = await getTruckId(req.body.truck_type)
       const { data, error } = await supabase
@@ -33,10 +31,12 @@ module.exports = async (req, res) => {
           distance: req.body.distance,
           user_id: userId,
         }).select();
-      console.log('Response for SR creation');
+      
       console.log({error});
-      console.log({data});
-      res.status(200).json(data[0]);
+      console.log(data[0]);
+      const searchRequestData = data[0];
+      
+      res.status(200).json({search_request: searchRequestData});
     } catch (error) {
       console.log(error);
     }

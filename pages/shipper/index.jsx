@@ -16,8 +16,6 @@ function Shipper() {
   const showTruckSearch = useRecoilValue(showTruckSearchState);
   const { route_path } = useRecoilValue(mapState);
 
-  console.log({ showSearch }, { showTruckSearch });
-
   return (
     <>
       <Navbar />

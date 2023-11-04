@@ -38,7 +38,6 @@ function NavbarMain() {
 
   useEffect(() => {
     setAvatar(user?.user_metadata?.avatal_url);
-    console.log(avatar);
   }, []);
 
   return (
