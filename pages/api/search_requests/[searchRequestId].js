@@ -16,10 +16,6 @@ module.exports = async (req, res) => {
   const role = data[0]?.role_meta_data?.role_id
   const userId = session.user.id
   try {
-    // if(!session) {
-    //   res.status(401).json({ response: "Unauthorized Request" })
-    //   return;
-    // }
     if(req.method == "PUT") {
       let search_request = req.body
       let { data, error } = await supabase

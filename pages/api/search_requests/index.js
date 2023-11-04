@@ -1,7 +1,8 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { getTruckId } from "@/lib/models/vehicle";
 
 module.exports = async (req, res) => {
-  const supabaseServerClient = createPagesServerClient({
+  const supabase = createPagesServerClient({
     req,
     res,
   });
@@ -9,14 +10,9 @@ module.exports = async (req, res) => {
   
   const {
     data: { session },
-  } = await supabaseServerClient.auth.getSession();
+  } = await supabase.auth.getSession();
 
   const userId = session.user.id
-  
-  // if(!session) {
-  //   res.status(401).json({ response: "Unauthorized Request" })
-  //   return;
-  // }
 
   if(req.method == "POST") {
     console.log("I'm in the POST API");
@@ -38,9 +34,9 @@ module.exports = async (req, res) => {
           user_id: userId,
         }).select();
       console.log('Response for SR creation');
-      console.log({data});
       console.log({error});
-      res.status(200).json(data);
+      console.log({data});
+      res.status(200).json(data[0]);
     } catch (error) {
       console.log(error);
     }

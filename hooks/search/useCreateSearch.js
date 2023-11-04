@@ -20,6 +20,8 @@ export function useCreateSearch() {
 }
 
 const createSearchReq = async (search, distance, duration) => {
+  console.log("Search Data in hook")
+  console.log({search})
   const requestParams = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

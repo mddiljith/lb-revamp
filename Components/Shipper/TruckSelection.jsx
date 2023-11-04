@@ -141,7 +141,7 @@ function TruckSelection() {
               name="truckLength"
               label="14ft" //map through the database
               value="14ft"
-              {...register("truck_type", {
+              {...register("truckLength", {
                 required: "This field is required",
               })}
               // checked={search.truck_length === "Open"}

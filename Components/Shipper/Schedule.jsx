@@ -19,6 +19,9 @@ function Schedule() {
   const { CreateSearch, isCreating } = useCreateSearch();
   const router = useRouter();
   // const [searchRequest, setSearchRequest] = useState([]);
+  const handleScheduleOption = (value) => {
+    setOption(value);
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,14 +32,14 @@ function Schedule() {
       {
         onSuccess: (data) => {
           console.log(data);
-          router.push(`shipper/${data.id}`);
+          router.push(`shipper/${data.data.id}`);
         },
       }
     );
 
     // setSearchRequest(searchRequestResp)
   };
-
+ 
   const handleChange = (e) => {
     if (option) {
       setSearch((prev) => {
@@ -68,7 +71,7 @@ function Schedule() {
         </Typography>
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
           <div className="flex flex-col gap-5">
-            <Select onChange={() => setOption} value={option} label="Schedule">
+            <Select onChange={handleScheduleOption} value={option} label="Schedule">
               <Option value={true}>Pickup Now</Option>
               <Option value={false}>Schedule later</Option>
             </Select>
