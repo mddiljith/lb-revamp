@@ -14,8 +14,10 @@ import Map from "@/Components/Map/Map";
 function Shipper() {
   const showSearch = useRecoilValue(showSearchState);
   const showTruckSearch = useRecoilValue(showTruckSearchState);
-  const { route_path } = useRecoilValue(mapState);
-
+  const { route_path, distance } = useRecoilValue(mapState);
+  console.log('Route path for Shipper');
+  console.log(route_path);
+  console.log(distance);
   return (
     <>
       <Navbar />

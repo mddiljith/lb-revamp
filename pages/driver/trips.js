@@ -1,5 +1,6 @@
 import React from "react";
 import DriverLayout from "@/Components/Driver/DriverLayout";
+import DriverTripManager from "@/Components/Driver/DriverTripManager";
 import {
   Tabs,
   TabsHeader,
@@ -17,7 +18,11 @@ import {
 // import { useTrips } from "@/hooks/trips/useTrips";
 
 function Trips() {
-	return(<div>Trips table</div>)
+	return (
+    <div>
+      <DriverTripManager/>
+    </div>
+  )
 }
 
 export default Trips;

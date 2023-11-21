@@ -30,7 +30,7 @@ function SearchForm() {
         };
       });
     }
-
+    
     // get eloc pass this to global context
 
     SetShowSearch(false);

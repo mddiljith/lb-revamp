@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchReqState } from "@/context/SearchAtom";
+import { searchReqState, mapState } from "@/context/SearchAtom";
 import {
   Button,
   Input,
@@ -14,7 +14,7 @@ import { callApi } from "@/lib/utils/api"
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
-  const mapData = useRecoilValue(searchReqState);
+  const mapData = useRecoilValue(mapState);
   const [option, setOption] = useState();
   const router = useRouter();
   
@@ -26,7 +26,6 @@ function Schedule() {
     e.preventDefault();
     console.log(search);
     const { distance, duration } = mapData;
-
     const requestParams = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

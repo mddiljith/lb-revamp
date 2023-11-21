@@ -26,16 +26,11 @@ module.exports = async (req, res) => {
       userField = 'owner_id'
       break;
     default:
-      res.status(404).json({"message": "No Role found"}) 
+      userField = 'shipper_id'
+      break;
   }
 
-  if(req.method == "GET") {
-    tripResponse = await ownerTrips(userId);
-  } else if (req.method == "POST") {
-    tripResponse = await createTrips(trip);
-  }
-
-  const createTrips = async (trip) => {
+  const createTrips = async () => {
     const s_r_id = req.body.search_request_id;
     const vehicles = await getVehicles();
     let selected_vehicle = vehicles[Math.floor(Math.random() * vehicles.length)]
@@ -54,7 +49,7 @@ module.exports = async (req, res) => {
       console.log(data);
   }
 
-  const ownerTrips = async (userId) => {
+  const getTrips = async (userId) => {
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -74,11 +69,17 @@ module.exports = async (req, res) => {
         search_requests(
           id,
           source,
-          destination
+          destination,
+          users(
+            email,
+            name
+          )
         ),
         payment_status(
           id,
-          status_id
+          statuses(
+            name
+          )
         )   
       `)
       .eq(`vehicles.${userField}`, userId);
@@ -88,6 +89,12 @@ module.exports = async (req, res) => {
     }
     
     return trips;
+  }
+
+  if(req.method == "GET") {
+    tripResponse = await getTrips(userId);
+  } else if (req.method == "POST") {
+    tripResponse = await createTrips();
   }
 
   // Get role

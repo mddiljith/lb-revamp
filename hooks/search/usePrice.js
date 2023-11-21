@@ -29,7 +29,6 @@ const getPrice = async (searchRequestId) => {
     headers: { "Content-Type": "application/json" }
   }
   
-  const { estimate } = await callApi(`/api/pricing/${searchRequestId}`, requestParams);
-  
-  return estimate;
+  const data = await callApi(`/api/pricing/${searchRequestId}`, requestParams);
+  return data;
 };
