@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
   const data = await getUserRole(session.user.id)
   const role = data[0]?.role_meta_data?.role_id
   const userId = session.user.id
+  const { status_id } = req.query
 
   let userField = "";
   switch(role) {
@@ -82,7 +83,8 @@ module.exports = async (req, res) => {
           )
         )   
       `)
-      .eq(`vehicles.${userField}`, userId);
+      .eq(`vehicles.${userField}`, userId)
+      .eq(`status_id`, status_id);
 
     if(error) {
       return error

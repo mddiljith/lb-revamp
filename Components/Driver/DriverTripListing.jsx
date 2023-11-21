@@ -1,12 +1,13 @@
 import React from "react";
+import Link from "next/link";
 import Table from "../ui/Table";
 import {
-  Typography,
-  Link
+  Typography
 } from "@material-tailwind/react";
 
 const DriverTripListing = ({ row, index }) => {
   const {
+    id,
     tracking_id, 
     search_requests,
     payment_status
@@ -16,9 +17,11 @@ const DriverTripListing = ({ row, index }) => {
     <>
     <Table.Row index={index}>
       <Table.RowItem>
-        <Typography className="text-sm font-semibold text-light-blue-900">
-          {tracking_id}
-        </Typography>
+        <Link href={`/trip/${id}`}>
+          <Typography className="text-sm font-semibold text-light-blue-900">
+            {tracking_id}
+          </Typography>
+        </Link>
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-sm font-light text-blue-gray-900">

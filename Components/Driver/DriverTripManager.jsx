@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TripTableDriver from "./TripTableDriver";
-import TripRowOwner from "../Owner/TripRowOwner";
 import { callApi } from "@/lib/utils/api";
 import {
   Tabs,
@@ -26,9 +24,9 @@ const DriverTripManager = () => {
     const requestParams = {
       headers: { "Content-Type": "application/json" }
     }
-    const trips_data = await callApi(`/api/trips`, requestParams);
+    const trips_data = await callApi(`/api/trips?status_id=${activeTab}`, requestParams);
     setTrips(trips_data);
-    console.log({trips_data})
+    console.log(trips_data)
   }
 
   const handleTabChange = (tabId) => {
@@ -65,11 +63,9 @@ const DriverTripManager = () => {
                     <Table topCard={
                       <Table.Top>
                         <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-                          <div>
-                            <Typography variant="h5" color="blue-gray">
-                              {secondary_label} Trips
-                            </Typography>
-                          </div>
+                          <Typography variant="h5" color="blue-gray">
+                            {secondary_label} Trips
+                          </Typography>
                         </div>
                       </Table.Top>
                     }>
@@ -88,16 +84,6 @@ const DriverTripManager = () => {
                     </Table>
                   </TabPanel>
                 ))}
-
-              <TabPanel value={1}>
-                <TripTableDriver trips={[]} />
-              </TabPanel>
-              <TabPanel value={2}>
-                <p>Upcoming trips</p>
-              </TabPanel>
-              <TabPanel value={3}>
-                <p>Cancelled trips</p>
-              </TabPanel>
             </TabsBody>
           </Tabs>
         </CardBody>
