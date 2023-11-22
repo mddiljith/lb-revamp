@@ -12,7 +12,7 @@ const TripMain = () => {
   return (
     <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 ...">
       <div class="col-span-2">
-        Map area
+        Map area for trip
         <Map path={path} />
       </div>
       <div class="col-span-2">
