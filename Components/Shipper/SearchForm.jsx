@@ -20,7 +20,9 @@ function SearchForm() {
     let eloc1 = mapData?.source.eLoc;
     let eloc2 = mapData?.destination.eLoc;
     if (eloc1 && eloc2) {
-      const {duration, distance, path} = await getDirection(eloc1, eloc2);
+      const mapResult = await getDirection(eloc1, eloc2);
+      const { duration, distance, path } = mapResult;
+      console.log(mapResult);
       setMapData((prev) => {
         return {
           ...prev,

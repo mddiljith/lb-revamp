@@ -58,7 +58,7 @@ function NavbarMain() {
                 variant="ghost"
                 color="green"
                 size="sm"
-                value={user["role_meta_data"][0].role_meta_data.role_descr}
+                value={user["role_meta_data"][0]?.role_meta_data?.role_descr}
               />
             </span>
           </>

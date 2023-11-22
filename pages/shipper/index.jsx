@@ -14,8 +14,8 @@ import Map from "@/Components/Map/Map";
 function Shipper() {
   const showSearch = useRecoilValue(showSearchState);
   const showTruckSearch = useRecoilValue(showTruckSearchState);
-  const { route_path } = useRecoilValue(mapState);
-
+  const { route_path, distance, duration } = useRecoilValue(mapState);
+  console.log({ distance }, { duration }, { route_path });
   return (
     <>
       <Navbar />
@@ -25,7 +25,7 @@ function Shipper() {
       >
         <div className=" top-10 bg-white w-96 ml-5 rounded-lg p-4 shadow-md">
           {showSearch && <SearchForm />}
-       
+
           {!showSearch && showTruckSearch && <TruckSelection />}
 
           {!showSearch && !showTruckSearch && <Schedule />}

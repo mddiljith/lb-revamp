@@ -2,20 +2,37 @@ import React from "react";
 import { useRouter } from "next/router";
 import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
+import { CardBody, Typography } from "@material-tailwind/react";
 
 function SearchConfirmation() {
   const { price } = usePrice();
   const { searchData } = useSearch();
-  console.log("price in view", price)
+  console.log("price in view", price, searchData);
   // 1.create a hook for featching the search request data from router query
   // 2.create the trip based on the confirmation of page, may be a trip generator hook can be used with mutation
   // 3. Push to the trip details page - where price is shown to the customer with map or price confirmation page
+  const handleClick = () => {
+    console.log(
+      price,
+      "redirect to the trip page after payment and trip creation"
+    );
+  };
 
   return (
     <>
       <p>Search details & Price</p>
-      <p>{price}</p>
-      <button>Confirm to Pay</button>
+      <Card>
+        <CardBody>
+          <Typography>kochi</Typography>
+          <Typography>to</Typography>
+          <Typography>Varkala</Typography>
+
+          <Typography>Distance : 100 Km</Typography>
+          <Typography> Estimated durationi : 4 hrs</Typography>
+        </CardBody>
+      </Card>
+      <p>Price : {price}</p>
+      <button onClick={handleClick}>Confirm to Pay</button>
     </>
   );
 }
