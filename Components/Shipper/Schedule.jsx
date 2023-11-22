@@ -25,11 +25,11 @@ function Schedule() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(search);
-    const { distance, duration } = mapData;
+    const { distance, duration, eloc1, eloc2 } = mapData;
     const requestParams = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...search, distance, duration }),
+      body: JSON.stringify({ ...search, distance, duration, eloc1, eloc2 }),
     };
     
     const {search_request} = await callApi('/api/search_requests', requestParams);

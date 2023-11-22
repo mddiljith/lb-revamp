@@ -27,6 +27,8 @@ function SearchForm() {
           route_path: path,
           duration,
           distance,
+          eloc1,
+          eloc2
         };
       });
     }

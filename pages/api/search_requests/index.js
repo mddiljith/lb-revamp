@@ -30,6 +30,8 @@ module.exports = async (req, res) => {
           duration: req.body.duration,
           distance: req.body.distance,
           user_id: userId,
+          source_eloc: req.body.eloc1,
+          destination_eloc: req.body.eloc2
         }).select();
       
       console.log({error});
