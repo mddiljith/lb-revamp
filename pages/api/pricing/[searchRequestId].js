@@ -18,11 +18,13 @@ module.exports = async (req, res) => {
           .from('search_requests')
           .select('*')
           .eq('id', searchRequestId)
-      console.log(data);
       const searchRequest = data[0];
       const distance = searchRequest.distance
+      if (distance == "") {
+        res.status(403).json({ result: "Distance is not defined "})
+      }
 
-      res.status(200).json({ estimate: distance * 50 });
+      res.status(200).json({ estimate: (distance/1000) * 50 });
     }
   } catch (err) {
     console.log("catchErr", err);

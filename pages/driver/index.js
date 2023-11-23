@@ -4,6 +4,7 @@ import GenericCard from "@/Components/ui/GenericCard";
 import Trips from "@/Components/ui/Dashboard/Trips"
 function DriverHome() {
   return (
+    <>
       <div className="flex px-8">
         <div className="flex-1/2">
           <GenericCard title="Today's Revenue" content="100" notice="50 less than yesterday" />
@@ -15,6 +16,7 @@ function DriverHome() {
           <Trips/>
         </div>
       </div>
+    </>
     )
 }
 

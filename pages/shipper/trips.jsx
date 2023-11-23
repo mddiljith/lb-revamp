@@ -1,7 +1,11 @@
 import React from "react";
 
 function Trips() {
-  return <div>Shipper</div>;
+  return (
+    <>
+      <div>Shipper</div>
+    </>
+  )
 }
 
 export default Trips;

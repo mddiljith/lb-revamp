@@ -29,10 +29,12 @@ function SearchForm() {
           route_path: path,
           duration,
           distance,
+          eloc1,
+          eloc2
         };
       });
     }
-
+    
     // get eloc pass this to global context
 
     SetShowSearch(false);

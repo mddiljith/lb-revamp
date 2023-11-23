@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { searchReqState } from "@/context/SearchAtom";
+import { searchReqState, mapState } from "@/context/SearchAtom";
 import {
   Button,
   Input,
@@ -14,7 +14,7 @@ import { callApi } from "@/lib/utils/api";
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
-  const mapData = useRecoilValue(searchReqState);
+  const mapData = useRecoilValue(mapState);
   const [option, setOption] = useState();
   const router = useRouter();
 
@@ -25,12 +25,16 @@ function Schedule() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(search);
+<<<<<<< HEAD
     const { distance, duration } = mapData;
     console.log(distance, duration);
+=======
+    const { distance, duration, eloc1, eloc2 } = mapData;
+>>>>>>> dae4950cc154d89ffa73091172b4107b1c212cfd
     const requestParams = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...search, distance, duration }),
+      body: JSON.stringify({ ...search, distance, duration, eloc1, eloc2 }),
     };
 
     const { search_request } = await callApi(

@@ -35,7 +35,6 @@ function NavbarMain() {
   const router = useRouter();
   const [avatar, setAvatar] = useState();
   const { logout, isLoading } = useLogout();
-
   useEffect(() => {
     setAvatar(user?.user_metadata?.avatal_url);
   }, []);
@@ -51,7 +50,7 @@ function NavbarMain() {
         {user ? (
           <>
             <span className="font-semibold text-xl py-2">
-              {user?.user_metadata?.full_name}
+              {user?.email}
             </span>
             <span className="py-2">
               <Chip

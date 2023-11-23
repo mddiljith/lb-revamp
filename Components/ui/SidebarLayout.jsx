@@ -22,9 +22,9 @@ function Sidebar({ sidelinks }) {
   const router = useRouter();
 
   return (
-    <aside className="space-x-1 flex flex-col w-1/5 overflow-y-auto py-4 h-screen sticky top-0 border border-gray-300 border-solid">
+    <aside className="space-x-1 flex flex-col w-1/6 overflow-y-auto py-4 h-screen sticky top-0 border border-gray-300 border-solid">
       <h3 className="font-bold text-xl text-blue-800 px-3 mb-4">
-        <Link href="/" class="px-3">LETSBUILD.</Link>
+        <Link href="/" className="px-3">LETSBUILD.</Link>
       </h3>
       <div className="flex-1 text-gray-900 p-3">
         {sidelinks.map((item) => (
