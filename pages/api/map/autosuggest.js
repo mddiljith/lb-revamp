@@ -5,7 +5,7 @@ const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const headers = {
   headers: {
     "Content-Type": "application/json",
-    "Authorization": `Bearer 8eb425f0-f580-47af-8d84-3f90db72c200`,
+    "Authorization": `Bearer 2f775e83-150f-4c1c-9033-912d91d6bfa4`,
   },
 };
 const fixedParams = "&region=IND&pod=CITY";

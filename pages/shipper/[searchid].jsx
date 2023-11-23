@@ -21,7 +21,7 @@ function SearchConfirmation() {
       setPrice(data.estimate);
     }
     getPrice();
-  }, []);
+  }, [searchid]);
 
   async function handleSubmit() {
     console.log('Submitting request');
@@ -38,7 +38,11 @@ function SearchConfirmation() {
     }
     
     const data = await callApi(`/api/trips`, requestParams);
+    console.log(data)
+
     setTrip(data)
+    console.log(trip[0].id)
+    router.push(`/shipper/trips/${trip[0].id}`);
   }
 
 
