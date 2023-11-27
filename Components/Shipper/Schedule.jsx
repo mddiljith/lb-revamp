@@ -25,12 +25,7 @@ function Schedule() {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(search);
-<<<<<<< HEAD
-    const { distance, duration } = mapData;
-    console.log(distance, duration);
-=======
     const { distance, duration, eloc1, eloc2 } = mapData;
->>>>>>> dae4950cc154d89ffa73091172b4107b1c212cfd
     const requestParams = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
