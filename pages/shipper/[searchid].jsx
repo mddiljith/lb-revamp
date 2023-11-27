@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { usePrice } from "@/hooks/search/usePrice";
+// import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
 import { CardBody, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";

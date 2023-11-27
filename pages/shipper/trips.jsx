@@ -1,11 +1,7 @@
 import React from "react";
 
-function Trips() {
-  return (
-    <>
-      <div>Shipper</div>
-    </>
-  )
+function trips() {
+  return <div>trips</div>;
 }
 
-export default Trips;
+export default trips;
