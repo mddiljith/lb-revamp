@@ -1,4 +1,5 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import {getVehicleId, generateTrackingId} from "@/lib/utils/getVehicleId";
 
 module.exports = async (req, res) => {
   const supabaseServerClient = createPagesServerClient({
@@ -6,7 +7,7 @@ module.exports = async (req, res) => {
     res,
   });
 
-  res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
+  // res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
 
   const {
     data: { session },
@@ -33,21 +34,29 @@ module.exports = async (req, res) => {
 
   const createTrips = async () => {
     const s_r_id = req.body.search_request_id;
-    const vehicles = await getVehicles();
-    let selected_vehicle = vehicles[Math.floor(Math.random() * vehicles.length)]
+    const vehicle = await getVehicleId();
+    console.log(vehicle.id)
     const trackingId = generateTrackingId();
-    let { data, error } = await supabase
+    let { data, error } = await supabaseServerClient
       .from('trips')
       .insert({
         search_request_id: s_r_id,
-        vehicle_id: selected_vehicle.id,
+        vehicle_id: vehicle.id,
         distance: 100,
-        tracking_id: trackingId
+        tracking_id: trackingId,
+        payment_status_id: 7,
+        status_id: 4
       }).select();
       console.log("Error in Trip create******");
       console.log(error);
       console.log("Data in Trip create******");
       console.log(data);
+      
+      if(error) {
+        return error
+      }
+
+      return data;
   }
 
   const getTrips = async (userId) => {
@@ -109,9 +118,7 @@ module.exports = async (req, res) => {
     return role
   }
 
-  const generateTrackingId = () => {
-    return Math.floor(Math.random() * 999999);
-  }
+  
 
   
   // } else if(req.method == 'POST') {

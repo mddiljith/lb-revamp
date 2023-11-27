@@ -1,3 +1,4 @@
+import OwnerLayout from "@/Components/Owner/OwnerLayout";
 import React from "react";
 
 function Payout() {

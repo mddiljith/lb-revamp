@@ -1,5 +1,6 @@
 import { useDeleteVehicle } from "@/hooks/vehicles/useDeleteVehicle";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import Table from "../ui/Table";
 import {
   Typography,
@@ -8,7 +9,6 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Link,
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical, IoIosArrowForward } from "react-icons/bs";
 
@@ -67,7 +67,9 @@ function VehicleRow(row, index) {
           >
             Update Status
           </MenuItem>
-          <MenuItem>Edit</MenuItem>
+          <MenuItem>
+            <Link href={`/trucks/${id}`}>Edit</Link>
+          </MenuItem>
           {/* <MenuItem onClick={() => deleteTruck(id)}>Delete</MenuItem>
             <MenuItem>
               <Link href={`/vehicle/${id}`}>

@@ -16,7 +16,8 @@ module.exports = async (req, res) => {
   const role = data[0]?.role_meta_data?.role_id
 
   let user_field = "";
-  if(role == "3") {
+  
+  if (role == "3") {
     user_field = "driver_id"
   } else if(role == "2") {
     user_field = "owner_id";
