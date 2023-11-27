@@ -17,11 +17,14 @@ import {
   TimelineItem,
   Typography,
 } from "@material-tailwind/react";
+import { useRecoilValue } from "recoil";
+import { PriceState } from "@/context/SearchAtom";
 
 const TripDetail = () => {
   const router = useRouter();
   const { tripId } = router.query;
   //get price from the searchiD result
+  const price = useRecoilValue(PriceState);
   return (
     <>
       <NavbarMain />
@@ -146,7 +149,7 @@ const TripDetail = () => {
                 color="blue-gray"
                 className="leading-none"
               >
-                Amount
+                Amount : {price}
               </Typography>
             </CardBody>
           </Card>

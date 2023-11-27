@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 // import { usePrice } from "@/hooks/search/usePrice";
 // import { useSearch } from "@/hooks/search/useSearch";
 import { callApi } from "@/lib/utils/api";
+import { useRecoilState } from "recoil";
+import { PriceState } from "@/context/SearchAtom";
 
 function SearchConfirmation() {
   // const { price } = usePrice();
@@ -14,7 +16,7 @@ function SearchConfirmation() {
   const router = useRouter();
   const { searchid } = router.query;
   // const { searchData } = useSearch();
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useRecoilState(PriceState);
   const [trip, setTrip] = useState([]);
   useEffect(() => {
     const getPrice = async () => {
