@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Card, Input, List, ListItem } from "@material-tailwind/react";
 import { getAddressList } from "@/services/map/search-auto";
-import { useSetRecoilState } from "recoil";
-import { mapState, searchReqState } from "@/context/SearchAtom";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { mapState, searchReqState, mapTokenState } from "@/context/SearchAtom";
 
 function AutocompleteInput({ label, placeholder, name }) {
   const [value, setValue] = useState({ place: "", field: "" });
@@ -10,7 +10,7 @@ function AutocompleteInput({ label, placeholder, name }) {
   const [suggestions, setSuggestions] = useState([]);
   const setMapLocations = useSetRecoilState(mapState);
   const setSearchReq = useSetRecoilState(searchReqState);
-
+  const mapToken = useRecoilValue(mapTokenState);
   const handleClick = (item) => {
     setValue((prev) => {
       return {
@@ -38,11 +38,9 @@ function AutocompleteInput({ label, placeholder, name }) {
 
   const handleSuggestion = async (value) => {
     if (value.length < 3) return;
-
     setSuggestions([]);
-    const result = await getAddressList(value);
+    const result = await getAddressList(value, mapToken);
     setSuggestions(result);
-    console.log(result);
   };
 
   return (

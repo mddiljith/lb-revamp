@@ -35,3 +35,8 @@ export const showTruckSearchState = atom({
   key: "showTruckSearch", // unique ID (with respect to other atoms/selectors)
   default: false, // default value (aka initial value)
 });
+
+export const mapTokenState = atom({
+  key: "mapToken", // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
