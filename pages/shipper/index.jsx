@@ -52,7 +52,7 @@ function Shipper() {
       >
         <div className=" top-10 bg-white w-96 ml-5 rounded-lg p-4 shadow-md">
           {showSearch && <SearchForm />}
-       
+
           {!showSearch && showTruckSearch && <TruckSelection />}
 
           {!showSearch && !showTruckSearch && <Schedule />}

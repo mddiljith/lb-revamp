@@ -59,7 +59,19 @@ module.exports = async (req, res) => {
       return data;
   }
 
+  const userFieldCheck = () => {
+    if (role != 1) {
+      // for owner & driver
+      return `eq(vehicles.${userField}, ${userId}).eq(status_id, ${status_id})`
+    } else {
+      // for shipper
+      return `eq(search_requests.user_id, ${userId}).eq(status_id, ${status_id})`
+    }
+  }
+
   const getTrips = async (userId) => {
+    let tripFilter = userFieldCheck();
+
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -91,9 +103,7 @@ module.exports = async (req, res) => {
             name
           )
         )   
-      `)
-      .eq(`vehicles.${userField}`, userId)
-      .eq(`status_id`, status_id);
+      `).tripFilter
 
     if(error) {
       return error

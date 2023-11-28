@@ -10,7 +10,7 @@ export function useSearch() {
     data: SearchData,
     error,
   } = useQuery({
-    queryKey: [`${searchId}`],
+    queryKey: [`${searchId}`, "search"],
     queryFn: () => getSearchData(searchId),
 
     onError: (err) => {

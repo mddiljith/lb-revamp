@@ -4,6 +4,12 @@ const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const fixedParams = "&region=IND&pod=CITY";
 
 export default async function GET(req, res) {
+  res.setHeader(
+    "Cache-Control",
+    "public",
+    "s-maxage=10",
+    "stale-while-revalidate=59"
+  );
   const searchtext = req.query.query;
   const mapToken = req.headers['x-map-token']
   

@@ -10,17 +10,17 @@ import {
 } from "@material-tailwind/react";
 import { useCreateSearch } from "@/hooks/search/useCreateSearch";
 import { useRouter } from "next/router";
-import { callApi } from "@/lib/utils/api"
+import { callApi } from "@/lib/utils/api";
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
   const [option, setOption] = useState();
   const router = useRouter();
-  
+
   const handleScheduleOption = (value) => {
     setOption(value);
-  }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -31,12 +31,15 @@ function Schedule() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...search, distance, duration, eloc1, eloc2 }),
     };
-    
-    const {search_request} = await callApi('/api/search_requests', requestParams);
+
+    const { search_request } = await callApi(
+      "/api/search_requests",
+      requestParams
+    );
 
     router.push(`shipper/${search_request.id}`);
   };
- 
+
   const handleChange = (e) => {
     if (option) {
       setSearch((prev) => {
@@ -66,10 +69,14 @@ function Schedule() {
         </Typography>
         <form className="flex flex-col gap-5" onSubmit={onSubmit}>
           <div className="flex flex-col gap-5">
-            <Select onChange={handleScheduleOption} value={option} label="Schedule">
-              <Option value={true}>Pickup Now</Option>
-              <Option value={false}>Schedule later</Option>
-            </Select>
+            <select
+              onChange={handleScheduleOption}
+              value={option}
+              label="Schedule"
+            >
+              <option value={true}>Pickup Now</option>
+              <option value={false}>Schedule later</option>
+            </select>
             <Input
               type="date"
               label="Pickup Date"
