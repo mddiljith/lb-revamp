@@ -36,6 +36,11 @@ export const showTruckSearchState = atom({
   default: false, // default value (aka initial value)
 });
 
+export const mapTokenState = atom({
+  key: "mapToken", // unique ID (with respect to other atoms/selectors)
+  default: '', // default value (aka initial value)
+});
+
 export const PriceState = atom({
   key: "searchPrice", // unique ID (with respect to other atoms/selectors)
   default: "", // default value (aka initial value)

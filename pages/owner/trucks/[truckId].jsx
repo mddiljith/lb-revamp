@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Input, Typography } from "@material-tailwind/react";
+import { Input, Typography, Switch } from "@material-tailwind/react";
 
 function TruckDetail() {
   const router = useRouter();
