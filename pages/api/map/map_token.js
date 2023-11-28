@@ -18,6 +18,13 @@ module.exports = async (req, res) => {
           .select('*')
       const token = data[0];
       res.status(200).json(token);
+    } else if (req.method == "PUT") {
+      let token = req.body
+      let { data, error } = await supabaseServerClient
+          .from('context')
+          .update(token)
+          .eq('id', 1)
+      res.status(200).json(data);
     }
   } catch (err) {
     console.log("catchErr", err);
