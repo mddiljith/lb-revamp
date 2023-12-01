@@ -9,6 +9,7 @@ import {
   CardBody,
   CardFooter,
   IconButton,
+  Spinner,
   Timeline,
   TimelineBody,
   TimelineConnector,
@@ -19,17 +20,21 @@ import {
 } from "@material-tailwind/react";
 import { useRecoilValue } from "recoil";
 import { PriceState } from "@/context/SearchAtom";
+import { useTrip } from "@/hooks/trips/useTrip";
 
 const TripDetail = () => {
-  const router = useRouter();
-  const { tripId } = router.query;
+  // const router = useRouter();
+  // const { tripId } = router.query;
   //get price from the searchiD result
+  const { isLoading, error, trip } = useTrip();
   const price = useRecoilValue(PriceState);
+
   return (
     <>
       <NavbarMain />
+      {isLoading && <Spinner />}
       <Typography variant="h3" color="blue-gray" className="p-4">
-        consignment ID: {tripId}
+        consignment ID:
       </Typography>
       <div className="flex flex-row justify-start ml-3">
         <div className="w-3/5 flex flex-col p-2">
@@ -145,6 +150,20 @@ const TripDetail = () => {
           <Card className="bg-gray-100">
             <CardBody>
               <Typography
+                variant="h6"
+                color="blue-gray"
+                className="leading-none"
+              >
+                source &rarr; destination
+              </Typography>
+              <Typography
+                variant="h6"
+                color="blue-gray"
+                className="leading-none"
+              >
+                Estimated Arrival :
+              </Typography>
+              <Typography
                 variant="h5"
                 color="blue-gray"
                 className="leading-none"
@@ -178,7 +197,6 @@ const TripDetail = () => {
             </CardBody>
             <CardFooter>
               <Button className="flex items-center gap-3">
-                {" "}
                 <IoCallOutline /> customer care
               </Button>
               <IoCallOutline />
