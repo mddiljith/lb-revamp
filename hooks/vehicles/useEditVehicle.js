@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export function useEditVehicle() {
   const queryClient = useQueryClient();
 
-  const { mutate: createTruck, isLoading: isCreating } = useMutation({
+  const { mutate: updateTruck, isLoading: isCreating } = useMutation({
     mutationFn: ({ newTruckData, vehicleId }) =>
       editVehicle(newTruckData, vehicleId),
     onSuccess: () => {
@@ -16,7 +16,7 @@ export function useEditVehicle() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isCreating, createTruck };
+  return { isUpdating, updateTruck };
 }
 
 const editVehicle = async (newTruckData, vehicleId) => {

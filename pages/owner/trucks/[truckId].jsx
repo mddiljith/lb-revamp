@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { Input, Typography, Switch } from "@material-tailwind/react";
+import { Input, Typography, Switch, Button } from "@material-tailwind/react";
+import { useEditVehicle } from "@/hooks/vehicles/useEditVehicle";
 
 function TruckDetail() {
   const router = useRouter();
   const { truckId } = router.query;
+  const { isUpdating, updateTruck } = useEditVehicle();
+  const [driverId, setDriverId] = useState(null);
 
+  const updateDriver = () => {
+    if (!driverId) return;
+    const newtruckData = {
+      driver_id: driverId,
+    };
+    updateTruck(
+      { newtruckData, truckId },
+      {
+        onSuccess: () => {
+          setDriverId("");
+        },
+      }
+    );
+  };
   //api for default driver
 
   return (
@@ -24,7 +41,9 @@ function TruckDetail() {
           labelProps={{
             className: "before:content-none after:content-none",
           }}
+          onChange={(e) => setDriverId(e.target.value)}
         />
+        <Button onClick={updateDriver}>Update Driver</Button>
       </div>
     </div>
   );

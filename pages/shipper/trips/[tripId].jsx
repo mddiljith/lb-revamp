@@ -149,27 +149,29 @@ const TripDetail = () => {
         <div className="w-2/6 m-2">
           <Card className="bg-gray-100">
             <CardBody>
-              <Typography
-                variant="h6"
-                color="blue-gray"
-                className="leading-none"
-              >
-                source &rarr; destination
-              </Typography>
-              <Typography
-                variant="h6"
-                color="blue-gray"
-                className="leading-none"
-              >
-                Estimated Arrival :
-              </Typography>
-              <Typography
-                variant="h5"
-                color="blue-gray"
-                className="leading-none"
-              >
-                Amount : {price}
-              </Typography>
+              <div className="flex flex-col gap-5">
+                <Typography
+                  variant="h6"
+                  color="blue-gray"
+                  className="leading-none"
+                >
+                  source &rarr; destination
+                </Typography>
+                <Typography
+                  variant="h6"
+                  color="blue-gray"
+                  className="leading-none"
+                >
+                  Estimated Arrival :
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="blue-gray"
+                  className="leading-none"
+                >
+                  Amount : {price}
+                </Typography>
+              </div>
             </CardBody>
           </Card>
           <Card className="bg-gray-100 mt-3">
