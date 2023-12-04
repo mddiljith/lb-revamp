@@ -27,7 +27,11 @@ const TripDetail = () => {
   // const { tripId } = router.query;
   //get price from the searchiD result
   const { isLoading, error, trip } = useTrip();
-  const price = useRecoilValue(PriceState);
+  // const price = useRecoilValue(PriceState);
+  const source = trip[0]?.search_requests?.source
+  const destination = trip[0]?.search_requests?.destination
+  const price = trip[0]?.payments?.price
+  console.log()
 
   return (
     <>
@@ -155,7 +159,7 @@ const TripDetail = () => {
                   color="blue-gray"
                   className="leading-none"
                 >
-                  source &rarr; destination
+                  {source} &rarr; {destination}
                 </Typography>
                 <Typography
                   variant="h6"

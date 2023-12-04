@@ -15,10 +15,14 @@ export default async function GET(req, res) {
   
   try {
     const autocompleteData = await fetchAutocompleteData(searchtext, mapToken)
-    res.status(200).json(autocompleteData);
+    if (autocompleteData.status == 401) {
+      throw new Error(autocompleteData)
+    } else {
+      res.status(200).json(autocompleteData);
+    }
   } catch (error) {
     console.log({error})
-    if (error.response && error.response.status === 401) {
+    if (error.status === 401) {
       try {
         const newToken = await refreshToken()
         const autocompleteData = await fetchAutocompleteData(searchtext, newToken)
@@ -41,7 +45,8 @@ async function fetchAutocompleteData(search, token) {
   const requestParams = {
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      //"Authorization": `Bearer ${token}`,
+      "Authorization": `Bearer ca92867d-9f82-457c-9265-d331eaf1cba5`,
     },
   }
   const data = await fetch(_url, requestParams)

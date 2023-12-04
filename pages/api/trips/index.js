@@ -37,6 +37,12 @@ module.exports = async (req, res) => {
     const vehicle = await getVehicleId();
     console.log(vehicle.id)
     const trackingId = generateTrackingId();
+
+    let { sr, sr_error } = await supabaseServerClient
+      .from('payments')
+      .select("id")
+      .eq('search_request_id', s_r_id);
+
     let { data, error } = await supabaseServerClient
       .from('trips')
       .insert({
@@ -45,7 +51,8 @@ module.exports = async (req, res) => {
         distance: 100,
         tracking_id: trackingId,
         payment_status_id: 7,
-        status_id: 4
+        status_id: 4,
+        payment_id: sr[0].id
       }).select();
       console.log("Error in Trip create******");
       console.log(error);
@@ -56,7 +63,11 @@ module.exports = async (req, res) => {
         return error
       }
 
-      return data;
+      return {data};
+  }
+
+  const selectPayment = async () => {
+    
   }
 
   const userFieldCheck = () => {
