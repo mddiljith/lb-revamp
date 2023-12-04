@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 // import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
-import { CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 // import { usePrice } from "@/hooks/search/usePrice";
 // import { useSearch } from "@/hooks/search/useSearch";
@@ -12,7 +12,7 @@ import { PriceState } from "@/context/SearchAtom";
 function SearchConfirmation() {
   // const { price } = usePrice();
   const { searchData } = useSearch();
-  console.log("price in view", price, searchData);
+  // console.log("price in view", price, searchData);
   const router = useRouter();
   const { searchid } = router.query;
   // const { searchData } = useSearch();
@@ -27,6 +27,15 @@ function SearchConfirmation() {
 
       const data = await callApi(`/api/pricing/${searchid}`, requestParams);
       setPrice(data.estimate);
+      const tripParams = {
+        method: "POST",
+        header: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          price: data.estimate,
+          search_request_id: searchid 
+        })
+      }
+      callApi('/api/payments', tripParams)
     };
     getPrice();
   }, [searchid]);
@@ -50,6 +59,7 @@ function SearchConfirmation() {
 
     setTrip(data);
     console.log(trip[0].id);
+
     router.push(`/shipper/trips/${trip[0].id}`);
   };
 

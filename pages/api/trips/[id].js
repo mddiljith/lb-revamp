@@ -50,8 +50,12 @@ module.exports = async (req, res) => {
           statuses(
             name
           )
+        ),
+        payments(
+          id,
+          price
         )   
-      `).eq('trip_id', id)
+      `).eq('id', id)
 
     if(error) {
       return error
