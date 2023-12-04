@@ -27,8 +27,6 @@ module.exports = async (req, res) => {
           search_request_id: search_request_id 
         }).select();
       
-      console.log({error});
-      console.log(data[0]);
       const payments = data[0];
       
       res.status(200).json({payments: payments});

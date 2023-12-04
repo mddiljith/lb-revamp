@@ -35,7 +35,6 @@ module.exports = async (req, res) => {
   const createTrips = async () => {
     const s_r_id = req.body.search_request_id;
     const vehicle = await getVehicleId();
-    console.log(vehicle.id)
     const trackingId = generateTrackingId();
 
     let { sr, sr_error } = await supabaseServerClient
@@ -54,9 +53,7 @@ module.exports = async (req, res) => {
         status_id: 4,
         payment_id: sr[0].id
       }).select();
-      console.log("Error in Trip create******");
       console.log(error);
-      console.log("Data in Trip create******");
       console.log(data);
       
       if(error) {

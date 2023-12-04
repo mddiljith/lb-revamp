@@ -31,7 +31,6 @@ const TripDetail = () => {
   const source = trip[0]?.search_requests?.source
   const destination = trip[0]?.search_requests?.destination
   const price = trip[0]?.payments?.price
-  console.log()
 
   return (
     <>

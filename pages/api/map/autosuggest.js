@@ -24,22 +24,18 @@ export default async function GET(req, res) {
       res.status(200).json(autocompleteData);
     }
   } catch (error) {
-    console.log('Invalid Token error caught')
       try {
         const newToken = await refreshToken()
-        console.log('New token generated', newToken)
         const autocompleteData = await fetchAutocompleteData(searchtext, newToken)
         await updateMapToken(newToken);
         res.status(200).json(autocompleteData);
       } catch (refreshError) {
-        console.error("Error refreshing token:", refreshError);
         res.status(500).json({ error: "Error refreshing token" });
       }
   }
 }
 
 async function fetchAutocompleteData(search, token) {
-  console.log(":::fetchAutocompleteData", token)
   let _url = `${BASE_URL}?query=${search}`;
   const requestParams = {
     headers: {
@@ -52,7 +48,6 @@ async function fetchAutocompleteData(search, token) {
                   return response.json()
                 })
 
-  console.log(':::fetchAutocompleteData Finished', data)
   return data
 }
 
