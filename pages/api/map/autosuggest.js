@@ -1,5 +1,8 @@
 //import { getAccessToken } from '../../../services/map/tokenService'
 
+import { callApi } from "@/lib/utils/api";
+import { env } from "eslint-config-next";
+
 const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const fixedParams = "&region=IND&pod=CITY";
 
@@ -15,16 +18,16 @@ export default async function GET(req, res) {
   
   try {
     const autocompleteData = await fetchAutocompleteData(searchtext, mapToken)
-    if (autocompleteData.status == 401) {
+    if (autocompleteData?.error == 'invalid_token') {
       throw new Error(autocompleteData)
     } else {
       res.status(200).json(autocompleteData);
     }
   } catch (error) {
-    console.log({error})
-    if (error.status === 401) {
+    console.log('Invalid Token error caught')
       try {
         const newToken = await refreshToken()
+        console.log('New token generated', newToken)
         const autocompleteData = await fetchAutocompleteData(searchtext, newToken)
         await updateMapToken(newToken);
         res.status(200).json(autocompleteData);
@@ -32,21 +35,16 @@ export default async function GET(req, res) {
         console.error("Error refreshing token:", refreshError);
         res.status(500).json({ error: "Error refreshing token" });
       }
-    } else {
-      console.error("Autocomplete error:", error);
-      res.status(500).json({ error: "Autocomplete error" });
-    }
   }
 }
 
 async function fetchAutocompleteData(search, token) {
-  console.log(":::fetchAutocompleteData")
+  console.log(":::fetchAutocompleteData", token)
   let _url = `${BASE_URL}?query=${search}`;
   const requestParams = {
     headers: {
       "Content-Type": "application/json",
-      //"Authorization": `Bearer ${token}`,
-      "Authorization": `Bearer ca92867d-9f82-457c-9265-d331eaf1cba5`,
+      "Authorization": `Bearer ${token}`,
     },
   }
   const data = await fetch(_url, requestParams)
@@ -59,12 +57,10 @@ async function fetchAutocompleteData(search, token) {
 }
 
 async function refreshToken() {
-  console.log(":::refreshToken")
-
   const tokenRequestBody = {
     'grant_type': 'client_credentials',
-    'client_id': '33OkryzDZsKQgUZOhY9rLY3JOsy_8VYy59GHEUSyC07x2GeaxOn8Ynt7FcITT8u9YUWqI_3VO6bplpRBqphPRg==',
-    'client_secret': 'lrFxI-iSEg_AL9sYtJo6XedufJKlBpHQmnOpVZiOo99u4QICrfX2rDkC9r5GGe1BcCt7LSjKPjKAhsZpY75eSjt1PXBSVB2n'
+    'client_id': env.prod.MAPPLS_CLIENT_ID,
+    'client_secret': env.prod.MAPPLS_CLIENT_SECRET
   }
   
   const tokenParams = {
@@ -79,19 +75,21 @@ async function refreshToken() {
                 .then((response) => {
                   return response.json()
                 })
-  console.log(':::refreshToken Finished', data)
 
   return data.access_token
 }
 
 async function updateMapToken(token) {
-  requestParams = {
+  const requestParams = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: {
+    body: JSON.stringify({
       map_token: token
-    }
+    })
   }
+  const _url = '/api/map/map_token'
+  const responseData = await callApi(_url, requestParams)
+
 }
