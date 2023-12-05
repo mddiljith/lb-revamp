@@ -1,7 +1,6 @@
 //import { getAccessToken } from '../../../services/map/tokenService'
 
 import { callApi } from "@/lib/utils/api";
-
 const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const fixedParams = "&region=IND&pod=CITY";
 
@@ -23,7 +22,6 @@ export default async function GET(req, res) {
       res.status(200).json(autocompleteData);
     }
   } catch (error) {
-    console.log('Invalid Token error caught')
       try {
         const newToken = await refreshToken()
         console.log('New token generated', newToken)
@@ -31,14 +29,12 @@ export default async function GET(req, res) {
         await updateMapToken(newToken);
         res.status(200).json(autocompleteData);
       } catch (refreshError) {
-        console.error("Error refreshing token:", refreshError);
         res.status(500).json({ error: "Error refreshing token" });
       }
   }
 }
 
 async function fetchAutocompleteData(search, token) {
-  console.log(":::fetchAutocompleteData", token)
   let _url = `${BASE_URL}?query=${search}`;
   const requestParams = {
     headers: {
@@ -51,7 +47,6 @@ async function fetchAutocompleteData(search, token) {
                   return response.json()
                 })
 
-  console.log(':::fetchAutocompleteData Finished', data)
   return data
 }
 
