@@ -18,6 +18,9 @@ function SearchConfirmation() {
   // const { searchData } = useSearch();
   const [price, setPrice] = useRecoilState(PriceState);
   const [trip, setTrip] = useState([]);
+
+  //insert price into the price table with search id
+
   useEffect(() => {
     const getPrice = async () => {
       const requestParams = {
@@ -29,13 +32,13 @@ function SearchConfirmation() {
       setPrice(data.estimate);
       const tripParams = {
         method: "POST",
-        header: {'Content-Type': 'application/json'},
+        header: { "Content-Type": "application/json" },
         body: JSON.stringify({
           price: data.estimate,
-          search_request_id: searchid 
-        })
-      }
-      callApi('/api/payments', tripParams)
+          search_request_id: searchid,
+        }),
+      };
+      callApi("/api/payments", tripParams);
     };
     getPrice();
   }, [searchid]);
