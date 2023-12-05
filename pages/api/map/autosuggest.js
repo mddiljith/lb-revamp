@@ -1,7 +1,6 @@
 //import { getAccessToken } from '../../../services/map/tokenService'
 
 import { callApi } from "@/lib/utils/api";
-import { env } from "eslint-config-next";
 
 const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const fixedParams = "&region=IND&pod=CITY";
