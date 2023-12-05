@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 // import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
-import { CardBody, Typography } from "@material-tailwind/react";
+import { CardBody, Typography, Card } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 // import { usePrice } from "@/hooks/search/usePrice";
 // import { useSearch } from "@/hooks/search/useSearch";
@@ -12,7 +12,7 @@ import { PriceState } from "@/context/SearchAtom";
 function SearchConfirmation() {
   // const { price } = usePrice();
   const { searchData } = useSearch();
-  console.log("price in view", price, searchData);
+  console.log(searchData);
   const router = useRouter();
   const { searchid } = router.query;
   // const { searchData } = useSearch();
@@ -33,6 +33,7 @@ function SearchConfirmation() {
 
   async function handleSubmit() {
     console.log("Submitting request");
+    
     createTripForRequest();
   }
 
