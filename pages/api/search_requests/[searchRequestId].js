@@ -12,9 +12,6 @@ module.exports = async (req, res) => {
   } = await supabaseServerClient.auth.getSession();
 
   const { searchRequestId } = req.query
-  const data = await getUserRole(session.user.id)
-  const role = data[0]?.role_meta_data?.role_id
-  const userId = session.user.id
   try {
     if(req.method == "PUT") {
       let search_request = req.body
