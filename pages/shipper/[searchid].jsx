@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 // import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
-import { CardBody, Typography, Card } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 // import { usePrice } from "@/hooks/search/usePrice";
 // import { useSearch } from "@/hooks/search/useSearch";
@@ -18,6 +18,9 @@ function SearchConfirmation() {
   // const { searchData } = useSearch();
   const [price, setPrice] = useRecoilState(PriceState);
   const [trip, setTrip] = useState([]);
+
+  //insert price into the price table with search id
+
   useEffect(() => {
     const getPrice = async () => {
       const requestParams = {
@@ -27,13 +30,19 @@ function SearchConfirmation() {
 
       const data = await callApi(`/api/pricing/${searchid}`, requestParams);
       setPrice(data.estimate);
+      const tripParams = {
+        method: "POST",
+        header: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          price: data.estimate,
+          search_request_id: searchid 
+        })
+      }
     };
     getPrice();
   }, [searchid]);
 
   async function handleSubmit() {
-    console.log("Submitting request");
-    
     createTripForRequest();
   }
 
@@ -47,15 +56,13 @@ function SearchConfirmation() {
     };
 
     const data = await callApi(`/api/trips`, requestParams);
-    console.log(data);
 
     setTrip(data);
-    console.log(trip[0].id);
+
     router.push(`/shipper/trips/${trip[0].id}`);
   };
 
   // const { price } = usePrice();
-  console.log("price in view", price);
   // 1.create a hook for featching the search request data from router query
   // 2.create the trip based on the confirmation of page, may be a trip generator hook can be used with mutation
   // 3. Push to the trip details page - where price is shown to the customer with map or price confirmation page

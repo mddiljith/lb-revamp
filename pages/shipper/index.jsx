@@ -20,12 +20,11 @@ function Shipper() {
   const showTruckSearch = useRecoilValue(showTruckSearchState);
   const { route_path, distance } = useRecoilValue(mapState);
   const [token, setToken] = useRecoilState(mapTokenState);
-  console.log('Route path for Shipper');
-  console.log(route_path);
-  console.log(distance);
 
   const getMapToken = async () => {
+    console.log("GetMapToken:")
     const tokenData = await callApi('/api/map/map_token')
+    console.log(tokenData);
     return tokenData
   }
 
