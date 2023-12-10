@@ -1,8 +1,6 @@
 //import { getAccessToken } from '../../../services/map/tokenService'
 
 import { callApi } from "@/lib/utils/api";
-import { env } from "eslint-config-next";
-
 const BASE_URL = "https://atlas.mappls.com/api/places/search/json";
 const fixedParams = "&region=IND&pod=CITY";
 
@@ -26,6 +24,7 @@ export default async function GET(req, res) {
   } catch (error) {
       try {
         const newToken = await refreshToken()
+        console.log('New token generated', newToken)
         const autocompleteData = await fetchAutocompleteData(searchtext, newToken)
         await updateMapToken(newToken);
         res.status(200).json(autocompleteData);

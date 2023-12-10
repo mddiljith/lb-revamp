@@ -22,7 +22,9 @@ function Shipper() {
   const [token, setToken] = useRecoilState(mapTokenState);
 
   const getMapToken = async () => {
+    console.log("GetMapToken:")
     const tokenData = await callApi('/api/map/map_token')
+    console.log(tokenData);
     return tokenData
   }
 

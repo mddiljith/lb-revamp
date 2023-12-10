@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 // import { usePrice } from "@/hooks/search/usePrice";
 import { useSearch } from "@/hooks/search/useSearch";
-import { CardBody, Typography, Card } from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 // import { usePrice } from "@/hooks/search/usePrice";
 // import { useSearch } from "@/hooks/search/useSearch";
@@ -38,14 +38,11 @@ function SearchConfirmation() {
           search_request_id: searchid,
         }),
       };
-      callApi("/api/payments", tripParams);
     };
     getPrice();
   }, [searchid]);
 
   async function handleSubmit() {
-    console.log("Submitting request");
-
     createTripForRequest();
   }
 
