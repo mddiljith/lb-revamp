@@ -1,33 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import DriverLayout from '@/Components/Driver/DriverLayout';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+
 import Map from "@/Components/Map/Map";
+import DriverLayout from '@/Components/Driver/DriverLayout';
+
 import { getDirection } from "@/services/map/getDirection";
-import { callApi } from '@/lib/utils/api';
+import { useTrip } from '@/hooks/trips/useTrip';
 
 const TripMain = () => {
+  const router = useRouter();
+  const { id } = router.query
   let [mapPath, setMapPath] = useState([])
-  const mapCordinates = async () => {
-    return await getDirection(eloc1, eloc2);
+
+  const mapCordinates = async (eloc1, eloc2) => {
+    const data = await getDirection(eloc1, eloc2);
+    console.log({data})
+    setMapPath(data);
   }
 
-  useEffect(() => {
-    // const { path } = mapCordinates()
-    // setMapPath(path)
-    // console.log(path)
+  const { isLoading, error, trip }  = useTrip()
 
-    // get the eloc values from the search request
-    // pass eloc to direction api and get directions
-    callApi('/api/search_request')
+  console.log('Trip found', trip)
 
-  }, []);
+  if(trip != undefined) {
+    let eloc1 = trip[0].search_requests.source_eloc
+    let eloc2 = trip[0].search_requests.destination_eloc
+    console.log(eloc1, eloc2)
+    
+    mapCordinates(eloc1, eloc2)
+    console.log('Path', mapPath)
+  }
+
 
   return (
-    <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 ...">
-      <div class="col-span-2">
+    <div className="grid grid-flow-row-dense grid-cols-3 grid-rows-3 ...">
+      <div className="col-span-2">
         Map area for trip
         {/* <Map path={mapPath} /> */}
       </div>
-      <div class="col-span-2">
+      <div className="col-span-2">
         Some other section
       </div>
       <div>Trip timeline</div>

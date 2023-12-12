@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 
 export function useTrip() {
   const router = useRouter();
-  const { tripId } = router.query;
+  const { id } = router.query;
+  const tripId = id;
   const {
     isLoading,
     data: trip,
