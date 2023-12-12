@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
         .from('payments')
         .insert({
           price: cost,
-          transaction_id: 111,
+          transaction_id: Math.floor(Math.random() * 999999),
           search_request_id: search_request_id 
         }).select();
       console.log(data)

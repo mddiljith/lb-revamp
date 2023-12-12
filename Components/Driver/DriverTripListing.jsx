@@ -17,7 +17,7 @@ const DriverTripListing = ({ row, index }) => {
     <>
     <Table.Row index={index}>
       <Table.RowItem>
-        <Link href={`/trip/${id}`}>
+        <Link href={`/driver/trips/${id}`}>
           <Typography className="text-sm font-semibold text-light-blue-900">
             {tracking_id}
           </Typography>

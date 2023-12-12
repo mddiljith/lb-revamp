@@ -9,7 +9,8 @@ function CheckoutConfirmation() {
   const router = useRouter();
   const { searchid } = router.query;
 
-  const createTripForRequest = async () => {
+  const createTripForRequest = async (searchid) => {
+    console.log('Creating Trip')
     const requestParams = {
       method: "POST",
       body: JSON.stringify({
@@ -18,12 +19,13 @@ function CheckoutConfirmation() {
       headers: { "Content-Type": "application/json" },
     };
 
-    const data = await callApi(`/api/trips`, requestParams);
-
+    const { data } = await callApi(`/api/trips`, requestParams);
+    console.log("TripData", data);
+    console.log(data[0])
     // setTrip(data);
-    let tripId = data[0]?.id
-    console.log(data);
-    console.log(tripId);
+    let tripId = data[0].id
+    console.log(tripId)
+
     router.push(`/shipper/trips/${tripId}`);
   };
 

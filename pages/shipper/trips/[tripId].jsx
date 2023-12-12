@@ -26,11 +26,17 @@ const TripDetail = () => {
   // const router = useRouter();
   // const { tripId } = router.query;
   //get price from the searchiD result
+  console.log('Trip Details loaded')
   const { isLoading, error, trip } = useTrip();
+  console.log('TripDetail', trip)
   // const price = useRecoilValue(PriceState);
-  const source = trip[0]?.search_requests?.source
-  const destination = trip[0]?.search_requests?.destination
-  const price = trip[0]?.payments?.price
+  // const source = trip[0]?.search_requests?.source
+  // const destination = trip[0]?.search_requests?.destination
+  // const price = trip[0]?.payments?.price
+
+  const source = 'abc'
+  const destination = 'def'
+  const price = 2000
 
   return (
     <>
