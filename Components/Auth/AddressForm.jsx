@@ -1,5 +1,4 @@
-import { CardBody, CardFooter } from "@material-tailwind/react";
-import { Input } from "postcss";
+import {Card, CardBody, CardFooter, Input } from "@material-tailwind/react";
 import React from "react";
 
 function AddressForm() {

@@ -17,7 +17,7 @@ import DriverTripListing from "./DriverTripListing";
 
 
 const DriverTripManager = () => {
-  const [activeTab, setActiveTab] = useState("1");
+  const [activeTab, setActiveTab] = useState("4");
   const [trips, setTrips] = useState([]);
 
   async function fetchTripsForDriver() {

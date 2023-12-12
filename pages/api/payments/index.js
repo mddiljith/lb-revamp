@@ -1,5 +1,4 @@
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
-import { getTruckId } from "@/lib/models/vehicle";
 
 module.exports = async (req, res) => {
   const supabase = createPagesServerClient({
@@ -15,23 +14,23 @@ module.exports = async (req, res) => {
   const userId = session.user.id
 
   if(req.method == "POST") {
-    const price = req.body.price;
+    const cost = req.body.price;
     const search_request_id = req.body.search_request_id;
-
     try {
       const { data, error } = await supabase
         .from('payments')
         .insert({
-          price: price,
+          price: cost,
           transaction_id: 111,
           search_request_id: search_request_id 
         }).select();
-
+      console.log(data)
+      console.log(error)
       const payments = data[0];
-      
+        
       res.status(200).json({payments: payments});
     } catch (error) {
-      console.log(error);
+      console.log({error});
     }
   }
 }

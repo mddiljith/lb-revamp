@@ -11,14 +11,12 @@ import { PriceState } from "@/context/SearchAtom";
 
 function SearchConfirmation() {
   // const { price } = usePrice();
-  const { searchData } = useSearch();
-  console.log(searchData);
+  // const { searchData } = useSearch();
+  // console.log(searchData);
   const router = useRouter();
   const { searchid } = router.query;
-  // const { searchData } = useSearch();
   const [price, setPrice] = useRecoilState(PriceState);
   const [trip, setTrip] = useState([]);
-
   //insert price into the price table with search id
 
   useEffect(() => {
@@ -42,26 +40,26 @@ function SearchConfirmation() {
     getPrice();
   }, [searchid]);
 
-  async function handleSubmit() {
-    createTripForRequest();
+  async function handleSubmit(__price) {
+    createPaymentForRequest(__price);
   }
 
-  const createTripForRequest = async () => {
+  const createPaymentForRequest = async (__price) => {
     const requestParams = {
       method: "POST",
       body: JSON.stringify({
         search_request_id: searchid,
+        price: __price
       }),
       headers: { "Content-Type": "application/json" },
     };
 
-    const data = await callApi(`/api/trips`, requestParams);
-
-    setTrip(data);
-
-    router.push(`/shipper/trips/${trip[0].id}`);
+    const data = await callApi(`/api/payments`, requestParams);
+    console.log('Payments data', data);
+    router.push(`/shipper/checkout/${searchid}`);
   };
 
+  
   // const { price } = usePrice();
   // 1.create a hook for featching the search request data from router query
   // 2.create the trip based on the confirmation of page, may be a trip generator hook can be used with mutation
@@ -83,7 +81,7 @@ function SearchConfirmation() {
       <p>Price : {price}</p>
 
       <p>{price}</p>
-      <button onClick={handleSubmit}>Confirm to Pay</button>
+      <button onClick={() => handleSubmit(price)}>Confirm to Pay</button>
     </>
   );
 }
