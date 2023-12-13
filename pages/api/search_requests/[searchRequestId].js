@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   try {
     if(req.method == "PUT") {
       let search_request = req.body
-      let { data, error } = await supabase
+      let { data, error } = await supabaseServerClient
           .from('search_requests')
           .update(search_request)
           .eq('id', search_request.id)
@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
       res.status(200).json(search_request);
     } else if(req.method == "GET") {
       let {searchRequestId} = req.query;
-      let { data, error } = await supabase
+      let { data, error } = await supabaseServerClient
           .from('search_requests')
           .select("*")
           .eq('id', searchRequestId);

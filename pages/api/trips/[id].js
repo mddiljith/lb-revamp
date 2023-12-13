@@ -34,27 +34,33 @@ module.exports = async (req, res) => {
           id,
           model,
           plate_number,
-          driver_id
+          driver_id,
+          users!vehicles_driver_id_fkey(
+            name,
+            email
+          )
         ),
         search_requests(
           id,
           source,
           destination,
+          source_eloc,
+          destination_eloc,
           users(
             email,
             name
-          )
+          ),
+          payments(
+            id,
+            price
+          )  
         ),
         payment_status(
           id,
           statuses(
             name
           )
-        ),
-        payments(
-          id,
-          price
-        )   
+        ) 
       `).eq('id', id)
 
     if(error) {

@@ -51,10 +51,11 @@ async function fetchAutocompleteData(search, token) {
 }
 
 async function refreshToken() {
+  console.log('Refresh token generated')
   const tokenRequestBody = {
     'grant_type': 'client_credentials',
-    'client_id': env.prod.MAPPLS_CLIENT_ID,
-    'client_secret': env.prod.MAPPLS_CLIENT_SECRET
+    'client_id': process.env.MAPPLS_CLIENT_ID,
+    'client_secret': process.env.MAPPLS_CLIENT_SECRET
   }
   
   const tokenParams = {
@@ -67,9 +68,10 @@ async function refreshToken() {
 
   const data = await fetch('https://outpost.mapmyindia.com/api/security/oauth/token', tokenParams)
                 .then((response) => {
+                  console.log({response})
                   return response.json()
                 })
-
+                console.log(data);
   return data.access_token
 }
 

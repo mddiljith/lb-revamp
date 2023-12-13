@@ -50,8 +50,8 @@ module.exports = async (req, res) => {
         distance: 100,
         tracking_id: trackingId,
         payment_status_id: 7,
-        status_id: 4,
-        payment_id: sr[0].id
+        status_id: 4
+        // payment_id: sr[0].id
       }).select();
       console.log(error);
       console.log(data);
@@ -63,38 +63,22 @@ module.exports = async (req, res) => {
       return {data};
   }
 
-  const selectPayment = async () => {
-    
-  }
-
-  const userFieldCheck = () => {
-    if (role != 1) {
-      // for owner & driver
-      return `eq(vehicles.${userField}, ${userId}).eq(status_id, ${status_id})`
-    } else {
-      // for shipper
-      return `eq(search_requests.user_id, ${userId}).eq(status_id, ${status_id})`
-    }
-  }
-
   const getTrips = async (userId) => {
-    let tripFilter = userFieldCheck();
-
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
-        id,
-        created_at,
-        tracking_id,
+        id, created_at, tracking_id,
         statuses(
           id,
           name
-        ),
+        ), 
+        status_id,
         vehicles!inner(
           id,
           model,
           plate_number,
-          driver_id
+          driver_id,
+          owner_id
         ),
         search_requests(
           id,
@@ -108,20 +92,73 @@ module.exports = async (req, res) => {
         payment_status(
           id,
           statuses(
+            id,
             name
           )
         )   
-      `).tripFilter
+      `)
+      .eq(`vehicles.${userField}`, `${userId}`)
+      .eq('status_id', status_id)
 
     if(error) {
+      console.log(error);
       return error
     }
-    
+    console.log('responsedata', trips);
+    return trips;
+  }
+
+  const getShipperTrips = async (userId) => {
+    let { data: trips, error } = await supabaseServerClient
+      .from('trips')
+      .select(`
+        id, created_at, tracking_id,
+        statuses(
+          id,
+          name
+        ), 
+        status_id,
+        vehicles!inner(
+          id,
+          model,
+          plate_number,
+          driver_id,
+          owner_id
+        ),
+        search_requests(
+          id,
+          source,
+          destination,
+          users(
+            email,
+            name
+          )
+        ),
+        payment_status(
+          id,
+          statuses(
+            id,
+            name
+          )
+        )   
+      `)
+      .eq('search_requests.user_id', `${userId}`)
+      .eq('status_id', status_id)
+
+    if(error) {
+      console.log(error);
+      return error
+    }
     return trips;
   }
 
   if(req.method == "GET") {
-    tripResponse = await getTrips(userId);
+    if (role != 1) {
+      tripResponse = await getTrips(userId);
+    }
+    else {
+      tripResponse = await getShippperTrips(userId);
+    }
   } else if (req.method == "POST") {
     tripResponse = await createTrips();
   }

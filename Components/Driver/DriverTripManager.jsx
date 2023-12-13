@@ -14,10 +14,8 @@ import Table from "@/Components/ui/Table";
 import { DRIVER_TRIP_TABS, DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLinksConst";
 import DriverTripListing from "./DriverTripListing";
 
-
-
 const DriverTripManager = () => {
-  const [activeTab, setActiveTab] = useState("1");
+  const [activeTab, setActiveTab] = useState("4");
   const [trips, setTrips] = useState([]);
 
   async function fetchTripsForDriver() {
@@ -26,7 +24,6 @@ const DriverTripManager = () => {
     }
     const trips_data = await callApi(`/api/trips?status_id=${activeTab}`, requestParams);
     setTrips(trips_data);
-    console.log(trips_data)
   }
 
   const handleTabChange = (tabId) => {
