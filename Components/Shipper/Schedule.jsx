@@ -15,7 +15,7 @@ import { callApi } from "@/lib/utils/api";
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
-  const [option, setOption] = useState();
+  const [option, setOption] = useState(true);
   const router = useRouter();
 
   const handleScheduleOption = (value) => {

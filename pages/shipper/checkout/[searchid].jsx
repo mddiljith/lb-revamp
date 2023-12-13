@@ -3,6 +3,7 @@ import React from "react";
 
 function CheckoutConfirmation() {
   //verify the shipper satatus and update the billing address accordingly
+  //SPLIT THE PAYMENT CONFIRMATION
   return (
     <div className="flex flex-row justify-start ml-3">
       <div className="w-3/5 flex flex-col p-2">
