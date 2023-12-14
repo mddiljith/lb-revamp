@@ -9,12 +9,12 @@ import { callApi } from "@/lib/utils/api";
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
-  const [option, setOption] = useState();
+  const [option, setOption] = useState(null);
   const router = useRouter();
 
   const handleScheduleOption = (value) => {
     console.log("chanegd", value);
-    setOption(() => value);
+    setOption(value);
     console.log(option);
   };
 
