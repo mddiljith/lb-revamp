@@ -53,7 +53,7 @@ const TripDetail = () => {
       {trip && (
         <>
           <Typography variant="h3" color="blue-gray" className="p-4">
-            consignment ID: {trip[0].id}
+            consignment ID: {trip[0]?.id}
           </Typography>
           <div className="flex flex-row justify-start ml-3">
             <div className="w-3/5 flex flex-col p-2">
@@ -106,7 +106,7 @@ const TripDetail = () => {
                           color="blue-gray"
                           className="leading-none"
                         >
-                          truck Assigned
+                          Truck Assigned
                         </Typography>
                       </TimelineHeader>
                       <TimelineBody className="pb-8">
@@ -269,11 +269,11 @@ const TripDetail = () => {
                     Vehicle number: <em>{trip[0]?.vehicles.plate_number}</em>{" "}
                   </Typography>
                   <Typography>
-                    Driver Name: <em>{trip[0]?.vehicles.users.name}</em>
+                    Driver Name: <em>{trip[0]?.vehicles?.users?.name}</em>
                   </Typography>
                   <Typography>Contact Number:</Typography>
                   <Typography>
-                    Truck Details: <em>{trip[0]?.vehicles.model}</em>
+                    Truck Details: <em>{trip[0]?.vehicles?.model}</em>
                   </Typography>
                 </CardBody>
               </Card>

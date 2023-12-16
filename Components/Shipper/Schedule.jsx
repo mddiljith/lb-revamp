@@ -80,7 +80,7 @@ function Schedule() {
                   label="Pickup Date"
                   variant="static"
                   name="scheduled_at"
-                  disabled={option}
+                  // disabled={option}
                   value={search.scheduled_at}
                   onChange={handleChange}
                 />
@@ -88,7 +88,7 @@ function Schedule() {
                   type="time"
                   label="Pickup time"
                   variant="static"
-                  disabled={option}
+                  // disabled={option}
                   name="scheduled_time"
                   value={search.scheduled_time}
                   onChange={handleChange}

@@ -17,7 +17,7 @@ export function useTrip() {
     queryKey: ["trip", tripId],
     queryFn: () => getTrip(tripId),
     onSuccess: (data) => {
-      setTripStatus(data[0].statuses.name);
+      setTripStatus(data[0]?.statuses.name);
     },
     onError: (err) => {
       console.log("ERROR", err);
