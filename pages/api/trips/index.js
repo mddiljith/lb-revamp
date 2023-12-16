@@ -109,6 +109,8 @@ module.exports = async (req, res) => {
   }
 
   const getShipperTrips = async (userId) => {
+    console.log('User ID', userId)
+    console.log('User ID', status_id)
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -122,7 +124,10 @@ module.exports = async (req, res) => {
           id,
           model,
           plate_number,
-          driver_id,
+          users!vehicles_driver_id_fkey(
+            name,
+            email
+          ),
           owner_id
         ),
         search_requests(
@@ -143,10 +148,9 @@ module.exports = async (req, res) => {
         )   
       `)
       .eq('search_requests.user_id', `${userId}`)
-      .eq('status_id', status_id)
 
     if(error) {
-      console.log(error);
+      console.log('errir',error);
       return error
     }
     return trips;
@@ -157,7 +161,7 @@ module.exports = async (req, res) => {
       tripResponse = await getTrips(userId);
     }
     else {
-      tripResponse = await getShippperTrips(userId);
+      tripResponse = await getShipperTrips(userId);
     }
   } else if (req.method == "POST") {
     tripResponse = await createTrips();
