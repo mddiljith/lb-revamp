@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 
 export function useSearch() {
   const router = useRouter();
-  const { searchId } = router.query;
+  const { searchid } = router.query;
   const {
     isLoading,
     data: SearchData,
     error,
   } = useQuery({
-    queryKey: [`${searchId}`, "search"],
-    queryFn: () => getSearchData(searchId),
+    queryKey: [`${searchid}`, "search"],
+    queryFn: () => getSearchData(searchid),
 
     onError: (err) => {
       console.log("ERROR", err);
@@ -23,7 +23,6 @@ export function useSearch() {
 }
 
 const getSearchData = async (searchRequestId) => {
-  console.log("Search Request ID",searchRequestId)
   const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests/${searchRequestId}`;
   const res = await fetch(_url);
   return res.json();

@@ -27,21 +27,9 @@ export function usePrice() {
 const getPrice = async (searchRequestId) => {
   const requestParams = {
     method: "POST",
-<<<<<<< HEAD
     headers: { "Content-Type": "application/json" },
   };
 
-  const { estimate } = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/pricing/${searchRequestId}`,
-    requestParams
-  );
-  console.log("api price", estimate);
-  return estimate;
-=======
-    headers: { "Content-Type": "application/json" }
-  }
-  
   const data = await callApi(`/api/pricing/${searchRequestId}`, requestParams);
   return data;
->>>>>>> dae4950cc154d89ffa73091172b4107b1c212cfd
 };

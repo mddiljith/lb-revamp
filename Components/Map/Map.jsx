@@ -3,21 +3,24 @@ import { mappls, mappls_plugin } from "mappls-web-maps";
 
 //multiple marker setup
 
-function Map({ position, path }) {
-  // console.log("path", path)
+function Map({ path }) {
+  console.log("path", path, [path[0].lat, path[0].lng]);
   let geoData = {
     type: "FeatureCollection",
     features: [
       {
         type: "Feature",
-        properties: { htmlPopup: "noida" },
+        properties: { htmlPopup: "source" },
         geometry: { type: "Point", coordinates: [path[0].lat, path[0].lng] },
       },
 
       {
         type: "Feature",
-        properties: { htmlPopup: "kerala" },
-        geometry: { type: "Point", coordinates: [path[path.length-1].lat, path[path.length-1].lng] },
+        properties: { htmlPopup: "Destination" },
+        geometry: {
+          type: "Point",
+          coordinates: [path[path.length - 1].lat, path[path.length - 1].lng],
+        },
       },
     ],
   };
@@ -25,7 +28,7 @@ function Map({ position, path }) {
   const styleMap = { width: "80%", height: "80vh", display: "inline-block" };
 
   const mapProps = {
-    center: [28.633, 77.2194],
+    center: [path[0].lat, path[0].lng],
     traffic: false,
     zoom: 10,
     geolocation: false,
@@ -55,12 +58,10 @@ function Map({ position, path }) {
         clusters: true,
       });
 
-       polylineObject = mapplsClassObject.Polyline(
-        {
-            map: mapObject,
-            path: path
-        }
-    );
+      polylineObject = mapplsClassObject.Polyline({
+        map: mapObject,
+        path: path,
+      });
     });
   });
 

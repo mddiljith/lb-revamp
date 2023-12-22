@@ -22,6 +22,7 @@ import {
 import { useRecoilValue } from "recoil";
 import { PriceState } from "@/context/SearchAtom";
 import { useTrip } from "@/hooks/trips/useTrip";
+import DeliveryformDailogBox from "@/Components/Shipper/DeliveryformDailogBox";
 
 const TripDetail = () => {
   // const router = useRouter();
@@ -29,9 +30,10 @@ const TripDetail = () => {
   //get price from the searchiD result
 
   const { isLoading, error, trip, tripStatus } = useTrip();
+  const [open, setOpen] = useState(false);
   // const [orderStatus, setOrderStatus] = useState(tripStatus);
   console.log("TripDetail", trip, error);
-
+  const handleOpen = () => setOpen(!open);
   // const source = trip[0]?.search_requests?.source;
   // const destination = trip[0]?.search_requests?.destination;
   // const price = trip[0]?.search_requests.payments[0].price;
@@ -214,9 +216,14 @@ const TripDetail = () => {
                 </CardBody>
                 <CardFooter className="pt-0">
                   <div className="p-2">
-                    <Button color="blue">
+                    <Button color="blue" onClick={handleOpen}>
                       Add delivery contact information
                     </Button>
+                    <DeliveryformDailogBox
+                      open={open}
+                      handler={handleOpen}
+                      onSubmit={handleOpen} // need to change this as per API call
+                    />
                   </div>
 
                   <div className="flex gap-3 justify-between p-2 mt-2">

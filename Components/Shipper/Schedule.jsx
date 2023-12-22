@@ -9,7 +9,7 @@ import { callApi } from "@/lib/utils/api";
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
-  const [option, setOption] = useState(null);
+  const [option, setOption] = useState(1);
   const router = useRouter();
 
   const handleScheduleOption = (value) => {
@@ -70,8 +70,8 @@ function Schedule() {
               value={option}
               label="Schedule"
             >
-              <option value={true}>Pickup Now</option>
-              <option value={false}>Schedule later</option>
+              <option value={1}>Pickup Now</option>
+              <option value={0}>Schedule later</option>
             </select>
             {option && (
               <>
