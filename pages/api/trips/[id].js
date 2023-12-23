@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   const role = data[0]?.role_meta_data?.role_id
   const userId = session.user.id
   const id = req.query.id
-  
+  console.log('Trip ID', id)
   const getTrips = async (id) => {
 
     let { data: trips, error } = await supabaseServerClient

@@ -9,13 +9,11 @@ import { callApi } from "@/lib/utils/api";
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
-  const [option, setOption] = useState(1);
+  const [option, setOption] = useState('');
   const router = useRouter();
 
   const handleScheduleOption = (value) => {
-    console.log("chanegd", value);
-    setOption(value);
-    console.log(option);
+    setOption(() => value);
   };
 
   const onSubmit = async (e) => {
@@ -73,7 +71,7 @@ function Schedule() {
               <option value={1}>Pickup Now</option>
               <option value={0}>Schedule later</option>
             </select>
-            {option && (
+            {option == 0 && (
               <>
                 <Input
                   type="date"
