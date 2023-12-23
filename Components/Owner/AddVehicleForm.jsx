@@ -29,6 +29,8 @@ function AddvehicleForm() {
     reset();
   };
 
+  console.log(errors);
+
   return (
     <>
       <Card className="px-3 my-2 pb-2">
@@ -105,7 +107,7 @@ function AddvehicleForm() {
                     required: "This field is required",
                     pattern: {
                       value:
-                        /^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/,
+                        /^[A-Z]{2}[0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)?[0-9]{4}$/,
                       message: "Please provide a valid Registration number",
                     },
                   })}
@@ -141,14 +143,7 @@ function AddvehicleForm() {
             </div>
           </label>
 
-          <input
-            id="doc"
-            type="file"
-            hidden
-            {...register("rc_photo", {
-              required: "This field is required",
-            })}
-          />
+          <input id="doc" type="file" hidden {...register("rc_photo")} />
 
           <div className="flex gap-5 mt-5">
             <Button type="submit" color="blue-gray" disabled={isCreating}>

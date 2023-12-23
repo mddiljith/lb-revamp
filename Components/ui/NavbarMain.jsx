@@ -36,7 +36,7 @@ function NavbarMain() {
   const [avatar, setAvatar] = useState();
   const { logout, isLoading } = useLogout();
   useEffect(() => {
-    setAvatar(user?.user_metadata?.avatal_url);
+    setAvatar(user?.user_metadata?.avatar_url);
   }, []);
 
   return (
@@ -49,9 +49,7 @@ function NavbarMain() {
       <div className="flex gap-2">
         {user ? (
           <>
-            <span className="font-semibold text-xl py-2">
-              {user?.email}
-            </span>
+            <span className="font-semibold text-xl py-2">{user?.email}</span>
             <span className="py-2">
               <Chip
                 variant="ghost"

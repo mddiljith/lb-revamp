@@ -3,13 +3,14 @@ import Navbar from "./NavbarMain";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Button } from "@material-tailwind/react";
+import NavbarMain from "./NavbarMain";
 
 function SidebarLayout({ sidelinks, children }) {
   return (
     <div className=" flex flex-row justify-start ">
       <Sidebar sidelinks={sidelinks} />
       <main className="flex-1 w-full  bg-gray-200 ">
-        <Navbar />
+        <NavbarMain />
         {/* <Suspense fallback={<h1>Loading....</h1>}> */}
         <section>{children}</section>
         {/* </Suspense> */}
@@ -24,7 +25,9 @@ function Sidebar({ sidelinks }) {
   return (
     <aside className="space-x-1 flex flex-col w-1/6 overflow-y-auto py-4 h-screen sticky top-0 border border-gray-300 border-solid">
       <h3 className="font-bold text-xl text-blue-800 px-3 mb-4">
-        <Link href="/" className="px-3">LETSBUILD.</Link>
+        <Link href="/" className="px-3">
+          LETSBUILD.
+        </Link>
       </h3>
       <div className="flex-1 text-gray-900 p-3">
         {sidelinks.map((item) => (
