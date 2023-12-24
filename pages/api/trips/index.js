@@ -137,7 +137,8 @@ module.exports = async (req, res) => {
           users(
             email,
             name
-          )
+          ),
+          scheduled_at
         ),
         payment_status(
           id,

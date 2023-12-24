@@ -14,9 +14,6 @@ import {
 
 // import TripTable from "../../components/User/TripTable";
 // import TripTableOwner from "@/Components/Owner/TripTableOwner";
-
-// import { useTrips } from "@/hooks/trips/useTrips";
-
 function Trips() {
 	return (
     <div>
