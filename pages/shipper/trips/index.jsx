@@ -10,7 +10,9 @@ function ShipperTrips() {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && <div className="flex items-center justify-center h-screen bg-gray-100" >
+        <Spinner />
+      </div>}
 
       {/* {trips && <TripTableOwner trips={trips} />} */}
       {/* tripTableShipper to be created based on the trip details */}

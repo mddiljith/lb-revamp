@@ -51,7 +51,9 @@ const TripDetail = () => {
   return (
     <>
       <NavbarMain />
-      {isLoading && <Spinner />}
+      {isLoading && <div className="flex items-center justify-center h-screen bg-gray-100" >
+        <Spinner />
+      </div>}
       {trip && (
         <>
           <Typography variant="h3" color="blue-gray" className="p-4">
@@ -295,7 +297,6 @@ const TripDetail = () => {
                   <Button className="flex items-center gap-3">
                     <IoCallOutline /> customer care
                   </Button>
-                  <IoCallOutline />
                 </CardFooter>
               </Card>
             </div>
