@@ -31,6 +31,7 @@ function DriverHome() {
               destination={trip.search_requests.destination}
               scheduled_at={trip.scheduled_at}
               trackingId={trip.tracking_id} 
+              tripId={trip.id}
             />
           </div>
         )}

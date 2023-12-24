@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
   const userId = session.user.id
   const id = req.query.id
   console.log('Trip ID', id)
-  const getTrips = async (id) => {
 
+  const getTrips = async (id) => {
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -70,8 +70,24 @@ module.exports = async (req, res) => {
     return trips;
   }
 
+  const updateTrip = async () => {
+    const trip = req.body
+    let { data, error } = await supabaseServerClient
+        .from('trips')
+        .update(trip)
+        .eq('id', trip.id)
+        .select();
+
+    if(error) {
+      return error
+    }
+    return data;
+  }
+
   if(req.method == "GET") {
     tripResponse = await getTrips(id);
+  } else if(req.method == "PUT") {
+    tripResponse = await updateTrip(id)
   }
 
   // Get role
@@ -88,5 +104,4 @@ module.exports = async (req, res) => {
   } else {
     res.status(404).json([]);
   }
-
 };
