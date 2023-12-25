@@ -6,19 +6,24 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
-
+  const [status, setStatus] = useState(4)
   const acceptTrip = async () => {
-    console.log('Driver is accepting the trip', tripId)
     const requestParams = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tripId, status_id: 5 }), // Change status to inprogress
     };
-    await callApi(`/api/trips/${tripId}`, requestParams)
-
+    const result = await callApi(`/api/trips/${tripId}`, requestParams)
+    toast.success(
+      "Trip accepted successfully."
+      );
+      
+    setStatus(5)
+    // setStatus(result[0]?.status_id)
     //Need an alert message here after trip is accepted.
   }
 
@@ -28,7 +33,8 @@ function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
 
 
   return (
-    <Card className="p-1">
+    <>
+    {status == 4 && <Card className="p-1">
       <CardHeader className="p-2 px-2" color="orange" shadow={false}>
         Trip Request
       </CardHeader>
@@ -44,7 +50,8 @@ function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
           <Button color="green" onClick={acceptTrip}>Approve</Button>
         </div>
       </CardBody>
-    </Card>
+    </Card>}
+    </>
   );
 }
 

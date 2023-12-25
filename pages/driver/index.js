@@ -20,7 +20,7 @@ function DriverHome() {
   useEffect(() => {
     fetchTripsForDriver();
   }, []);
-  console.log({trips})
+  
   return (
     <>
       <div className="flex px-8">

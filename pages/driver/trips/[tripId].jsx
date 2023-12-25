@@ -26,7 +26,7 @@ import { IoCallOutline } from "react-icons/io5";
 const TripMain = () => {
   const { isLoading, error, trip, tripStatus }  = useTrip()
   const [open, setOpen] = useState(false);
-  console.log("TripDetail", trip, error);
+  console.log("TripDetail", tripStatus, error);
   const handleOpen = () => setOpen(!open);
 
   return (
@@ -73,13 +73,13 @@ const TripMain = () => {
                       <TimelineConnector />
                       <TimelineHeader className="h-3">
                         <TimelineIcon>
-                          {tripStatus === "inprogress" ? (
+                          {tripStatus === "Inprogress" ? (
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Active" ? (
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -111,7 +111,7 @@ const TripMain = () => {
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -142,7 +142,7 @@ const TripMain = () => {
                         <TimelineIcon>
                           {tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -169,7 +169,7 @@ const TripMain = () => {
                     <TimelineItem>
                       <TimelineHeader className="h-3">
                         <TimelineIcon>
-                          {tripStatus === "completed" ? (
+                          {tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />

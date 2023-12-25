@@ -7,6 +7,13 @@ Timeline - Status
 
 1 - Pending
 2 - In progress
-3 - Active
+3 - In progress
 4 - In Transit
 5 - Completed
+
+Trip created (status: 4 (pending)) -> [only in dashboard]
+Payment complete (status_id: 4) -> [only in dashboard]
+Random truck selected (status_id: 4) -> [only in dashboard]
+Driver accept (status_id: 5 -Inprogress) -> [Pickup]
+Driver pickup - doc uploaded (status_id: 6) [Intransit]
+Delivered (status_id: 3)
