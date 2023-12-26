@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 
-function PriceCard({ price, onSubmit }) {
+function PriceCard({ price, onSubmit, isLoading }) {
   return (
     <>
       <Card>
@@ -23,7 +23,11 @@ function PriceCard({ price, onSubmit }) {
         </CardBody>
         <CardFooter>
           <Typography variant="h6">Total : {price?.toFixed(2)} INR</Typography>
-          {onSubmit && <Button onClick={onSubmit}>Confirm to Pay</Button>}
+          {onSubmit && (
+            <Button disabled={isLoading} onClick={onSubmit}>
+              Confirm to Pay
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </>

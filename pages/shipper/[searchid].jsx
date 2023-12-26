@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-// import { usePrice } from "@/hooks/search/usePrice";
+
 import { useSearch } from "@/hooks/search/useSearch";
 import {
   Button,
@@ -9,67 +9,55 @@ import {
   Spinner,
   Typography,
 } from "@material-tailwind/react";
-import React, { useEffect, useState } from "react";
-// import { usePrice } from "@/hooks/search/usePrice";
-// import { useSearch } from "@/hooks/search/useSearch";
+import React, { useEffect } from "react";
+
 import { callApi } from "@/lib/utils/api";
 import NavbarMain from "@/Components/ui/NavbarMain";
-import { useRecoilState } from "recoil";
-import { PriceState } from "@/context/SearchAtom";
+
 import PriceCard from "@/Components/Shipper/PriceCard";
+import { usePrice } from "@/hooks/search/usePrice";
+import { usePayment } from "@/hooks/search/usePayment";
 
 function SearchConfirmation() {
-  // const { price } = usePrice();
-
-  // console.log(searchData);
   const router = useRouter();
   const { searchid } = router.query;
-  const [price, setPrice] = useRecoilState(PriceState);
-  // const [trip, setTrip] = useState([]);
+  const { price, isLoading: isPrice } = usePrice(); // price calculation and storing to recoil state
   const { SearchData, isLoading } = useSearch();
+  const { isCreating, CreatePayment } = usePayment();
   //insert price into the price table with search id
 
-  useEffect(() => {
-    const getPrice = async () => {
-      const requestParams = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      };
+  // useEffect(() => {
+  //   const getPrice = async () => {
+  //     const requestParams = {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //     };
 
-      const data = await callApi(`/api/pricing/${searchid}`, requestParams);
-      setPrice(data.estimate);
-      const tripParams = {
-        method: "POST",
-        header: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          price: data.estimate,
-          search_request_id: searchid,
-        }),
-      };
-    };
-    getPrice();
-  }, [searchid]);
+  //     const data = await callApi(`/api/pricing/${searchid}`, requestParams);
+  //   };
+  //   getPrice();
+  // }, [searchid]);
   console.log(price);
 
   async function handleSubmit(__price) {
-    createPaymentForRequest(__price);
+    CreatePayment(__price);
   }
 
-  const createPaymentForRequest = async (__price) => {
-    const requestParams = {
-      method: "POST",
-      body: JSON.stringify({
-        search_request_id: searchid,
-        price: __price,
-      }),
-      headers: { "Content-Type": "application/json" },
-    };
+  // const createPaymentForRequest = async (__price) => {
+  //   const requestParams = {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       search_request_id: searchid,
+  //       price: __price,
+  //     }),
+  //     headers: { "Content-Type": "application/json" },
+  //   };
 
-    const data = await callApi(`/api/payments`, requestParams);
-    console.log("Payments data", data);
-    console.log(price);
-    router.push(`/shipper/checkout/${searchid}`);
-  };
+  //   const data = await callApi(`/api/payments`, requestParams);
+  //   console.log("Payments data", data);
+  //   console.log(price);
+  //   router.push(`/shipper/checkout/${searchid}`);
+  // };
 
   console.log(SearchData);
 
@@ -81,6 +69,11 @@ function SearchConfirmation() {
   return (
     <>
       {isLoading && <Spinner />}
+      {isPrice && (
+        <span>
+          <Spinner /> Calculating Price
+        </span>
+      )}
       <NavbarMain />
       {SearchData && (
         <div className="flex gap-5 p-4 mt-4 mx-auto w-4/6">
@@ -105,7 +98,11 @@ function SearchConfirmation() {
               </div>
             </CardBody>
           </Card>
-          <PriceCard price={price} onSubmit={() => handleSubmit(price)} />
+          <PriceCard
+            price={price}
+            onSubmit={() => handleSubmit(price)}
+            isLoading={isCreating}
+          />
         </div>
       )}
     </>

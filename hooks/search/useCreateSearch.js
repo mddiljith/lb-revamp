@@ -30,6 +30,6 @@ const createSearchReq = async (search, distance, duration) => {
     `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
     requestParams
   );
-  console.log('Response in Hook1', res);
+  // console.log('Response in Hook1', res);
   return res;
 };
