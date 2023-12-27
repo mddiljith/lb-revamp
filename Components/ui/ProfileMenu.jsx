@@ -11,7 +11,7 @@ import {
   HiOutlineCash,
   HiOutlineUserCircle,
 } from "react-icons/hi";
-
+import Link from "next/link";
 function ProfileMenu({ logout, img_url }) {
   return (
     <Menu>

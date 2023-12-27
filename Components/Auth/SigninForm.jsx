@@ -79,7 +79,7 @@ function SignInForm() {
           Login
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
-          you don't have any account?{" "}
+          you dont have any account?{" "}
           <Link href="/auth/signUp" className="font-medium text-gray-900">
             Sign Up
           </Link>

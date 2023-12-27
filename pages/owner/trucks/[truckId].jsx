@@ -6,7 +6,7 @@ import { useEditVehicle } from "@/hooks/vehicles/useEditVehicle";
 function TruckDetail() {
   const router = useRouter();
   const { truckId } = router.query;
-  const { isUpdating, updateTruck } = useEditVehicle();
+  const { updateTruck } = useEditVehicle();
   const [driverId, setDriverId] = useState(null);
 
   const updateDriver = () => {
