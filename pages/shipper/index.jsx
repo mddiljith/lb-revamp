@@ -23,7 +23,7 @@ function Shipper() {
 
   const getMapToken = async () => {
     console.log("GetMapToken:")
-    const tokenData = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/map/map_token`)
+    const tokenData = await callApi(`/api/map/map_token`)
     console.log(tokenData);
     return tokenData
   }
