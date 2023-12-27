@@ -36,7 +36,7 @@ function SearchConfirmation() {
         headers: { "Content-Type": "application/json" },
       };
 
-      const data = await callApi(`/api/pricing/${searchid}`, requestParams);
+      const data = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/pricing/${searchid}`, requestParams);
       setPrice(data.estimate);
       const tripParams = {
         method: "POST",
@@ -65,7 +65,7 @@ function SearchConfirmation() {
       headers: { "Content-Type": "application/json" },
     };
 
-    const data = await callApi(`/api/payments`, requestParams);
+    const data = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/payments`, requestParams);
     console.log("Payments data", data);
     console.log(price);
     router.push(`/shipper/checkout/${searchid}`);

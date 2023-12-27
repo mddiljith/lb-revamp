@@ -30,6 +30,6 @@ const getPrice = async (searchRequestId) => {
     headers: { "Content-Type": "application/json" },
   };
 
-  const data = await callApi(`/api/pricing/${searchRequestId}`, requestParams);
+  const data = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/pricing/${searchRequestId}`, requestParams);
   return data;
 };

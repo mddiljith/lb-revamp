@@ -17,7 +17,7 @@ function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tripId, status_id: 5 }), // Change status to inprogress
     };
-    const result = await callApi(`/api/trips/${tripId}`, requestParams)
+    const result = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`, requestParams)
     toast.success(
       "Trip accepted successfully."
       );

@@ -21,7 +21,7 @@ function PickupConfirmForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tripId, status_id: 6 }), // Change status to inprogress
     };
-    const result = await callApi(`/api/trips/${tripId}`, requestParams)
+    const result = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`, requestParams)
     if (result) {
       router.push('/driver/trips/')
     }

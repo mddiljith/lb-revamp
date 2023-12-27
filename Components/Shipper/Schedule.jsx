@@ -27,7 +27,7 @@ function Schedule() {
     };
 
     const { search_request } = await callApi(
-      "/api/search_requests",
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
       requestParams
     );
 
