@@ -13,7 +13,7 @@ function DriverHome() {
     const requestParams = {
       headers: { "Content-Type": "application/json" }
     }
-    const trips_data = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips?status_id=4`, requestParams);
+    const trips_data = await callApi(`/api/trips?status_id=4`, requestParams);
     setTrips(trips_data);
   }
 
