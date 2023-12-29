@@ -14,22 +14,9 @@ function AddvehicleForm() {
   const { errors } = formState;
   const onSubmit = async (newTruck) => {
     createTruck(newTruck);
-
-    // setVehicleData({
-    //   model: "",
-    //   model_year: "",
-    //   plate_number: "",
-    //   truck_type: "",
-    //   status_id: "",
-    //   rc_photo: "",
-    //   vehicle_photo: "",
-    //   owner_id: "",
-    // });
     setShowAddVehicle(false);
     reset();
   };
-
-  console.log(errors);
 
   return (
     <>
@@ -105,11 +92,11 @@ function AddvehicleForm() {
                   error={errors?.plate_number?.message}
                   {...register("registration_number", {
                     required: "This field is required",
-                    pattern: {
-                      value:
-                        /^[A-Z]{2}[0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)?[0-9]{4}$/,
-                      message: "Please provide a valid Registration number",
-                    },
+                    // pattern: {
+                    //   value:
+                    //     /^[A-Z]{2}[0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)?[0-9]{4}$/,
+                    //   message: "Please provide a valid Registration number",
+                    // },
                   })}
                 />
               </div>

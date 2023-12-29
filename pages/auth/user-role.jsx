@@ -58,7 +58,7 @@ function RolePage({ initialSession, user }) {
             id="user"
             name="type"
             label="I want a truck"
-            value="rider-3"
+            value="shipper-1"
             onChange={(e) => setRole(e.target.value.split("-"))}
             defaultChecked
           />
@@ -66,14 +66,14 @@ function RolePage({ initialSession, user }) {
             id="owner"
             name="type"
             label="I'm a truck Owner"
-            value="owner-1"
+            value="owner-2"
             onChange={(e) => setRole(e.target.value.split("-"))}
           />
           <Radio
             id="driver"
             name="type"
             label="I'm a driver"
-            value="driver-2"
+            value="driver-3"
             onChange={(e) => setRole(e.target.value.split("-"))}
           />
         </CardBody>

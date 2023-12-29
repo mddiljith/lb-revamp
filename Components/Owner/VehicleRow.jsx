@@ -15,7 +15,7 @@ import { BsThreeDotsVertical, IoIosArrowForward } from "react-icons/bs";
 function VehicleRow(row, index) {
   const { deleteTruck } = useDeleteVehicle();
   const [value, setValue] = useState(row);
-
+  console.log(value)
   const { id, types, model, model_year, plate_number, statuses } = value.row;
 
   return (

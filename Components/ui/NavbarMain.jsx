@@ -25,6 +25,9 @@ const navList = (
       <Link href="/">Home</Link>
     </li>
     <li>
+      <Link href="/">Dashboard</Link>
+    </li>
+    <li>
       <Link href="/">Feature</Link>
     </li>
   </ul>
@@ -34,9 +37,11 @@ function NavbarMain() {
   const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
   const [avatar, setAvatar] = useState();
+  const [role, setRole] = useState();
   const { logout, isLoading } = useLogout();
   useEffect(() => {
     setAvatar(user?.user_metadata?.avatar_url);
+    setRole("/"+user?.role_meta_data[0]?.role_meta_data?.role_descr)
   }, []);
 
   return (
