@@ -14,17 +14,18 @@ const DriverTripListing = ({ row, index }) => {
     payment_status,
     status_id
   } = row;
+  console.log({status_id})
   return (
     <>
     <Table.Row index={index}>
       <Table.RowItem>
-        { status_id == 4 && <Link href={`/driver/trips/transit/${id}`}> 
+        { status_id == 5 && <Link href={`/driver/trips/transit/${id}`}> 
             <Typography className="text-sm font-semibold text-light-blue-900">
               {tracking_id}
             </Typography>
           </Link>
         }
-        { status_id != 4 && <Link href={`/driver/trips/transit/${id}`}> 
+        { status_id != 5 && <Link href={`/driver/trips/${id}`}> 
             <Typography className="text-sm font-semibold text-light-blue-900">
               {tracking_id}
             </Typography>
