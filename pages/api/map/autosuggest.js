@@ -85,7 +85,7 @@ async function updateMapToken(token) {
       map_token: token
     })
   }
-  const _url = '/api/map/map_token'
+  const _url = `/api/map/map_token`
   const responseData = await callApi(_url, requestParams)
 
 }

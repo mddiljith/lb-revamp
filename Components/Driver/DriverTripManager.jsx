@@ -22,7 +22,7 @@ const DriverTripManager = () => {
     const requestParams = {
       headers: { "Content-Type": "application/json" }
     }
-    const trips_data = await callApi(`/api/trips?status_id=${activeTab}`, requestParams);
+    const trips_data = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips?status_id=${activeTab}`, requestParams);
     setTrips(trips_data);
   }
 

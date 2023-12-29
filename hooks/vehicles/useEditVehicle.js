@@ -16,7 +16,7 @@ export function useEditVehicle() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isUpdating, updateTruck };
+  return {updateTruck };
 }
 
 const editVehicle = async (newTruckData, vehicleId) => {

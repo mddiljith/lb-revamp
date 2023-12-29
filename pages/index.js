@@ -8,38 +8,47 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
 import Navbar from "@/Components/ui/NavbarMain";
 import { useUserRole } from "@/hooks/auth/useUserRole";
+import SignInForm from "@/Components/Auth/SigninForm";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  // const router = useRouter();
+  const router = useRouter();
 
   const supabase = useSupabaseClient();
   // const { user, userRole } = useUserRole();
   const { login, isLoading: isLoading2 } = useLoginGoogle();
   const { logout, isLoading } = useLogout();
   const user = useUserRole();
-  console.log('User from HOOK', user)
+  console.log(user.user)
 
+  if(user?.user?.id) {
+    console.log('redirecting to dashboard', )
+    const userRoleDesc = user?.user?.role_meta_data[0]?.role_meta_data.role_descr
+    console.log(userRoleDesc)
+    router.push(`/${userRoleDesc}`)
+  }
   const handleclick = async () => {
     const { data: session } = await supabase.auth.getSession();
     console.log(session);
     toast.info("displaying session");
   };
 
-  // console.log("resultfromuseuserhook", user, userRole);
-
   return (
     <>
-      <Navbar />
-      <Link href={"/auth/signUp"}>SignUp</Link>
-      <Link href={"/auth/login"}>SignIn</Link>
-      <Button onClick={login} disabled={isLoading2}>
-        signin with google
-      </Button>
-      <Button onClick={logout} disabled={isLoading}>
-        signOut
-      </Button>
+    { user.user == null ? <SignInForm/> : <div>
+        <Navbar />
+        <Link href={"/auth/signUp"}>SignUp</Link>
+        <Link href={"/auth/login"}>SignIn</Link>
+        <Button onClick={login} disabled={isLoading2}>
+          signin with google
+        </Button>
+        <Button onClick={logout} disabled={isLoading}>
+          signOut
+        </Button>
 
-      <Button onClick={handleclick}>Get session</Button>
+        <Button onClick={handleclick}>Get session</Button>
+      </div>
+    }
     </>
   );
 }

@@ -22,12 +22,15 @@ export function usePrice() {
   return { isLoading, error, price, data };
 }
 
-const getPrice = async (searchreqID) => {
+const getPrice = async (searchRequestId) => {
   const requestParams = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   };
 
-  const priceData = await callApi(`/api/pricing/${searchreqID}`, requestParams);
-  return priceData;
+  const data = await callApi(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/pricing/${searchRequestId}`,
+    requestParams
+  );
+  return data;
 };
