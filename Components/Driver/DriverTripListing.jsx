@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Table from "../ui/Table";
 import {
@@ -10,18 +11,25 @@ const DriverTripListing = ({ row, index }) => {
     id,
     tracking_id, 
     search_requests,
-    payment_status
+    payment_status,
+    status_id
   } = row;
-
   return (
     <>
     <Table.Row index={index}>
       <Table.RowItem>
-        <Link href={`/driver/trips/${id}`}>
-          <Typography className="text-sm font-semibold text-light-blue-900">
-            {tracking_id}
-          </Typography>
-        </Link>
+        { status_id == 4 && <Link href={`/driver/trips/transit/${id}`}> 
+            <Typography className="text-sm font-semibold text-light-blue-900">
+              {tracking_id}
+            </Typography>
+          </Link>
+        }
+        { status_id != 4 && <Link href={`/driver/trips/transit/${id}`}> 
+            <Typography className="text-sm font-semibold text-light-blue-900">
+              {tracking_id}
+            </Typography>
+          </Link>
+        }
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-sm font-light text-blue-gray-900">

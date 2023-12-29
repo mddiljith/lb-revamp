@@ -4,14 +4,14 @@ import { mappls, mappls_plugin } from "mappls-web-maps";
 //multiple marker setup
 
 function Map({ path }) {
-  console.log("path", path, [path[0].lat, path[0].lng]);
+  console.log("path", path, [path[0]?.lat, path[0]?.lng]);
   let geoData = {
     type: "FeatureCollection",
     features: [
       {
         type: "Feature",
         properties: { htmlPopup: "source" },
-        geometry: { type: "Point", coordinates: [path[0].lat, path[0].lng] },
+        geometry: { type: "Point", coordinates: [path[0]?.lat, path[0]?.lng] },
       },
 
       {
@@ -19,7 +19,7 @@ function Map({ path }) {
         properties: { htmlPopup: "Destination" },
         geometry: {
           type: "Point",
-          coordinates: [path[path.length - 1].lat, path[path.length - 1].lng],
+          coordinates: [path[path.length - 1]?.lat, path[path.length - 1]?.lng],
         },
       },
     ],
@@ -28,7 +28,7 @@ function Map({ path }) {
   const styleMap = { width: "80%", height: "80vh", display: "inline-block" };
 
   const mapProps = {
-    center: [path[0].lat, path[0].lng],
+    center: [path[0]?.lat, path[0]?.lng],
     traffic: false,
     zoom: 10,
     geolocation: false,

@@ -10,9 +10,11 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useLogin } from "@/hooks/auth/useLogin";
 import { FcGoogle } from "react-icons/fc";
+import { useLoginGoogle } from "@/hooks/auth/useLoginGoogle";
 
 function SignInForm() {
   const { login, isLoading } = useLogin();
+  const { login: googleLogin, isLoading: isLoading2 } = useLoginGoogle();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = ({ email, password }) => {
@@ -86,10 +88,12 @@ function SignInForm() {
         </Typography>
       </form>
 
-      <div>
-        <Button>
-          <FcGoogle />
-          <span> Login with Google</span>
+      <div className="p-3">
+        <Button onClick={googleLogin} disabled={isLoading2}>
+          <div className="flex gap-3 justify-center items-center">
+            <FcGoogle size={22} />
+            <span> Login with Google</span>
+          </div>
         </Button>
       </div>
     </Card>

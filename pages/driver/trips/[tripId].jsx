@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import NavbarMain from "@/Components/ui/NavbarMain";
-import { IoCallOutline } from "react-icons/io5";
-import { HiMiniCheckCircle, HiExclamationCircle } from "react-icons/hi2";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import DriverLayout from '@/Components/Driver/DriverLayout';
+import { getDirection } from "@/services/map/getDirection";
+import { useTrip } from '@/hooks/trips/useTrip';
+import DeliveryformDailogBox from "@/Components/Shipper/DeliveryformDailogBox";
 import {
   Button,
   ButtonGroup,
@@ -19,38 +20,17 @@ import {
   TimelineItem,
   Typography,
 } from "@material-tailwind/react";
-import { useRecoilValue } from "recoil";
-import { PriceState } from "@/context/SearchAtom";
-import { useTrip } from "@/hooks/trips/useTrip";
-import DeliveryformDailogBox from "@/Components/Shipper/DeliveryformDailogBox";
+import { HiMiniCheckCircle, HiExclamationCircle } from "react-icons/hi2";
+import { IoCallOutline } from "react-icons/io5";
 
-const TripDetail = () => {
-  // const router = useRouter();
-  // const { tripId } = router.query;
-  //get price from the searchiD result
-
-  const { isLoading, error, trip, tripStatus } = useTrip();
+const TripMain = () => {
+  const { isLoading, error, trip, tripStatus }  = useTrip()
   const [open, setOpen] = useState(false);
-  // const [orderStatus, setOrderStatus] = useState(tripStatus);
-  console.log("TripDetail", trip, error);
+  console.log("TripDetail", tripStatus, error);
   const handleOpen = () => setOpen(!open);
-  // const source = trip[0]?.search_requests?.source;
-  // const destination = trip[0]?.search_requests?.destination;
-  // const price = trip[0]?.search_requests.payments[0].price;
-  // const vehicle_num = trip[0]?.vehicles.plate_number;
-  // const vehicle_model = trip[0]?.vehicles.model;
-  // const driver_name = trip[0]?.vehicles.users.name;
-
-  // const source = "abc";
-  // const destination = "abc";
-  // const price = "abc";
-  // const vehicle_num = "abc";
-  // const vehicle_model = "abc";
-  // const driver_name = "abc";
 
   return (
     <>
-      <NavbarMain />
       {isLoading && <div className="flex items-center justify-center h-screen bg-gray-100" >
         <Spinner />
       </div>}
@@ -93,13 +73,13 @@ const TripDetail = () => {
                       <TimelineConnector />
                       <TimelineHeader className="h-3">
                         <TimelineIcon>
-                          {tripStatus === "inprogress" ? (
+                          {tripStatus === "Inprogress" ? (
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Active" ? (
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -131,7 +111,7 @@ const TripDetail = () => {
                             <HiMiniCheckCircle />
                           ) : tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -162,7 +142,7 @@ const TripDetail = () => {
                         <TimelineIcon>
                           {tripStatus === "Intransit" ? (
                             <HiMiniCheckCircle />
-                          ) : tripStatus === "completed" ? (
+                          ) : tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -189,7 +169,7 @@ const TripDetail = () => {
                     <TimelineItem>
                       <TimelineHeader className="h-3">
                         <TimelineIcon>
-                          {tripStatus === "completed" ? (
+                          {tripStatus === "Completed" ? (
                             <HiMiniCheckCircle />
                           ) : (
                             <HiExclamationCircle />
@@ -305,5 +285,10 @@ const TripDetail = () => {
       )}
     </>
   );
+}
+
+export default TripMain;
+
+TripMain.getLayout = function getLayout(page) {
+  return <DriverLayout>{page}</DriverLayout>;
 };
-export default TripDetail;

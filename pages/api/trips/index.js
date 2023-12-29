@@ -104,7 +104,6 @@ module.exports = async (req, res) => {
       console.log(error);
       return error
     }
-    console.log('responsedata', trips);
     return trips;
   }
 
@@ -137,7 +136,8 @@ module.exports = async (req, res) => {
           users(
             email,
             name
-          )
+          ),
+          scheduled_at
         ),
         payment_status(
           id,

@@ -15,7 +15,7 @@ import { DRIVER_TRIP_TABS, DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLink
 import DriverTripListing from "./DriverTripListing";
 
 const DriverTripManager = () => {
-  const [activeTab, setActiveTab] = useState("4");
+  const [activeTab, setActiveTab] = useState("5");
   const [trips, setTrips] = useState([]);
 
   async function fetchTripsForDriver() {
