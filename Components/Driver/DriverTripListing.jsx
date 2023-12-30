@@ -14,7 +14,7 @@ const DriverTripListing = ({ row, index }) => {
     payment_status,
     status_id
   } = row;
-  console.log({status_id})
+  
   return (
     <>
     <Table.Row index={index}>

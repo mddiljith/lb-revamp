@@ -11,37 +11,44 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical, IoIosArrowForward } from "react-icons/bs";
+import UpdateVehicleStatus from "./UpdateVehicleStatus";
 
 function VehicleRow(row, index) {
-  const { deleteTruck } = useDeleteVehicle();
+  // const { deleteTruck } = useDeleteVehicle();
   const [value, setValue] = useState(row);
-  console.log(value)
+  const [open, setOpen] = useState(false);
   const { id, types, model, model_year, plate_number, statuses } = value.row;
+
+  const dialogHandler = () => {
+    setOpen(!open)
+  }
+
+  console.log({open})
 
   return (
     <Table.Row index={index}>
       <Table.RowItem>
-        <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
+        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
           {`${model}`}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
+        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
           {types.name}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
+        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
           {model}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
+        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
           {model_year}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-xs font-semibold text-blue-gray-600 whitespace-nowrap">
+        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
           {plate_number}
         </Typography>
       </Table.RowItem>
@@ -50,7 +57,7 @@ function VehicleRow(row, index) {
           variant="gradient"
           color={statuses.name === "Active" ? "green" : "blue-gray"}
           value={statuses.name}
-          className="py-0.5 px-2 text-[11px] font-medium"
+          className="py-0.5 px-2 text-[11px] font-normal"
         />
       </Table.RowItem>
       <Menu placement="left-end">
@@ -61,28 +68,19 @@ function VehicleRow(row, index) {
         </MenuHandler>
         <MenuList>
           <MenuItem
-          // onClick={() => {
-          //   dialogHandler();
-          // }}
+          onClick={() => {
+            dialogHandler();
+          }}
           >
             Update Status
           </MenuItem>
           <MenuItem>
-            <Link href={`/trucks/${id}`}>Edit</Link>
+            <Link href={`/owner/trucks/${id}`}>Edit</Link>
           </MenuItem>
-          {/* <MenuItem onClick={() => deleteTruck(id)}>Delete</MenuItem>
-            <MenuItem>
-              <Link href={`/vehicle/${id}`}>
-                <div className="flex  gap-1">
-                  More
-                  <span className="align-bottom">
-                    <IoIosArrowForward />
-                  </span>
-                </div>
-              </Link>
-            </MenuItem> */}
+          <MenuItem>Delete</MenuItem>
         </MenuList>
       </Menu>
+      <UpdateVehicleStatus open={open} handleOpen={dialogHandler} cacheKey={id} />
     </Table.Row>
   );
 }

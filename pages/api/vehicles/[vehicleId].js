@@ -5,7 +5,6 @@ export default async function handler(req, res) {
     req,
     res,
   });
-  res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
   
   const { vehicleId } = req.query;
   try {
@@ -14,6 +13,7 @@ export default async function handler(req, res) {
     //   return;
     // }
     if (req.method == "GET") {
+      console.log('GET /vehicles/id')
       let { data, error } = await supabase
         .from("vehicles")
         .select(`
@@ -27,6 +27,10 @@ export default async function handler(req, res) {
           owner_id
         `)
         .eq("id", vehicleId);
+      if(error) {
+        res.status(400).json(error)
+      }
+      console.log(data);
       res.status(200).json(data);
     } else if (req.method == "PUT") {
       let vehicle = req.body;

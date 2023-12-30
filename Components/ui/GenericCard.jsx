@@ -18,7 +18,7 @@ const GenericCard = (props) => {
           <Typography variant="h1" className="text-center p-5">
             &#8377;{props.content}
           </Typography>
-          <Typography variant="p" className="text-center py-2 text-sm">
+          <Typography variant="h5" className="text-center py-2 text-sm">
             &#8377;{props.notice}
           </Typography>
         </CardBody>

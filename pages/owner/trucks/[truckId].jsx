@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import OwnerLayout from "@/Components/Owner/OwnerLayout";
 import { Input, Typography, Switch, Button } from "@material-tailwind/react";
 import { useEditVehicle } from "@/hooks/vehicles/useEditVehicle";
+import VehicleCard from "@/Components/Vehicle/VehicleCard";
 
 function TruckDetail() {
   const router = useRouter();
@@ -27,6 +29,7 @@ function TruckDetail() {
 
   return (
     <div>
+      <VehicleCard vechicleId={truckId}/>
       <p>TruckDetail {truckId}</p>
       <p>display details of the truck format yet to decide</p>
       <div className="mb-1 flex flex-col gap-6">
@@ -50,3 +53,9 @@ function TruckDetail() {
 }
 
 export default TruckDetail;
+
+TruckDetail.getLayout = function getLayout(page) {
+  return <OwnerLayout>{page}</OwnerLayout>;
+
+  // <SidebarLayout sidelinks={OWNER_SIDELINKS}>{page}</SidebarLayout>;
+};
