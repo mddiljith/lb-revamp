@@ -5,6 +5,7 @@ import GenericCard from "@/Components/ui/GenericCard";
 import Trips from "@/Components/ui/Dashboard/Trips"
 import ApprovalCard from "@/Components/Driver/ApprovalCard";
 import { callApi } from "@/lib/utils/api";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 function DriverHome() {
   const [trips, setTrips] = useState([]);
@@ -57,3 +58,49 @@ DriverHome.getLayout = function getLayout(page) {
   return <DriverLayout>{page}</DriverLayout>;
 };
 
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createPagesServerClient(ctx);
+  let role = null;
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  async function getUserRole(user_id) {
+    let { data: role, error } = await supabase
+    .from('users')
+    .select('role_meta_data')
+    .eq('id', user_id)
+
+    return role
+  }
+
+  if (session) {
+    const data = await getUserRole(session.user.id)
+    role = data[0]?.role_meta_data?.role_id
+    if (role != "3") {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        props: {
+          initialSession: session,
+          user: session.user,
+          role: role
+        },
+      }
+    }
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+};

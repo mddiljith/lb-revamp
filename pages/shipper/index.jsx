@@ -2,6 +2,7 @@ import Schedule from "@/Components/Shipper/Schedule";
 import SearchForm from "@/Components/Shipper/SearchForm";
 import TruckSelection from "@/Components/Shipper/TruckSelection";
 import Navbar from "@/Components/ui/NavbarMain";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import {
   mapState,
   showSearchState,
@@ -67,3 +68,50 @@ function Shipper() {
 }
 
 export default Shipper;
+
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createPagesServerClient(ctx);
+  let role = null;
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  async function getUserRole(user_id) {
+    let { data: role, error } = await supabase
+    .from('users')
+    .select('role_meta_data')
+    .eq('id', user_id)
+
+    return role
+  }
+
+  if (session) {
+    const data = await getUserRole(session.user.id)
+    role = data[0]?.role_meta_data?.role_id
+    if (role != "1") {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        props: {
+          initialSession: session,
+          user: session.user,
+          role: role
+        },
+      }
+    }
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+};

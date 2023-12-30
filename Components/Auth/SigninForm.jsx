@@ -19,7 +19,6 @@ function SignInForm() {
   const { login, isLoading } = useLogin();
   const { login: googleLogin, isLoading: isLoading2 } = useLoginGoogle();
   const { register, handleSubmit, reset } = useForm();
-
   const onSubmit = ({ email, password }) => {
     if (!email || !password) return;
     console.log(email);
@@ -103,7 +102,7 @@ function SignInForm() {
             </form>
           </CardBody>
           <CardFooter className="pt-2 flex items-center justify-center">
-            <Button className="flex items-center">
+            <Button className="flex items-center" onClick={googleLogin}>
               <span className="mr-2">
                 <FcGoogle />
               </span>
