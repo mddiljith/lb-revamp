@@ -1,4 +1,5 @@
 // import { useRouter } from "next/router";
+import { useEffect } from "react";
 import {
   Button,
   Card,
@@ -24,14 +25,24 @@ import { FiFacebook } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 
 export default function Home() {
-  // const router = useRouter();
+  const router = useRouter();
 
   // const supabase = useSupabaseClient();
   // // const { user, userRole } = useUserRole();
   // const { login, isLoading: isLoading2 } = useLoginGoogle();
   // const { logout, isLoading } = useLogout();
-  // const user = useUserRole();
+  const user = useUserRole();
   // console.log(user.user)
+
+  useEffect(() => {
+    if (user?.user?.id) {
+      console.log("redirecting to dashboard");
+      const userRoleDesc =
+        user?.user?.role_meta_data[0]?.role_meta_data.role_descr;
+      console.log(userRoleDesc);
+      router.push(`/${userRoleDesc}`);
+    }
+  }, [user]);
 
   // if(user?.user?.id) {
   //   console.log('redirecting to dashboard', )
@@ -117,13 +128,13 @@ export default function Home() {
               <FeatureCard
                 title="Shenil Padmanabhan"
                 content={
-                  "TruckBook provided an excellent service. The booking process was smooth and the truck arrived on time."
+                  "LetsBuild provided an excellent service. The booking process was smooth and the truck arrived on time."
                 }
               />
               <FeatureCard
                 title="Fathima Pyari"
                 content={
-                  "I've been using TruckBook for years. They're always reliable and their customer service is top notch."
+                  "I've been using LetsBuild for years. They're always reliable and their customer service is top notch."
                 }
               />
             </div>

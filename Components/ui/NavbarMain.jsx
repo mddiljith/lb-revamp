@@ -35,13 +35,13 @@ const navList = (
 function NavbarMain() {
   const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState("/user.png");
   const [role, setRole] = useState();
   const { logout, isLoading } = useLogout();
   useEffect(() => {
     setAvatar(user?.user_metadata?.avatar_url);
-    setRole("/"+user?.role_meta_data[0]?.role_meta_data?.role_descr)
-  }, []);
+    setRole("/" + user?.role_meta_data[0]?.role_meta_data?.role_descr);
+  }, [user]);
 
   return (
     <Navbar

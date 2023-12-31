@@ -1,8 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import NavbarMain from "@/Components/ui/NavbarMain";
+import { Button, Step, Stepper, Typography } from "@material-tailwind/react";
+import PersonalForm from "@/Components/Auth/PersonalForm";
 
 function Profile({ user, role }) {
-  return <div>{user.email} {role}</div>;
+  const [activeStep, setActiveStep] = useState(0);
+  const [isLastStep, setIsLastStep] = useState(false);
+  const [isFirstStep, setIsFirstStep] = useState(false);
+
+  const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
+  const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
+  return (
+    <>
+      <NavbarMain />
+      <div className="w-4/5 py-4 px-8 mx-auto">
+        <Stepper
+          activeStep={activeStep}
+          isLastStep={(value) => setIsLastStep(value)}
+          isFirstStep={(value) => setIsFirstStep(value)}
+        >
+          <Step className="h-4 w-4" onClick={() => setActiveStep(0)}>
+            <Typography
+              variant="h6"
+              color={activeStep === 0 ? "blue-gray" : "gray"}
+              className="absolute -bottom-[3rem] text-center"
+            >
+              Personal info
+            </Typography>
+          </Step>
+          <Step className="h-4 w-4" onClick={() => setActiveStep(1)} />
+          <Step className="h-4 w-4" onClick={() => setActiveStep(2)} />
+        </Stepper>
+        <div className="mt-12">{activeStep == 0 && <PersonalForm />}</div>
+
+        <div className="mt-10 flex justify-between">
+          <Button onClick={handlePrev} disabled={isFirstStep}>
+            Prev
+          </Button>
+          <Button onClick={handleNext} disabled={isLastStep}>
+            Next
+          </Button>
+        </div>
+      </div>
+      <div>
+        {user.email} {role}
+      </div>
+    </>
+  );
 }
 
 export default Profile;
@@ -18,22 +63,22 @@ export const getServerSideProps = async (ctx) => {
 
   async function getUserRole(user_id) {
     let { data: role, error } = await supabase
-    .from('users')
-    .select('role_meta_data')
-    .eq('id', user_id)
+      .from("users")
+      .select("role_meta_data")
+      .eq("id", user_id);
 
-    return role
+    return role;
   }
 
   if (session) {
-    const data = await getUserRole(session.user.id)
-    role = data[0]?.role_meta_data?.role_id
+    const data = await getUserRole(session.user.id);
+    role = data[0]?.role_meta_data?.role_id;
     if (role) {
       return {
         props: {
           initialSession: session,
           user: session.user,
-          role: role
+          role: role,
         },
       };
     } else {
