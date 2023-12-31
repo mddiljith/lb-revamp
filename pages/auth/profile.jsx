@@ -3,6 +3,7 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import NavbarMain from "@/Components/ui/NavbarMain";
 import { Button, Step, Stepper, Typography } from "@material-tailwind/react";
 import PersonalForm from "@/Components/Auth/PersonalForm";
+import ShipperInfoForm from "@/Components/Shipper/shipperInfoForm";
 
 function Profile({ user, role }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -29,10 +30,21 @@ function Profile({ user, role }) {
               Personal info
             </Typography>
           </Step>
-          <Step className="h-4 w-4" onClick={() => setActiveStep(1)} />
+          <Step className="h-4 w-4" onClick={() => setActiveStep(1)}>
+            <Typography
+              variant="h6"
+              color={activeStep === 0 ? "blue-gray" : "gray"}
+              className="absolute -bottom-[3rem] text-center"
+            >
+              Other info
+            </Typography>
+          </Step>
           <Step className="h-4 w-4" onClick={() => setActiveStep(2)} />
         </Stepper>
-        <div className="mt-12">{activeStep == 0 && <PersonalForm />}</div>
+        <div className="mt-12">
+          {activeStep === 0 && <PersonalForm />}
+          {activeStep === 1 && <ShipperInfoForm />}
+        </div>
 
         <div className="mt-10 flex justify-between">
           <Button onClick={handlePrev} disabled={isFirstStep}>

@@ -16,8 +16,6 @@ function PersonalForm() {
             <Input type="date" label="date of Birth" />
             <Input label="Gender" />
           </div>
-          <Input label="Organisation Name" />
-          <Input label="GSTIN" />
         </div>
       </CardBody>
     </Card>
