@@ -52,7 +52,7 @@ const navList = (
 
 function NavbarHome() {
   const router = useRouter();
-  const [openNav, setOpenNav] = useState(true);
+  const [openNav, setOpenNav] = useState(false);
   return (
     <Navbar className="mx-auto max-w-screen px-4 py-2 lg:px-8 lg:py-4 sticky top-0 z-10 h-max rounded-none">
       <div className="flex justify-between">
