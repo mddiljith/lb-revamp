@@ -9,8 +9,8 @@ export function useAddVehicle() {
   const { mutate: createTruck, isLoading: isCreating } = useMutation({
     mutationFn: createVehicle,
     onSuccess: () => {
-      toast.success("New Truck successfully created");
       queryClient.invalidateQueries({ queryKey: ["Vehicles"] });
+      toast.success("Successfully updated the vehicle list");
     },
     onError: (err) => toast.error(err.message),
   });

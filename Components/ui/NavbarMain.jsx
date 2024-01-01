@@ -18,20 +18,6 @@ import {
 
 import { useUserRole } from "@/hooks/auth/useUserRole";
 
-const navList = (
-  <ul className="flex justify-between p-4 items-center gap-8">
-    <li>
-      <Link href="/">Home</Link>
-    </li>
-    <li>
-      <Link href="/">Dashboard</Link>
-    </li>
-    <li>
-      <Link href="/">Feature</Link>
-    </li>
-  </ul>
-);
-
 function NavbarMain() {
   const { user, isLoading: isLoading2 } = useUserRole();
   const router = useRouter();
@@ -46,7 +32,7 @@ function NavbarMain() {
   return (
     <Navbar
       role="nav"
-      className="flex justify-between w-full transition-all sticky top-1 z-40 py-3 border border-gray-300 border-solid p-4 shadow-none text-gray-900"
+      className="flex justify-between w-full transition-all sticky top-0 z-40 py-3 border border-gray-300 border-solid p-4 shadow-none text-gray-900"
       fullWidth
       blurred
     >
@@ -67,7 +53,7 @@ function NavbarMain() {
           <div>None</div>
         )}
       </div>
-      {navList}
+      <NavList role={user?.role_meta_data[0]?.role_meta_data?.role_descr} />
       <div className="flex items-center gap-1">
         {user ? (
           <Menu placement="bottom-end">
@@ -107,3 +93,19 @@ function NavbarMain() {
 }
 
 export default NavbarMain;
+
+export const NavList = ({ role }) => {
+  return (
+    <ul className="flex justify-between p-4 items-center gap-8">
+      <li>
+        <Link href="/">Home</Link>
+      </li>
+      <li>
+        <Link href={`${role}/dashboard`}>Dashboard</Link>
+      </li>
+      <li>
+        <Link href="/">Feature</Link>
+      </li>
+    </ul>
+  );
+};

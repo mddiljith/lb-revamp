@@ -5,6 +5,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Spinner,
   Typography,
 } from "@material-tailwind/react";
 
@@ -31,14 +32,13 @@ export default function Home() {
   // // const { user, userRole } = useUserRole();
   // const { login, isLoading: isLoading2 } = useLoginGoogle();
   // const { logout, isLoading } = useLogout();
-  const user = useUserRole();
-  // console.log(user.user)
+  const { isLoading, user } = useUserRole();
+  console.log(user);
 
   useEffect(() => {
-    if (user?.user?.id) {
+    if (user?.id) {
       console.log("redirecting to dashboard");
-      const userRoleDesc =
-        user?.user?.role_meta_data[0]?.role_meta_data.role_descr;
+      const userRoleDesc = user?.role_meta_data[0]?.role_meta_data.role_descr;
       console.log(userRoleDesc);
       router.push(`/${userRoleDesc}`);
     }
@@ -59,6 +59,11 @@ export default function Home() {
 
   return (
     <>
+      {isLoading && (
+        <div className="flex items-center justify-center h-screen bg-gray-100">
+          <Spinner />
+        </div>
+      )}
       <NavbarHome />
       <div className="flex flex-col min-h-screen">
         <main className="flex-1 flex flex-col ">
