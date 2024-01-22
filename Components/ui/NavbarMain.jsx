@@ -32,27 +32,10 @@ function NavbarMain() {
   return (
     <Navbar
       role="nav"
-      className="flex justify-between w-full transition-all sticky top-0 z-40 py-3 border border-gray-300 border-solid p-4 shadow-none text-gray-900"
+      className="flex justify-between w-full transition-all sticky top-0 z-40 py-2 border border-gray-300 border-solid p-0 shadow-none text-gray-900"
       fullWidth
       blurred
     >
-      <div className="flex gap-2">
-        {user ? (
-          <>
-            <span className="font-semibold text-xl py-2">{user?.email}</span>
-            <span className="py-2">
-              <Chip
-                variant="ghost"
-                color="green"
-                size="sm"
-                value={user["role_meta_data"][0]?.role_meta_data?.role_descr}
-              />
-            </span>
-          </>
-        ) : (
-          <div>None</div>
-        )}
-      </div>
       <NavList role={user?.role_meta_data[0]?.role_meta_data?.role_descr} />
       <div className="flex items-center gap-1">
         {user ? (
@@ -61,6 +44,9 @@ function NavbarMain() {
               <Avatar src={avatar} />
             </MenuHandler>
             <MenuList>
+              <MenuItem>
+              <Link href=""><b>{user?.email}</b>({user?.role_meta_data[0]?.role_meta_data?.role_descr})</Link>
+              </MenuItem>
               <MenuItem>
                 <Link href="/auth/profile">Profile</Link>
               </MenuItem>
@@ -96,15 +82,15 @@ export default NavbarMain;
 
 export const NavList = ({ role }) => {
   return (
-    <ul className="flex justify-between p-4 items-center gap-8">
+    <ul className="flex justify-between p-4 items-center gap-8 float-right ml-auto">
       <li>
-        <Link href="/">Home</Link>
+        <Link href="/" className="text-sm">Home</Link>
       </li>
       <li>
-        <Link href={`${role}/dashboard`}>Dashboard</Link>
+        <Link href={`${role}/dashboard`} className="text-sm">Dashboard</Link>
       </li>
       <li>
-        <Link href="/">Feature</Link>
+        <Link href="/" className="text-sm">Feature</Link>
       </li>
     </ul>
   );
