@@ -3,7 +3,7 @@ import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import NavbarMain from "@/Components/ui/NavbarMain";
 import { Button, Step, Stepper, Typography } from "@material-tailwind/react";
 import PersonalForm from "@/Components/Auth/PersonalForm";
-import ShipperInfoForm from "@/Components/Shipper/shipperInfoForm";
+import ShipperInfoForm from "@/Components/Shipper/ShipperInfoForm";
 
 function Profile({ user, role }) {
   const [activeStep, setActiveStep] = useState(0);
