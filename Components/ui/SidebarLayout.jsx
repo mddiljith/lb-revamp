@@ -3,7 +3,7 @@ import Navbar from "./NavbarMain";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Avatar, Button, IconButton } from "@material-tailwind/react";
-import { IoIosArrowDropright } from "react-icons/io";
+import { IoIosArrowDropleft } from "react-icons/io";
 import NavbarMain from "./NavbarMain";
 
 function SidebarLayout({ sidelinks, children }) {
@@ -23,11 +23,12 @@ function SidebarLayout({ sidelinks, children }) {
 function Sidebar({ sidelinks }) {
   const router = useRouter();
   const [open, setOpen] = useState(true);
+  console.log(router.pathname);
 
   return (
     <aside
       className={`space-x-1 flex flex-col  overflow-y-auto py-4 h-screen sticky top-0 duration-300 ${
-        open ? "w-1/6" : "w-20"
+        open ? "w-1/8" : "w-20"
       }`}
     >
       <div className=" px-3 mb-4 flex items-center">
@@ -43,13 +44,14 @@ function Sidebar({ sidelinks }) {
         </Link>
       </div>
       <div
-        className={`absolute cursor-pointer right-0 top-8 inset-x-1.5 ${
+        className={`absolute cursor-pointer right-8 top-2 inset-x-1.5 ${
           !open && "rotate-180"
         }`}
+        style={{ fontSize: "22px" }}
         onClick={() => setOpen(!open)}
         variant="text"
       >
-        <IoIosArrowDropright />
+        <IoIosArrowDropleft />
       </div>
       <div className="flex-1 text-gray-900 p-3">
         {sidelinks.map((item) => (
@@ -60,7 +62,7 @@ function Sidebar({ sidelinks }) {
             <Link href={item.path}>
               <Button
                 variant={router.pathname === item.path ? "filled" : "text"}
-                className="flex items-center gap-1 px-2 w-full text-base font-normal text-gray-900 transition duration-75 normal-case bg-white shadow-none hover:font-semibold hover:shadow-none active:bg-light-blue-500 focus:bg-light-blue-500 hover:bg-light-blue-100 focus:font-semibold active:font-semibold"
+                className="flex items-center gap-1 px-2 w-full text-sm font-normal text-gray-900 transition duration-75 normal-case bg-white shadow-none hover:font-semibold hover:shadow-none active:bg-light-blue-500 focus:bg-light-blue-500 hover:bg-light-blue-100 focus:font-semibold active:font-semibold"
               >
                 {item.icon}
                 <div
