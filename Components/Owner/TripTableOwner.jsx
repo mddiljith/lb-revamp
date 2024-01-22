@@ -1,8 +1,8 @@
 import React from "react";
 import Table from "@/Components/ui/Table";
-
-import { Typography } from "@material-tailwind/react";
+import { Typography, Card, Button } from "@material-tailwind/react";
 import TripRowOwner from "./TripRowOwner";
+import { FaEye } from "react-icons/fa";
 
 const TRIP_HEAD = [
   "Date",
@@ -16,30 +16,34 @@ const TRIP_HEAD = [
 
 function TripTableOwner({ trips }) {
   return (
-    <Table
-      topCard={
-        <Table.Top>
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            <div>
-              <Typography variant="h5" color="blue-gray">
-                Trip List
-              </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
-                See information about the trips
-              </Typography>
-            </div>
+    <div className="flex"> 
+      <div className="w-full h-80 mx-2 mb-2 bg-white">
+        <div className="p-6">
+          <div className="flex items-center">
+            <Typography variant="h6" className="p-3">Trips Overview</Typography>
+            <Button variant="text" color="teal" ripple={false} className="text-xs p-2">
+              <div className="flex gap-1 justify-center items-center p-0">
+                <FaEye size={14} />
+                <span className="text-xs">Show Trips</span>
+              </div>
+            </Button>
           </div>
-        </Table.Top>
-      }
-    >
-      <Table.Header header={TRIP_HEAD} />
-      <Table.Body
-        data={trips}
-        render={(trip, i) => (
-          <TripRowOwner row={trip} key={trip.id} index={i} />
-        )}
-      />
-    </Table>
+          <div className="overflow-x-auto text-xs">
+            {trips.length > 0 ? (
+              <Table>
+                <Table.Header header={TRIP_HEAD} />
+                <Table.Body
+                  data={trips}
+                  render={(trip, i) => (
+                    <TripRowOwner row={trip} key={trip.id} index={i} />
+                  )}
+                />
+              </Table>
+            ) : (<div className="text-sm justify-center items-center p-3">No trips found</div>)}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -2,27 +2,41 @@ import OwnerLayout from "@/Components/Owner/OwnerLayout";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
-import { Card, Typography, Spinner, Button } from "@material-tailwind/react";
+import {
+  Spinner,
+  Card
+} from "@material-tailwind/react";
 import { useVehicles } from "@/hooks/vehicles/useVehicles";
-import { FaPlusCircle } from "react-icons/fa";
 import VehicleTable from "@/Components/Owner/VehicleTable";
-import AddvehicleForm from "@/Components/Owner/AddVehicleForm";
 import { showAddvehicleState } from "@/context/VehicleAtom";
+import TripTableOwner from "@/Components/Owner/TripTableOwner";
+import { useTrips } from "@/hooks/trips/useTrips";
+
 
 function OwnerHome() {
   const { isLoading, error, vehicles } = useVehicles();
-  const [showAddvehicle, setShowAddVehicle] = useRecoilState(showAddvehicleState);
-
-  console.log({vehicles})
+  const { isTripLoading, tripError, trips } = useTrips();
+  console.log({trips})
   return (
     <>
-      {showAddvehicle && <AddvehicleForm />}
+      
+        <div className="flex"> 
+        {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
+          <div className="w-1/2 h-90 mx-4 my-3 bg-white">
+            { vehicles && <VehicleTable vehicleData={vehicles} />}
+          </div>
+        )}
+        {
+        isTripLoading && !tripError ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
+          <div className="w-1/2 h-90 mx-4 my-3 bg-white">
+            { trips && <TripTableOwner trips={trips} /> }
+          </div> 
+        )}
+        </div>
+      
+      
+      
 
-      {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
-        <>
-          { vehicles && <VehicleTable vehicleData={vehicles} />}
-        </>
-      )}
     </>
   );
 }

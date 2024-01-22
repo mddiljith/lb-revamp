@@ -64,6 +64,7 @@ module.exports = async (req, res) => {
   }
 
   const getTrips = async (userId) => {
+    console.log({userField, userId, status_id})
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -98,7 +99,7 @@ module.exports = async (req, res) => {
         )   
       `)
       .eq(`vehicles.${userField}`, `${userId}`)
-      .eq('status_id', status_id)
+      // .eq('status_id', status_id)
 
     if(error) {
       console.log(error);

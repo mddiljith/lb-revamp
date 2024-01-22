@@ -3,17 +3,17 @@ import VehicleRow from "./VehicleRow";
 import Table from "../ui/Table";
 import {
   Button,
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
   Typography,
-  Card
+  Card,
+  Dialog,
+  DialogBody,
+  DialogHeader
 } from "@material-tailwind/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { showAddvehicleState } from "@/context/VehicleAtom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { FaPlusCircle } from "react-icons/fa";
+import { DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLinksConst";
+import AddvehicleForm from "./AddVehicleForm";
 
 const VEHICLE_HEAD = [
   "Vehicle id",
@@ -26,37 +26,48 @@ const VEHICLE_HEAD = [
 ];
 
 function VehicleTable({ vehicleData }) {
-  const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
+  const [showAddvehicle, setShowAddVehicle] = useRecoilState(showAddvehicleState);
   const toggleForm = () => {
     setShowAddVehicle((prev) => !prev);
   };
-
   return (
     <>
-    <Card className="w-600 mx-4 my-3 bg-white rounded-lg shadow">
-      <div className="p-6">
-        <div className="flex justify-between items-center">
-          <Typography variant="h6" className="p-3">Manage your Trucks</Typography>
-          <Button ripple={false} className="text-xs p-2" onClick={toggleForm}>
-            <div className="flex gap-1 justify-center items-center p-0">
-              <FaPlusCircle size={14} />
-              <span className="text-xs">Add Truck</span>
-            </div>
-          </Button>
+      <Dialog open={showAddvehicle} size="lg" handler={toggleForm}>
+        <div className="">
+          <DialogHeader>
+            <Typography variant="h5" color="#607d8b" className="p-3">Add New Truck</Typography>
+          </DialogHeader>
+          <DialogBody>
+            <AddvehicleForm/> 
+          </DialogBody>
         </div>
-        <div className="overflow-x-auto text-xs">
-          <Table className="bg-white">
-            <Table.Header header={VEHICLE_HEAD} className="font-semibold"/>
-            <Table.Body
-              data={vehicleData}
-              render={(vehicle, i) => (
-                <VehicleRow row={vehicle} key={vehicle.id} index={i} />
-              )}
-            />
-          </Table>
+      </Dialog>
+      <div className="flex"> 
+        <div className="w-full h-80 mx-1 mb-2 bg-white overflow-y-auto">
+          <div className="p-6">
+            <div className="flex items-center">
+              <Typography variant="h6" className="p-3">Manage Trucks</Typography>
+              <Button variant="text" ripple={false} color="teal" className="text-xs p-2" onClick={toggleForm}>
+                <div className="flex gap-1 justify-center items-center p-0">
+                  <FaPlusCircle size={14} />
+                  <span className="text-xs">Add Truck</span>
+                </div>
+              </Button>
+            </div>
+            <div className="overflow-x-auto text-xs">
+              <Table className="bg-white">
+                <Table.Header header={VEHICLE_HEAD} className="font-semibold text-small"/>
+                <Table.Body
+                  data={vehicleData}
+                  render={(vehicle, i) => (
+                    <VehicleRow row={vehicle} key={vehicle.id} index={i} />
+                  )}
+                />
+              </Table>
+            </div>
+          </div>
         </div>
       </div>
-    </Card>
     </>
   );
 }

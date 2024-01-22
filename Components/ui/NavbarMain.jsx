@@ -84,13 +84,13 @@ export const NavList = ({ role }) => {
   return (
     <ul className="flex justify-between p-4 items-center gap-8 float-right ml-auto">
       <li>
-        <Link href="/" className="text-sm">Home</Link>
+        <Link href="/" className="text-xs">Home</Link>
       </li>
       <li>
-        <Link href={`${role}/dashboard`} className="text-sm">Dashboard</Link>
+        <Link href={`${role}/dashboard`} className="text-xs">Dashboard</Link>
       </li>
       <li>
-        <Link href="/" className="text-sm">Feature</Link>
+        <Link href="/" className="text-xs">Feature</Link>
       </li>
     </ul>
   );
