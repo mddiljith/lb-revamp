@@ -4,6 +4,7 @@ import {
   Input,
   Option,
   Select,
+  Typography,
 } from "@material-tailwind/react";
 import React from "react";
 import AddressForm from "../Auth/AddressForm";
@@ -24,10 +25,7 @@ function ShipperInfoForm() {
               <Option>Yes</Option>
               <Option>No</Option>
             </Select>
-            <Select label="Organisation Role">
-              <Option>Admin</Option>
-              <Option>User</Option>
-            </Select>
+            <Typography>Address </Typography>
             <AddressForm />
           </div>
         </CardBody>
