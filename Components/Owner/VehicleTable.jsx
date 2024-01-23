@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
   Typography,
+  Card
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { showAddvehicleState } from "@/context/VehicleAtom";
@@ -31,38 +32,32 @@ function VehicleTable({ vehicleData }) {
   };
 
   return (
-    <Table
-      topCard={
-        <Table.Top>
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            <div>
-              <Typography variant="h5" color="blue-gray">
-                Manage your Trucks
-              </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
-                See information about the Trucks
-              </Typography>
+    <>
+    <Card className="w-600 mx-4 my-3 bg-white rounded-lg shadow">
+      <div className="p-6">
+        <div className="flex justify-between items-center">
+          <Typography variant="h6" className="p-3">Manage your Trucks</Typography>
+          <Button ripple={false} className="text-xs p-2" onClick={toggleForm}>
+            <div className="flex gap-1 justify-center items-center p-0">
+              <FaPlusCircle size={14} />
+              <span className="text-xs">Add Truck</span>
             </div>
-            <div>
-              <Button ripple={false} onClick={toggleForm}>
-                <div className="flex gap-1 justify-center align-middle">
-                  <FaPlusCircle size={18} />
-                  <span>Add Truck</span>
-                </div>
-              </Button>
-            </div>
-          </div>
-        </Table.Top>
-      }
-    >
-      <Table.Header header={VEHICLE_HEAD} />
-      <Table.Body
-        data={vehicleData}
-        render={(vehicle, i) => (
-          <VehicleRow row={vehicle} key={vehicle.id} index={i} />
-        )}
-      />
-    </Table>
+          </Button>
+        </div>
+        <div className="overflow-x-auto text-xs">
+          <Table className="bg-white">
+            <Table.Header header={VEHICLE_HEAD} className="font-semibold"/>
+            <Table.Body
+              data={vehicleData}
+              render={(vehicle, i) => (
+                <VehicleRow row={vehicle} key={vehicle.id} index={i} />
+              )}
+            />
+          </Table>
+        </div>
+      </div>
+    </Card>
+    </>
   );
 }
 

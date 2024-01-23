@@ -28,27 +28,27 @@ function VehicleRow(row, index) {
   return (
     <Table.Row index={index}>
       <Table.RowItem>
-        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
+        <Typography className="text-xs font-normal whitespace-nowrap">
           {`${model}`}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
+        <Typography className="text-xs font-normal whitespace-nowrap">
           {types.name}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
+        <Typography className="text-xs font-normal whitespace-nowrap">
           {model}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
+        <Typography className="text-xs font-normal whitespace-nowrap">
           {model_year}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>
-        <Typography className="text-sm font-normal text-gray-600 whitespace-nowrap">
+        <Typography className="text-xs font-normal whitespace-nowrap">
           {plate_number}
         </Typography>
       </Table.RowItem>
@@ -57,7 +57,7 @@ function VehicleRow(row, index) {
           variant="gradient"
           color={statuses.name === "Active" ? "green" : "blue-gray"}
           value={statuses.name}
-          className="py-0.5 px-2 text-[11px] font-normal"
+          className="py-0.5 px-2 text-[11px] font-sm text-center"
         />
       </Table.RowItem>
       <Menu placement="left-end">

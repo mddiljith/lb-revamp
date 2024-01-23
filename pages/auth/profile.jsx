@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import PersonalForm from "@/Components/Auth/PersonalForm";
-import ShipperInfoForm from "@/Components/Shipper/shipperInfoForm";
+import ShipperInfoForm from "@/Components/Shipper/ShipperInfoForm";
 import KycForm from "@/Components/Auth/KycForm";
 
 function Profile({ user, role }) {

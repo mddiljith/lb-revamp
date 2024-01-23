@@ -18,7 +18,7 @@ function Trucks({ user, role }) {
     <Card className="p-2 mt-6 w-full">
       {showAddvehicle && <AddvehicleForm />}
 
-      {isLoading && !error ? (<Spinner />) : (
+      {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
         <>
           { vehicles && <VehicleTable vehicleData={vehicles} />}
         </>

@@ -1,9 +1,30 @@
 import OwnerLayout from "@/Components/Owner/OwnerLayout";
 import React from "react";
+import { useRecoilState } from "recoil";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { Card, Typography, Spinner, Button } from "@material-tailwind/react";
+import { useVehicles } from "@/hooks/vehicles/useVehicles";
+import { FaPlusCircle } from "react-icons/fa";
+import VehicleTable from "@/Components/Owner/VehicleTable";
+import AddvehicleForm from "@/Components/Owner/AddVehicleForm";
+import { showAddvehicleState } from "@/context/VehicleAtom";
 
 function OwnerHome() {
-  return <div>OwnerHome/dashboard</div>;
+  const { isLoading, error, vehicles } = useVehicles();
+  const [showAddvehicle, setShowAddVehicle] = useRecoilState(showAddvehicleState);
+
+  console.log({vehicles})
+  return (
+    <>
+      {showAddvehicle && <AddvehicleForm />}
+
+      {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
+        <>
+          { vehicles && <VehicleTable vehicleData={vehicles} />}
+        </>
+      )}
+    </>
+  );
 }
 
 export default OwnerHome;
