@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function changepassword() {
+function Changepassword() {
   const supabase = useSupabaseClient();
   const { register, handleSubmit, formState, getValues } = useForm();
   const router = useRouter();
@@ -87,4 +87,4 @@ function changepassword() {
   );
 }
 
-export default changepassword;
+export default Changepassword;

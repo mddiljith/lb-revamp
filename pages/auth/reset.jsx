@@ -11,7 +11,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { CiCircleCheck } from "react-icons/ci";
 
-function reset() {
+function Reset() {
   const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState(null);
   const supabase = useSupabaseClient();
@@ -66,4 +66,4 @@ function reset() {
   );
 }
 
-export default reset;
+export default Reset;
