@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Input,
@@ -12,15 +12,16 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useLogin } from "@/hooks/auth/useLogin";
 import { FcGoogle } from "react-icons/fc";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useLoginGoogle } from "@/hooks/auth/useLoginGoogle";
-import { useRouter } from "next/router";
 
 function SignInForm() {
   const { login, isLoading } = useLogin();
   const { login: googleLogin, isLoading: isLoading2 } = useLoginGoogle();
   const { register, handleSubmit, reset } = useForm();
-  const router = useRouter();
+  const [show, setShow] = useState(false);
+
   const onSubmit = ({ email, password }) => {
     if (!email || !password) return;
     console.log(email);
@@ -59,9 +60,16 @@ function SignInForm() {
                   disabled={isLoading}
                 />
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   size="lg"
                   label="Password"
+                  icon={
+                    show ? (
+                      <FaEye onClick={() => setShow(!show)} />
+                    ) : (
+                      <FaEyeSlash onClick={() => setShow(!show)} />
+                    )
+                  }
                   disabled={isLoading}
                   {...register("password")}
                 />
