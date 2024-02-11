@@ -14,11 +14,13 @@ import { useLogin } from "@/hooks/auth/useLogin";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import { useLoginGoogle } from "@/hooks/auth/useLoginGoogle";
+import { useRouter } from "next/router";
 
 function SignInForm() {
   const { login, isLoading } = useLogin();
   const { login: googleLogin, isLoading: isLoading2 } = useLoginGoogle();
   const { register, handleSubmit, reset } = useForm();
+  const router = useRouter();
   const onSubmit = ({ email, password }) => {
     if (!email || !password) return;
     console.log(email);
@@ -97,6 +99,11 @@ function SignInForm() {
                 Dont have any account?{" "}
                 <Link href="/auth/signUp" className="font-medium text-blue-500">
                   Sign Up
+                </Link>
+              </Typography>
+              <Typography variant="small" className="text-center">
+                <Link href="/auth/reset" className="font-medium text-blue-500">
+                  Forgot password
                 </Link>
               </Typography>
             </form>
