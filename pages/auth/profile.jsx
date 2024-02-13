@@ -86,9 +86,6 @@ function Profile({ user, role }) {
           {activeStep == 2 && <Button>Finish</Button>}
         </div>
       </div>
-      <div>
-        {user.email} {role}
-      </div>
     </>
   );
 }

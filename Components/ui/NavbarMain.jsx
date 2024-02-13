@@ -14,6 +14,7 @@ import {
   IconButton,
   Navbar,
   Chip,
+  Typography,
 } from "@material-tailwind/react";
 
 import { useUserRole } from "@/hooks/auth/useUserRole";
@@ -36,6 +37,13 @@ function NavbarMain() {
       fullWidth
       blurred
     >
+      <div className="flex text-center items-center justify-center gap-2">
+        <Avatar src="/shipping.png" alt="logo" variant="square" />
+        <Typography variant="h4" color="blue-gray">
+          LetsBuild
+        </Typography>
+      </div>
+
       <NavList role={user?.role_meta_data[0]?.role_meta_data?.role_descr} />
       <div className="flex items-center gap-1">
         {user ? (
@@ -45,7 +53,10 @@ function NavbarMain() {
             </MenuHandler>
             <MenuList>
               <MenuItem>
-              <Link href=""><b>{user?.email}</b>({user?.role_meta_data[0]?.role_meta_data?.role_descr})</Link>
+                <Link href="">
+                  <b>{user?.email}</b>(
+                  {user?.role_meta_data[0]?.role_meta_data?.role_descr})
+                </Link>
               </MenuItem>
               <MenuItem>
                 <Link href="/auth/profile">Profile</Link>
@@ -84,13 +95,19 @@ export const NavList = ({ role }) => {
   return (
     <ul className="flex justify-between p-4 items-center gap-8 float-right ml-auto">
       <li>
-        <Link href="/" className="text-sm">Home</Link>
+        <Link href="/" className="text-sm">
+          Home
+        </Link>
       </li>
       <li>
-        <Link href={`${role}/dashboard`} className="text-sm">Dashboard</Link>
+        <Link href={`${role}/dashboard`} className="text-sm">
+          Dashboard
+        </Link>
       </li>
       <li>
-        <Link href="/" className="text-sm">Feature</Link>
+        <Link href="/" className="text-sm">
+          Feature
+        </Link>
       </li>
     </ul>
   );

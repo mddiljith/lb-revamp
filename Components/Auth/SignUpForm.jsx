@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Input,
@@ -11,12 +11,14 @@ import {
 import Link from "next/link";
 import { useSignup } from "@/hooks/auth/useSignup";
 import { useForm } from "react-hook-form";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 
 function SignUpForm() {
   const { signup, isLoading } = useSignup();
+  const [show, setShow] = useState(false);
 
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
@@ -85,9 +87,16 @@ function SignUpForm() {
                   })}
                 />
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   size="lg"
                   label="Password"
+                  icon={
+                    show ? (
+                      <FaEye onClick={() => setShow(!show)} />
+                    ) : (
+                      <FaEyeSlash onClick={() => setShow(!show)} />
+                    )
+                  }
                   disabled={isLoading}
                   error={errors?.password?.message}
                   {...register("password", {
@@ -100,9 +109,16 @@ function SignUpForm() {
                 />
 
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   size="lg"
                   id="passwordConfirm"
+                  icon={
+                    show ? (
+                      <FaEye onClick={() => setShow(!show)} />
+                    ) : (
+                      <FaEyeSlash onClick={() => setShow(!show)} />
+                    )
+                  }
                   label="Confirm Password"
                   disabled={isLoading}
                   error={errors?.passwordConfirm?.message}
