@@ -27,7 +27,7 @@ function Sidebar({ sidelinks }) {
 
   return (
     <aside
-      className={`space-x-1 flex flex-col  overflow-y-auto py-4 h-screen sticky top-0 duration-300 ${
+      className={`space-x-1 flex flex-col overflow-y-auto py-4 h-screen sticky top-0 duration-300 ${
         open ? "w-1/8" : "w-20"
       }`}
     >

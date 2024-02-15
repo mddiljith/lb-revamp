@@ -17,3 +17,6 @@ Random truck selected (status_id: 4) -> [only in dashboard]
 Driver accept (status_id: 5 -Inprogress) -> [Pickup]
 Driver pickup - doc uploaded (status_id: 6) [Intransit]
 Delivered (status_id: 3)
+
+Statuses for owner:
+Active Trips -> [5,6,3]

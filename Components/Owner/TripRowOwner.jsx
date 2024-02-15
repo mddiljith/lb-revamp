@@ -8,6 +8,7 @@ import Table from "../ui/Table";
 
 function TripRowOwner({ row, index }) {
   // revalidate what need tio show for the ttr
+  console.log({row})
   const {
     id,
     created_at,
@@ -32,7 +33,7 @@ function TripRowOwner({ row, index }) {
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-500">
           {search_requests.source}
-        </Typography>
+        </Typography>&rarr;
         <Typography className="text-xs font-semibold text-blue-gray-500">
           {search_requests.destination}
         </Typography>
@@ -44,7 +45,7 @@ function TripRowOwner({ row, index }) {
       </Table.RowItem>
       <Table.RowItem>
         <Typography className="text-xs font-semibold text-blue-gray-600">
-          {search_requests.id}
+          {vehicles.users.name}
         </Typography>
       </Table.RowItem>
       <Table.RowItem>

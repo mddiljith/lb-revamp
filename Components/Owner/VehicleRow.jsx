@@ -2,6 +2,7 @@ import { useDeleteVehicle } from "@/hooks/vehicles/useDeleteVehicle";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Table from "../ui/Table";
+import { useRouter } from "next/router";
 import {
   Typography,
   Chip,
@@ -18,7 +19,7 @@ function VehicleRow(row, index) {
   const [value, setValue] = useState(row);
   const [open, setOpen] = useState(false);
   const { id, types, model, model_year, plate_number, statuses } = value.row;
-
+  const router = useRouter()
   const dialogHandler = () => {
     setOpen(!open)
   }
@@ -74,8 +75,9 @@ function VehicleRow(row, index) {
           >
             Update Status
           </MenuItem>
-          <MenuItem>
-            <Link href={`/owner/trucks/${id}`}>Edit</Link>
+          <MenuItem onClick={() => {
+            router.push(`/owner/trucks/${id}`)
+          }}>Edit
           </MenuItem>
           <MenuItem>Delete</MenuItem>
         </MenuList>

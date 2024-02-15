@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Input,
@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useLogin } from "@/hooks/auth/useLogin";
 import { FcGoogle } from "react-icons/fc";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Image from "next/image";
 import { useLoginGoogle } from "@/hooks/auth/useLoginGoogle";
 
@@ -19,6 +20,8 @@ function SignInForm() {
   const { login, isLoading } = useLogin();
   const { login: googleLogin, isLoading: isLoading2 } = useLoginGoogle();
   const { register, handleSubmit, reset } = useForm();
+  const [show, setShow] = useState(false);
+
   const onSubmit = ({ email, password }) => {
     if (!email || !password) return;
     console.log(email);
@@ -57,9 +60,16 @@ function SignInForm() {
                   disabled={isLoading}
                 />
                 <Input
-                  type="password"
+                  type={show ? "text" : "password"}
                   size="lg"
                   label="Password"
+                  icon={
+                    show ? (
+                      <FaEye onClick={() => setShow(!show)} />
+                    ) : (
+                      <FaEyeSlash onClick={() => setShow(!show)} />
+                    )
+                  }
                   disabled={isLoading}
                   {...register("password")}
                 />
@@ -97,6 +107,11 @@ function SignInForm() {
                 Dont have any account?{" "}
                 <Link href="/auth/signUp" className="font-medium text-blue-500">
                   Sign Up
+                </Link>
+              </Typography>
+              <Typography variant="small" className="text-center">
+                <Link href="/auth/reset" className="font-medium text-blue-500">
+                  Forgot password
                 </Link>
               </Typography>
             </form>

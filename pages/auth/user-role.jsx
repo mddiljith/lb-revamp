@@ -14,12 +14,13 @@ import {
   Radio,
   Button,
 } from "@material-tailwind/react";
+import NavbarHome from "@/Components/ui/NavbarHome";
 
 function RolePage({ initialSession, user }) {
   const supabase = useSupabaseClient();
-  const [role, setRole] = useState([]);
+  const [role, setRole] = useState(["shipper", 1]);
   const router = useRouter();
-
+  console.log(user?.user_metadata?.full_name);
   const handleSubmit = async () => {
     // session['user']['role_id'] = role;
     // write the role to database
@@ -42,48 +43,51 @@ function RolePage({ initialSession, user }) {
   };
 
   return (
-    <div className="container mx-auto p-5 mt-4">
-      <Card className="w-96">
-        <CardHeader
-          variant="gradient"
-          color="blue"
-          className="mb-4 grid h-28 place-items-center"
-        >
-          <Typography variant="h3" color="white">
-            Choose your role
-          </Typography>
-        </CardHeader>
-        <CardBody className="flex flex-col gap-4">
-          <Radio
-            id="user"
-            name="type"
-            label="I want a truck"
-            value="shipper-1"
-            onChange={(e) => setRole(e.target.value.split("-"))}
-            defaultChecked
-          />
-          <Radio
-            id="owner"
-            name="type"
-            label="I'm a truck Owner"
-            value="owner-2"
-            onChange={(e) => setRole(e.target.value.split("-"))}
-          />
-          <Radio
-            id="driver"
-            name="type"
-            label="I'm a driver"
-            value="driver-3"
-            onChange={(e) => setRole(e.target.value.split("-"))}
-          />
-        </CardBody>
-        <CardFooter className="pt-0">
-          <Button variant="gradient" fullWidth onClick={handleSubmit}>
-            Sign Up
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+    <>
+      <NavbarHome userName={`${user?.user_metadata?.full_name}`} />
+      <div className="w-2/6 mx-auto p-5 mt-10">
+        <Card className="w-96">
+          <CardHeader
+            variant="gradient"
+            color="blue"
+            className="mb-4 grid h-28 place-items-center"
+          >
+            <Typography variant="h3" color="white">
+              Choose your role
+            </Typography>
+          </CardHeader>
+          <CardBody className="flex flex-col gap-4">
+            <Radio
+              id="user"
+              name="type"
+              label="I want a truck"
+              value="shipper-1"
+              onChange={(e) => setRole(e.target.value.split("-"))}
+              defaultChecked
+            />
+            <Radio
+              id="owner"
+              name="type"
+              label="I'm a truck Owner"
+              value="owner-2"
+              onChange={(e) => setRole(e.target.value.split("-"))}
+            />
+            <Radio
+              id="driver"
+              name="type"
+              label="I'm a driver"
+              value="driver-3"
+              onChange={(e) => setRole(e.target.value.split("-"))}
+            />
+          </CardBody>
+          <CardFooter className="pt-0">
+            <Button variant="gradient" fullWidth onClick={handleSubmit}>
+              Confirm
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    </>
   );
 }
 

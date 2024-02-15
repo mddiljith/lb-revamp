@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import NavbarMain from "@/Components/ui/NavbarMain";
-import { Button, Step, Stepper, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Input,
+  Option,
+  Select,
+  Step,
+  Stepper,
+  Typography,
+} from "@material-tailwind/react";
 import PersonalForm from "@/Components/Auth/PersonalForm";
 import ShipperInfoForm from "@/Components/Shipper/ShipperInfoForm";
+import KycForm from "@/Components/Auth/KycForm";
 
 function Profile({ user, role }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -39,24 +48,43 @@ function Profile({ user, role }) {
               Other info
             </Typography>
           </Step>
-          <Step className="h-4 w-4" onClick={() => setActiveStep(2)} />
+          <Step className="h-4 w-4" onClick={() => setActiveStep(2)}>
+            <Typography
+              variant="h6"
+              color={activeStep === 0 ? "blue-gray" : "gray"}
+              className="absolute -bottom-[3rem] text-center"
+            >
+              KYC
+            </Typography>
+          </Step>
         </Stepper>
         <div className="mt-12">
-          {activeStep === 0 && <PersonalForm />}
-          {activeStep === 1 && <ShipperInfoForm />}
+          {activeStep === 0 && <ShipperInfoForm />}
+          {activeStep === 1 && (
+            <>
+              <Input label="Contact name" />
+              <Select label="role">
+                <Option>Admin</Option>
+                <Option>User</Option>
+                <Option>Approver</Option>
+              </Select>
+              <PersonalForm />
+            </>
+          )}
+          {activeStep === 2 && <KycForm />}
         </div>
 
         <div className="mt-10 flex justify-between">
           <Button onClick={handlePrev} disabled={isFirstStep}>
             Prev
           </Button>
-          <Button onClick={handleNext} disabled={isLastStep}>
-            Next
-          </Button>
+          {activeStep !== 2 && (
+            <Button onClick={handleNext} disabled={isLastStep}>
+              Next
+            </Button>
+          )}
+          {activeStep == 2 && <Button>Finish</Button>}
         </div>
-      </div>
-      <div>
-        {user.email} {role}
       </div>
     </>
   );

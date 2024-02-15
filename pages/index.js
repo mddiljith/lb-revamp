@@ -38,9 +38,12 @@ export default function Home() {
   useEffect(() => {
     if (user?.id) {
       console.log("redirecting to dashboard");
-      const userRoleDesc = user?.role_meta_data[0]?.role_meta_data.role_descr;
-      console.log(userRoleDesc);
-      router.push(`/${userRoleDesc}`);
+      if (user?.role_meta_data[0]?.role_meta_data) {
+        const userRoleDesc =
+          user?.role_meta_data[0]?.role_meta_data?.role_descr;
+        console.log(userRoleDesc, "data not available");
+        router.push(`/${userRoleDesc}`);
+      } else router.push(`/auth/profile`);
     }
   }, [user]);
 

@@ -51,7 +51,7 @@ function AddvehicleForm() {
                   name="truck_type"
                   label={<span className="text-xs">Open</span>}
                   value="Open"
-                  checked={getValues().truck_type === "Open"}
+                  // checked={getValues().truck_type === "Open"}
                   {...register("truck_type", {
                     required: "This field is required",
                   })}
@@ -62,7 +62,7 @@ function AddvehicleForm() {
                   name="truck_type"
                   label={<span className="text-xs">Small Truck</span>}
                   value="Small Truck"
-                  checked={getValues().truck_type === "Small Truck"}
+                  // checked={getValues().truck_type === "Small Truck"}
                   {...register("truck_type", {
                     required: "This field is required",
                   })}
@@ -73,7 +73,7 @@ function AddvehicleForm() {
                   name="truck_type"
                   label={<span className="text-xs">Container</span>}
                   value="Container"
-                  checked={getValues().truck_type === "Container"}
+                  // checked={getValues().truck_type === "Container"}
                   {...register("truck_type", {
                     required: "This field is required",
                   })}

@@ -79,6 +79,10 @@ module.exports = async (req, res) => {
           model,
           plate_number,
           driver_id,
+          users!vehicles_driver_id_fkey(
+            name,
+            email
+          ),
           owner_id
         ),
         search_requests(

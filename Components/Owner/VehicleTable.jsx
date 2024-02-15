@@ -16,7 +16,7 @@ import { DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLinksConst";
 import AddvehicleForm from "./AddVehicleForm";
 
 const VEHICLE_HEAD = [
-  "Vehicle id",
+  "Vehicle Name",
   "Type",
   "Model",
   "Year",

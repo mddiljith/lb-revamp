@@ -19,24 +19,19 @@ function OwnerHome() {
   console.log({trips})
   return (
     <>
-      
-        <div className="flex"> 
-        {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
-          <div className="w-1/2 h-90 mx-4 my-3 bg-white">
-            { vehicles && <VehicleTable vehicleData={vehicles} />}
-          </div>
-        )}
-        {
-        isTripLoading && !tripError ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
-          <div className="w-1/2 h-90 mx-4 my-3 bg-white">
-            { trips && <TripTableOwner trips={trips} /> }
-          </div> 
-        )}
+      <div className="flex flex-col"> 
+      {isLoading && !error ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
+        <div className="w-full h-90 mx-4 my-3 bg-white">
+          { vehicles && <VehicleTable vehicleData={vehicles} />}
         </div>
-      
-      
-      
-
+      )}
+      {
+      isTripLoading && !tripError ? (<div className="flex items-center justify-center h-screen bg-gray-100"><Spinner /></div>) : (
+        <div className="w-full h-90 mx-4 my-3 bg-white">
+          { trips && <TripTableOwner trips={trips} /> }
+        </div> 
+      )}
+      </div>
     </>
   );
 }
