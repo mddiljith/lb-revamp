@@ -1,10 +1,12 @@
 import React from "react";
 import { mappls, mappls_plugin } from "mappls-web-maps";
+import { getDate } from "date-fns";
 
 //multiple marker setup
 
-function MapHome({ position }) {
+function MapHome({ position, path }) {
   console.log("inside map geolocation", position);
+  
   let geoData = {
     type: "FeatureCollection",
     features: [
@@ -15,18 +17,21 @@ function MapHome({ position }) {
           type: "Point",
           coordinates: [position.lat, position.lng],
         },
-      },
-
-      // {
-      //   type: "Feature",
-      //   properties: { htmlPopup: "Destination" },
-      //   geometry: {
-      //     type: "Point",
-      //     coordinates: [path[path.length - 1]?.lat, path[path.length - 1]?.lng],
-      //   },
-      // },
-    ],
+      }
+    ]
   };
+  if(path) {
+    feature_map = {
+      type: "Feature",
+      properties: { htmlPopup: "Destination" },
+      geometry: {
+        type: "Point",
+        coordinates: [path[path.length - 1]?.lat, path[path.length - 1]?.lng],
+      }
+    }
+    getData.features.push(feature_map)
+  }
+  console.log({getData})
 
   const styleMap = {
     width: "100%",

@@ -31,18 +31,21 @@ function NavbarMain() {
   }, [user]);
 
   return (
+    
     <Navbar
       role="nav"
       className="flex justify-between w-full transition-all sticky top-0 z-40 py-2 border border-gray-300 border-solid p-0 shadow-none text-gray-900"
       fullWidth
       blurred
     >
+      { !user &&
       <div className="flex text-center items-center justify-center gap-2">
         <Avatar src="/shipping.png" alt="logo" variant="square" />
         <Typography variant="h4" color="blue-gray">
           LetsBuild
         </Typography>
       </div>
+      }   
 
       <NavList role={user?.role_meta_data[0]?.role_meta_data?.role_descr} />
       <div className="flex items-center gap-1">

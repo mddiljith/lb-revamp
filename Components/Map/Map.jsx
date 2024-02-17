@@ -25,7 +25,7 @@ function Map({ path }) {
     ],
   };
 
-  const styleMap = { width: "80%", height: "80vh", display: "inline-block" };
+  const styleMap = { width: "100%", height: "100%", display: "inline-block" };
 
   const mapProps = {
     center: [path[0]?.lat, path[0]?.lng],

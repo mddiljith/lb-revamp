@@ -1,27 +1,43 @@
 import React from "react";
-import ApprovalCard from "@/Components/Driver/ApprovalCard";
 import FooterMob from "@/Components/Driver/mob/FooterMob";
 import NavbarMob from "@/Components/Driver/mob/NavbarMob";
 import Mapmob from "@/Components/Map/Mapmob";
-import { Card, CardBody } from "@material-tailwind/react";
 import AcceptedCard from "@/Components/Driver/mob/AcceptedCard";
+import { useRouter } from "next/router";
+import { useTrip } from "@/hooks/trips/useTrip";
+import { useRecoilValue, useRecoilState} from "recoil";
+import { tripState } from "@/context/TripAtom";
+import Map from "@/Components/Map/Map";
 
-function prepickup() {
+function Prepickup() {
+  const router = useRouter();
+  const {tripId} = router.query;
+  const { isLoading, error, trip, tripStatus } = useTrip();
+  console.log(isLoading)
+  console.log({trip})
+
+  const { route_path, distance, duration } = useRecoilValue(tripState);
+
   return (
     <div className="flex flex-col h-screen ">
       <NavbarMob />
-
-      <div className=" flex-1 flex flex-col">
+      {trip && <div className=" flex-1 flex flex-col">
         <div className=" bg-blue-300 flex-1 overflow-hidden">
-          <Mapmob />
+          {/* <Mapmob path={route_path} /> */}
+          {route_path && <Map path={route_path} />}
         </div>
         <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
-          <AcceptedCard />
+          <AcceptedCard 
+            trip={trip[0]}
+            shipper={trip[0]?.search_requests?.users?.name}
+            tracking_id={trip[0]?.tracking_id}
+            source_eloc={trip[0]?.search_requests?.source_eloc}
+          />
         </div>
-      </div>
+      </div>}
       <FooterMob />
     </div>
   );
 }
 
-export default prepickup;
+export default Prepickup;

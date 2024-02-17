@@ -6,21 +6,48 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
 import { MdCall, MdCancel, MdClose, MdOutlineChat } from "react-icons/md";
-
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { useGeolocation } from "@/hooks/map/useGeolocation";
+import { tripState } from "@/context/TripAtom";
+import { getDirection } from "@/services/map/getDirection";
+import Link from "next/link";
 /* Action map should be loaded to show the driver location pickup loaction */
-const loadMap = () => {};
 
-function AcceptedCard() {
+function AcceptedCard({trip, shipper, tracking_id, source_eloc}) {
+  const { position, getPosition } = useGeolocation();
+  const [pickupMap, setPickupMap] = useRecoilState(tripState);
+  console.log(pickupMap.route_path)
+  const loadMap = async () => {
+    console.log('Loading Map')
+    await getPosition()
+    console.log(position, source_eloc)
+    const lat_lng = `${position.lng},${position.lat}`
+    if (position && source_eloc) {
+      const mapResult = await getDirection(lat_lng, source_eloc);
+      const { duration, distance, path } = mapResult;
+      setPickupMap((prev) => {
+        return {
+          ...prev,
+          route_path: path,
+          duration,
+          distance,
+          position,
+          source_eloc
+        };
+      });
+    }
+  };
+  
   return (
     <Card>
       <CardBody>
         <div className="flex gap-3 items-center justify-center">
           <Avatar src="/user.png" />
-          <Typography variant="h4"> COCOCOLA PVT LTD </Typography>
+          <Typography variant="h4"> {shipper} </Typography>
         </div>
-        <Typography variant="h5">Tracking ID xxxx </Typography>
+        <Typography variant="h5">Tracking ID {tracking_id} </Typography>
         <div className="flex gap-3 justify-between  items-center text-blue-400 p-4 mt-5 ">
           <div className="flex gap-1 items-center">
             <MdCall size={28} /> <Typography variant="h6">call</Typography>
@@ -36,9 +63,13 @@ function AcceptedCard() {
         </div>
       </CardBody>
       <CardFooter>
+        { pickupMap.route_path ? 
+          <Link href={`/driver/mob/managePickup?tripId=${trip.id}`}>
+            <Button fullWidth>Manage Pickup</Button>
+          </Link>:
         <Button onClick={loadMap} fullWidth>
           Start
-        </Button>
+        </Button>}
 
         {/* Action map should be loaded to show the driver location pickup loaction */}
       </CardFooter>

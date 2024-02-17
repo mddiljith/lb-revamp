@@ -8,16 +8,18 @@ import {
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
   const [status, setStatus] = useState(4)
+  const router = useRouter()
   const acceptTrip = async () => {
     const requestParams = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tripId, status_id: 5 }), // Change status to inprogress
     };
-    const result = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`, requestParams)
+    const result = await callApi(`/api/trips/${tripId}`, requestParams)
     toast.success(
       "Trip accepted successfully."
       );
@@ -25,12 +27,12 @@ function ApprovalCard({ source, destination, schedule, trackingId, tripId }) {
     setStatus(5)
     // setStatus(result[0]?.status_id)
     //Need an alert message here after trip is accepted.
+    router.push(`/driver/mob/prepickup?tripId=${tripId}`)
   }
 
   const rejectTrip = async () => {
     console.log('Driver is rejecting the trip', tripId)
   }
-
 
   return (
     <>

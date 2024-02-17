@@ -26,19 +26,7 @@ function DriverHome() {
 
   return (
     <>
-      <div className="flex px-8">
-        {trips.map((trip) => (
-          <div className="flex-1/4 mt-10" key={trip.id}>
-            <ApprovalCard
-              source={trip.search_requests.source}
-              destination={trip.search_requests.destination}
-              scheduled_at={trip.scheduled_at}
-              trackingId={trip.tracking_id}
-              tripId={trip.id}
-            />
-          </div>
-        ))}
-
+      <div className="flex mx-2">
         <div className="flex-1/2">
           <GenericCard
             title="Today's Revenue"
@@ -53,9 +41,29 @@ function DriverHome() {
             notice="120 less than last month"
           />
         </div>
-        <div className="flex-1/4">
+        <div className="flex-1/2">
+          <GenericCard
+            title="This Year Revenue"
+            content="13K"
+            notice="5K less than last Year"
+          />
+        </div>
+      </div>
+      <div className="flex">
+        <div className="flex-1 w-16 mx-6">
           <Trips />
         </div>
+        {trips.map((trip) => (
+          <div className="flex-1/2 mx-4 mt-10" key={trip.id}>
+            <ApprovalCard
+              source={trip.search_requests.source}
+              destination={trip.search_requests.destination}
+              scheduled_at={trip.scheduled_at}
+              trackingId={trip.tracking_id}
+              tripId={trip.id}
+            />
+          </div>
+        ))}
       </div>
       <Link href={"/driver/mob"}>
         <Typography color="blue">Go to Mobile Version</Typography>
