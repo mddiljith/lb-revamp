@@ -11,7 +11,10 @@ function MapHome({ position }) {
       {
         type: "Feature",
         properties: { htmlPopup: "source" },
-        geometry: { type: "Point", coordinates: [position.lat, position.lng] },
+        geometry: {
+          type: "Point",
+          coordinates: [position.lat, position.lng],
+        },
       },
 
       // {
@@ -25,7 +28,12 @@ function MapHome({ position }) {
     ],
   };
 
-  const styleMap = { width: "100%", height: "100vh", display: "inline-block" };
+  const styleMap = {
+    width: "100%",
+    height: "100%",
+    display: "inline-block",
+    // overflow: "hidden",
+  };
 
   const mapProps = {
     center: [position?.lat, position?.lng],

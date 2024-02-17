@@ -4,12 +4,13 @@ import { useForm } from "react-hook-form";
 import { FiUpload } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { callApi } from "@/lib/utils/api";
+import { FaCamera } from "react-icons/fa6";
 
 function PickupConfirmForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
   const router = useRouter();
-  const {tripId} = router.query
+  const { tripId } = router.query;
   //verify the docs
   //   Invoice/Delivery challan - can be uploaded by Shipper
   // e-way bill
@@ -21,9 +22,12 @@ function PickupConfirmForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: tripId, status_id: 6 }), // Change status to inprogress
     };
-    const result = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`, requestParams)
+    const result = await callApi(
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`,
+      requestParams
+    );
     if (result) {
-      router.push('/driver/trips/')
+      router.push("/driver/trips/");
     }
   };
 
@@ -43,7 +47,7 @@ function PickupConfirmForm() {
             required: "This field is required",
           })}
         />
-        <label htmlFor="invoice" className="w-4/12">
+        <label htmlFor="invoice" className="w-32">
           <div className="flex gap-4  border p-5 bg-blue-50 rounded-md">
             <FiUpload size={28} />
             <span>Upload Invoice</span>
@@ -68,7 +72,7 @@ function PickupConfirmForm() {
             // required: "This field is required",
           })}
         />
-        <label htmlFor="invoice" className="w-4/12">
+        <label htmlFor="ewaybill" className="w-32">
           <div className="flex gap-4  border p-5 bg-blue-50 rounded-md">
             <FiUpload size={28} />
             <span>Upload Eway bill</span>
@@ -76,16 +80,31 @@ function PickupConfirmForm() {
         </label>
 
         <input
-          id="invoice"
+          id="ewaybill"
           type="file"
           hidden
-          {...register("invoice", {
+          {...register("ewaybill", {
             // required: "This field is required",
           })}
         />
-        <Button type="submit">Submit</Button>
+        <label htmlFor="pickupImage" className="w-32">
+          <div className="flex gap-4  border p-5 bg-blue-50 rounded-md">
+            <FaCamera size={28} />
+            <span>Capture Pickup Image</span>
+          </div>
+        </label>
+
+        <input
+          id="pickupImage"
+          type="file"
+          hidden
+          {...register("pickupImage", {
+            // required: "This field is required",
+          })}
+        />
+
+        <Button type="submit">COMPLETE PICKUP</Button>
       </form>
-      <Button>Generate LR</Button>
     </Card>
   );
 }

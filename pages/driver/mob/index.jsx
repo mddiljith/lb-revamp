@@ -8,13 +8,17 @@ import React from "react";
 function DriverHomeMob() {
   return (
     <>
-      <div className="flex flex-col flex-none">
+      <div className="flex flex-col h-screen ">
         <NavbarMob />
-        <ApprovalCard />
-        <div className="h-screen bg-red-100">
-          <Mapmob />
-        </div>
 
+        <div className=" flex-1 flex flex-col">
+          <div className=" bg-blue-300 flex-1 overflow-hidden">
+            <Mapmob />
+          </div>
+          <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
+            <ApprovalCard />
+          </div>
+        </div>
         <FooterMob />
       </div>
     </>
