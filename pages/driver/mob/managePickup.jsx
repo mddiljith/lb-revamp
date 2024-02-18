@@ -6,12 +6,14 @@ import {
   Button,
   Card,
   CardBody,
+  CardFooter,
+  IconButton,
   Input,
   Typography,
 } from "@material-tailwind/react";
 import { MdCall, MdCancel, MdOutlineChat } from "react-icons/md";
 import PickupConfirmForm from "@/Components/Driver/PickupConfirmForm";
-
+import { MdAdd } from "react-icons/md";
 function managePickup() {
   return (
     <>
@@ -25,6 +27,11 @@ function managePickup() {
                 <Typography>Pickup</Typography>
                 <PickupConfirmForm />
               </CardBody>
+              <CardFooter>
+                <IconButton>
+                  <MdAdd />
+                </IconButton>
+              </CardFooter>
             </Card>
           </div>
           <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
