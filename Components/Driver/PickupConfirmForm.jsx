@@ -18,17 +18,32 @@ function PickupConfirmForm() {
   // Insurance (if any)
   const onSubmit = async (data) => {
     const requestParams = {
-      method: "PUT",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: tripId, status_id: 6 }), // Change status to inprogress
+      body: JSON.stringify({ 
+        trip_id: tripId,
+        status_id: 6,
+        docs: [
+          {
+            docs: data.invoiceNumber,
+            doc_type: 'invoice',
+            url: ''
+          },
+          {
+            docs: data.ewaybillNumber,
+            doc_type: 'ewaybill',
+            url: ''
+          }
+        ] 
+      }), // Change status to inprogress
     };
+    console.log({requestParams})
     const result = await callApi(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${tripId}`,
+      `/api/trip_docs`,
       requestParams
     );
-    if (result) {
-      router.push("/driver/trips/");
-    }
+    console.log({result})
+    router.push(`/driver/mob/navigateTrip?tripId=${tripId}`);
   };
 
   return (
@@ -68,7 +83,7 @@ function PickupConfirmForm() {
           // defaultValue={getValues().model}
           name="Ewaybill_number"
           error={errors?.EwaybillNumber?.message}
-          {...register("EwaybillNumber", {
+          {...register("ewaybillNumber", {
             // required: "This field is required",
           })}
         />
