@@ -61,12 +61,14 @@ module.exports = async (req, res) => {
     return data;
   }
 
-  const result = await processTripDocs();
-
-  if(result) {
-    res.status(200).json(result);
+  if(req.method == "POST") {
+    const result = await processTripDocs();
+    if(result) {
+      res.status(200).json(result);
+    } else {
+      res.status(404).json([]);
+    }
   } else {
-    res.status(404).json([]);
+    console.log('Unknown request')
   }
-
 };

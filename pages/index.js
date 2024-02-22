@@ -70,7 +70,7 @@ export default function Home() {
       <NavbarHome />
       <div className="flex flex-col min-h-screen">
         <main className="flex-1 flex flex-col ">
-          <section className="w-full bg-[#f7f7f7] p-6 sm:p-12 lg:p-24">
+          <section className="w-full p-6 sm:p-12 lg:p-24">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               Fast and Reliable Truck Booking
             </h1>

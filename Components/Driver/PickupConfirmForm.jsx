@@ -3,8 +3,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FiUpload } from "react-icons/fi";
 import { useRouter } from "next/router";
-import { callApi } from "@/lib/utils/api";
 import { FaCamera } from "react-icons/fa6";
+import { createTripDoc } from "@/lib/utils/apis/trip_docs";
+import { updateTrip } from "@/lib/utils/apis/trips";
 
 function PickupConfirmForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -17,33 +18,33 @@ function PickupConfirmForm() {
   // LR receipt (Lorry receipt)
   // Insurance (if any)
   const onSubmit = async (data) => {
-    const requestParams = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        trip_id: tripId,
-        status_id: 6,
-        docs: [
-          {
-            docs: data.invoiceNumber,
-            doc_type: 'invoice',
-            url: ''
-          },
-          {
-            docs: data.ewaybillNumber,
-            doc_type: 'ewaybill',
-            url: ''
-          }
-        ] 
-      }), // Change status to inprogress
+    const payload = {
+      trip_id: tripId,
+      status_id: 6,
+      docs: [
+        {
+          docs: data.invoiceNumber,
+          doc_type: 'invoice',
+          url: ''
+        },
+        {
+          docs: data.ewaybillNumber,
+          doc_type: 'ewaybill',
+          url: ''
+        }
+      ] 
     };
-    console.log({requestParams})
-    const result = await callApi(
-      `/api/trip_docs`,
-      requestParams
-    );
+    console.log({payload})
+    const tripPayload = {
+      id: tripId,
+      status_id: 6
+    }
+    await createTripDoc(payload)
+    const result = await updateTrip(tripPayload)
     console.log({result})
-    router.push(`/driver/mob/navigateTrip?tripId=${tripId}`);
+    if(result) {
+      router.push(`/driver/mob/navigateTrip?tripId=${tripId}`);
+    }
   };
 
   return (
