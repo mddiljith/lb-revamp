@@ -12,6 +12,7 @@ export function usePrice() {
   const { isLoading, data, error } = useQuery({
     queryKey: [`${searchid}`, "price"],
     queryFn: () => getPrice(searchid),
+    enabled: !!searchid,
     onSuccess: (data) => setPrice(data.estimate),
     onError: (err) => {
       console.log("ERROR", err);
@@ -29,7 +30,7 @@ const getPrice = async (searchRequestId) => {
   };
 
   const data = await callApi(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/pricing/${searchRequestId}`,
+    `/api/pricing/${searchRequestId}`,
     requestParams
   );
   return data;

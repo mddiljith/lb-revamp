@@ -26,12 +26,16 @@ function Schedule() {
       body: JSON.stringify({ ...search, distance, duration, eloc1, eloc2 }),
     };
 
-    const { search_request } = await callApi(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests`,
+    const {search_request} = await callApi(
+      `/api/search_requests`,
       requestParams
     );
 
-    router.push(`shipper/${search_request.id}`);
+    console.log('SEARCH REQUEST',{search_request})
+    console.log('SEARCH REQUEST ID',search_request.id)
+    if(search_request) {
+      router.push(`shipper/${search_request.id}`);
+    }
   };
 
   const handleChange = (e) => {

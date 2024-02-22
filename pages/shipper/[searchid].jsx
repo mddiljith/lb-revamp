@@ -37,8 +37,6 @@ function SearchConfirmation() {
   //   };
   //   getPrice();
   // }, [searchid]);
-  console.log(price);
-
   async function handleSubmit(__price) {
     CreatePayment(__price);
   }
@@ -58,8 +56,6 @@ function SearchConfirmation() {
   //   console.log(price);
   //   router.push(`/shipper/checkout/${searchid}`);
   // };
-
-  console.log(SearchData);
 
   // const { price } = usePrice();
   // 1.create a hook for featching the search request data from router query
@@ -98,11 +94,11 @@ function SearchConfirmation() {
               </div>
             </CardBody>
           </Card>
-          <PriceCard
+          {price && <PriceCard
             price={price}
             onSubmit={() => handleSubmit(price)}
             isLoading={isCreating}
-          />
+          />}
         </div>
       )}
     </>

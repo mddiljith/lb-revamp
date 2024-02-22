@@ -57,7 +57,7 @@ const TripDetail = () => {
       {trip && (
         <>
           <Typography variant="h3" color="blue-gray" className="p-4">
-            consignment ID: {trip[0]?.id}
+            consignment ID: #{trip[0]?.tracking_id}
           </Typography>
           <div className="flex flex-row justify-start ml-3">
             <div className="w-3/5 flex flex-col p-2">
