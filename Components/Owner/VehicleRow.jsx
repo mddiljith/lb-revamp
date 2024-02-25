@@ -24,8 +24,6 @@ function VehicleRow(row, index) {
     setOpen(!open)
   }
 
-  console.log({open})
-
   return (
     <Table.Row index={index}>
       <Table.RowItem>

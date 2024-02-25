@@ -19,21 +19,20 @@ import {
   TimelineItem,
   Typography,
 } from "@material-tailwind/react";
-import { useRecoilValue } from "recoil";
-import { PriceState } from "@/context/SearchAtom";
 import { useTrip } from "@/hooks/trips/useTrip";
 import DeliveryformDailogBox from "@/Components/Shipper/DeliveryformDailogBox";
+import { intervalToDuration, formatDuration } from 'date-fns';
 
 const TripDetail = () => {
   // const router = useRouter();
   // const { tripId } = router.query;
   //get price from the searchiD result
-
   const { isLoading, error, trip, tripStatus } = useTrip();
   const [open, setOpen] = useState(false);
   // const [orderStatus, setOrderStatus] = useState(tripStatus);
   console.log("TripDetail", trip, error);
   const handleOpen = () => setOpen(!open);
+  let duration;
   // const source = trip[0]?.search_requests?.source;
   // const destination = trip[0]?.search_requests?.destination;
   // const price = trip[0]?.search_requests.payments[0].price;
@@ -47,7 +46,11 @@ const TripDetail = () => {
   // const vehicle_num = "abc";
   // const vehicle_model = "abc";
   // const driver_name = "abc";
-
+  if(trip){
+    const duration_in_minutes = trip[0]?.search_requests?.duration
+    duration = intervalToDuration({start: 0, end: duration_in_minutes*1000})
+  }
+  console.log()
   return (
     <>
       <NavbarMain />
@@ -253,7 +256,7 @@ const TripDetail = () => {
                       color="blue-gray"
                       className="leading-none"
                     >
-                      Estimated Arrival :
+                      Estimated Arrival : {duration?.days}d : {duration?.hours}h : {duration?.minutes}m
                     </Typography>
                     <Typography
                       variant="h5"
