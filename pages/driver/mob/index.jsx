@@ -2,24 +2,15 @@ import ApprovalCard from "@/Components/Driver/ApprovalCard";
 import FooterMob from "@/Components/Driver/mob/FooterMob";
 import NavbarMob from "@/Components/Driver/mob/NavbarMob";
 import Mapmob from "@/Components/Map/Mapmob";
-import { useState, useEffect } from "react";
-import { callApi } from "@/lib/utils/api";
 import React from "react";
+import { useTrips } from "@/hooks/trips/useTrips";
 
 function DriverHomeMob() {
-  const [trips, setTrips] = useState([]);
-  const status_id = 4; // FOr pending trips
-  async function fetchTripsForDriver(status_id) {
-    const requestParams = {
-      headers: { "Content-Type": "application/json" },
-    };
-    const trips_data = await callApi(`/api/trips?status_id={status_id}`, requestParams);
-    setTrips(trips_data);
+  let {isLoading, trips, error} = useTrips()
+  console.log({trips})
+  if(trips){
+    trips = trips.filter(trip => trip.status_id === 4);
   }
-  useEffect(() => {
-    fetchTripsForDriver();
-    console.log({trips})
-  }, []);
   return (
     <>
       <div className="flex flex-col h-screen ">
@@ -30,7 +21,7 @@ function DriverHomeMob() {
             <Mapmob />
           </div>
           <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
-          {trips.map((trip) => (
+          {trips && trips.map((trip) => (
             <div className="flex-1/4 mt-10" key={trip.id}>
               <ApprovalCard
                 source={trip.search_requests.source}

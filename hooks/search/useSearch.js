@@ -23,7 +23,7 @@ export function useSearch() {
 }
 
 const getSearchData = async (searchRequestId) => {
-  const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/search_requests/${searchRequestId}`;
+  const _url = `/api/search_requests/${searchRequestId}`;
   const res = await fetch(_url);
   return res.json();
 };

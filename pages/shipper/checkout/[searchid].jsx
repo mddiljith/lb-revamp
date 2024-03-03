@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-
 import {
   Card,
   CardBody,
@@ -34,7 +33,7 @@ function CheckoutConfirmation() {
       headers: { "Content-Type": "application/json" },
     };
 
-    const { data } = await callApi(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips`, requestParams);
+    const {data} = await callApi(`/api/trips`, requestParams);
     console.log("TripData", data);
     console.log(data[0]);
     // setTrip(data);

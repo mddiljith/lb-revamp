@@ -34,7 +34,7 @@ function managePickup() {
               </CardFooter>
             </Card>
           </div>
-          <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
+          {/* <div className="bottom-2 w-full fixed p-2 z-50 mb-12">
             <Card>
               <CardBody>
                 <Typography variant="h5">Tracking ID : xxxxx </Typography>
@@ -51,7 +51,7 @@ function managePickup() {
                 <Button variant="outlined">Cancel Trip</Button>
               </CardBody>
             </Card>
-          </div>
+          </div> */}
         </div>
         <FooterMob />
       </div>

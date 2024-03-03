@@ -2,6 +2,8 @@ import React from "react";
 import FooterMob from "@/Components/Driver/mob/FooterMob";
 import NavbarMob from "@/Components/Driver/mob/NavbarMob";
 import Mapmob from "@/Components/Map/Mapmob";
+import { useRouter } from "next/router";
+
 import {
   Button,
   Card,
@@ -11,8 +13,26 @@ import {
 } from "@material-tailwind/react";
 import { MdCall, MdCancel, MdOutlineChat } from "react-icons/md";
 import PickupConfirmForm from "@/Components/Driver/PickupConfirmForm";
+import { updateTrip } from "@/lib/utils/apis/trips";
 
 function NavigateTrip() {
+  const router = useRouter();
+  const { tripId } = router.query;
+  const handleSubmit = async () => {
+    const payload = {
+      id: tripId,
+      status_id: 3
+    }
+
+    const result = await updateTrip(payload)
+    if(result) {
+      console.log({result})
+      router.push(`/driver/mob/delivery?tripId=${tripId}`);
+    } else {
+      console.log('Something went wrong')
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col h-screen ">
@@ -37,7 +57,7 @@ function NavigateTrip() {
                   </div>
                 </div>
                 <Button variant="outlined">Support</Button>
-                <Button variant="outlined" className="ml-3">
+                <Button variant="outlined" className="ml-3" onClick={handleSubmit}>
                   Delivery
                 </Button>
               </CardBody>

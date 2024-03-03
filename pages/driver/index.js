@@ -4,56 +4,47 @@ import { useState, useEffect } from "react";
 import GenericCard from "@/Components/ui/GenericCard";
 import Trips from "@/Components/ui/Dashboard/Trips";
 import ApprovalCard from "@/Components/Driver/ApprovalCard";
-import { callApi } from "@/lib/utils/api";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { Typography } from "@material-tailwind/react";
+import { useTrips } from "@/hooks/trips/useTrips";
+import { DRIVER_TRIP_TABS, DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLinksConst";
+
 
 function DriverHome() {
-  const [trips, setTrips] = useState([]);
-
-  async function fetchTripsForDriver() {
-    const requestParams = {
-      headers: { "Content-Type": "application/json" },
-    };
-    const trips_data = await callApi(`/api/trips?status_id=4`, requestParams);
-    setTrips(trips_data);
+  let {isLoading, trips, error} = useTrips()
+  console.log({trips})
+  if(trips){
+    trips = trips.filter(trip => trip.status_id === 4);
   }
 
-  useEffect(() => {
-    fetchTripsForDriver();
-  }, []);
-
   return (
-    <>
-      <div className="flex mx-2">
-        <div className="flex-1/2">
-          <GenericCard
-            title="Today's Revenue"
-            content="100"
-            notice="50 less than yesterday"
-          />
-        </div>
-        <div className="flex-1/2">
-          <GenericCard
-            title="Current Month Revenue"
-            content="1200"
-            notice="120 less than last month"
-          />
-        </div>
-        <div className="flex-1/2">
-          <GenericCard
-            title="This Year Revenue"
-            content="13K"
-            notice="5K less than last Year"
-          />
-        </div>
+    <div className="flex flex-col w-full min-h-screen p-2 md:gap-2 md:p-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <GenericCard
+          title="Total Trips"
+          content="125"
+          notice="50 less than yesterday"
+          icon="1"
+        />
+        <GenericCard
+          title="Average Rating"
+          content="4.5"
+          notice="120 less than last month"
+          icon="2"
+        />
+        <GenericCard
+          title="Current Earnings"
+          content="13K"
+          notice="5K less than last Year"
+          icon="3"
+        />
       </div>
       <div className="flex">
-        <div className="flex-1 w-16 mx-6">
+        <div className="flex-1 w-16 mx-2">
           <Trips />
         </div>
-        {trips.map((trip) => (
+        {trips && trips.map((trip) => (
           <div className="flex-1/2 mx-4 mt-10" key={trip.id}>
             <ApprovalCard
               source={trip.search_requests.source}
@@ -68,7 +59,7 @@ function DriverHome() {
       <Link href={"/driver/mob"}>
         <Typography color="blue">Go to Mobile Version</Typography>
       </Link>
-    </>
+    </div>
   );
 }
 

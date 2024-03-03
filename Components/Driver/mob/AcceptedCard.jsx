@@ -23,8 +23,8 @@ function AcceptedCard({trip, shipper, tracking_id, source_eloc}) {
     console.log('Loading Map')
     await getPosition()
     console.log(position, source_eloc)
-    const lat_lng = `${position.lng},${position.lat}`
     if (position && source_eloc) {
+      const lat_lng = `${position.lng},${position.lat}`
       const mapResult = await getDirection(lat_lng, source_eloc);
       const { duration, distance, path } = mapResult;
       setPickupMap((prev) => {

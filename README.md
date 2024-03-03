@@ -20,3 +20,7 @@ Delivered (status_id: 3)
 
 Statuses for owner:
 Active Trips -> [5,6,3]
+
+Upload Documents:
+Table: trip_dos
+Document types: [invoice, eway_bill, pickup_image]
