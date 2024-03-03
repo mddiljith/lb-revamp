@@ -18,13 +18,13 @@ function Changepassword() {
   const { errors } = formState;
 
   const onSubmit = async ({ password }) => {
-    console.log('ONLCIK')
+    console.log("ONLCIK");
     const { data, error } = await supabase.auth.updateUser({ password });
 
     if (data) {
       router.push("/");
     } else {
-      console.log('Password not reset')
+      console.log("Password not reset");
     }
     if (error) {
       console.log(error);
@@ -77,7 +77,7 @@ function Changepassword() {
                 })}
               />
             </div>
-            <Button>Confirm Password</Button>
+            <Button type="submit">Confirm Password</Button>
           </form>
           {errors && (
             <Typography variant="small" color="gray">
