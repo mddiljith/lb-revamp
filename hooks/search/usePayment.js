@@ -9,7 +9,7 @@ export function usePayment() {
   const { searchid } = router.query;
 
   const { mutate: CreatePayment, isLoading: isCreating } = useMutation({
-    mutationFn: ({ price }) => createPaymentForRequest(searchid, price),
+    mutationFn: async ({ price }) => await createPaymentForRequest(searchid, price),
     onSuccess: () => {
       router.push(`/shipper/checkout/${searchid}`);
     },

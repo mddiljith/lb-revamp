@@ -22,9 +22,10 @@ export default async function handler(req, res) {
           model_year,
           plate_number,
           types(name),
-          statuses(name),
+          statuses(id, name),
           driver_id,
-          owner_id
+          owner_id,
+          status_remarks
         `)
         .eq("id", vehicleId);
       if(error) {

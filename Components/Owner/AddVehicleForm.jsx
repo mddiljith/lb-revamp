@@ -6,7 +6,7 @@ import {
 } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { FiUpload } from "react-icons/fi";
-import { FaAngleRight, FaCaretRight } from "react-icons/fa";
+import { FaCaretRight } from "react-icons/fa";
 import { useSetRecoilState } from "recoil";
 import {Spinner, Typography} from "@material-tailwind/react";
 import { useAddVehicle } from "@/hooks/vehicles/useAddVehicle";

@@ -46,6 +46,8 @@ module.exports = async (req, res) => {
           destination,
           source_eloc,
           destination_eloc,
+          distance,
+          duration,
           users(
             email,
             name
