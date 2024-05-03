@@ -24,3 +24,6 @@ Active Trips -> [5,6,3]
 Upload Documents:
 Table: trip_dos
 Document types: [invoice, eway_bill, pickup_image]
+
+upload testing -
+https://czeuhxbwlhmtszaczaoa.supabase.co/storage/v1/object/public/vehicle/rc-book/test.png?t=2024-05-03T07%3A37%3A51.498Z

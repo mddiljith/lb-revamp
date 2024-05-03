@@ -1,14 +1,9 @@
-import { 
-  Avatar, 
-  Button, 
-  Input, 
-  Radio,
-} from "@material-tailwind/react";
+import { Avatar, Button, Input, Radio } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { FiUpload } from "react-icons/fi";
 import { FaCaretRight } from "react-icons/fa";
 import { useSetRecoilState } from "recoil";
-import {Spinner, Typography} from "@material-tailwind/react";
+import { Spinner, Typography } from "@material-tailwind/react";
 import { useAddVehicle } from "@/hooks/vehicles/useAddVehicle";
 import { showAddvehicleState } from "@/context/VehicleAtom";
 
@@ -19,7 +14,7 @@ function AddvehicleForm() {
   const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
   const { errors } = formState;
   const onSubmit = async (newTruck) => {
-    console.log({newTruck})
+    console.log(newTruck.rc_photo[0].name);
     createTruck(newTruck, {
       onSuccess: () => {
         toast.success("New Truck successfully created");
@@ -34,17 +29,16 @@ function AddvehicleForm() {
 
   return (
     <>
-      <form
-        className="flex flex-col gap-1"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex flex-col gap-1" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-3 gap-2">
           {isCreating ? (
             <Spinner />
           ) : (
             <div className="flex flex-col gap-4 col-span-2">
               <div className="mb-2 flex items-center">
-                <Typography variant="small" className="p-3 font-semibold">Truck Type</Typography>  
+                <Typography variant="small" className="p-3 font-semibold">
+                  Truck Type
+                </Typography>
                 <Radio
                   className="ml-1"
                   id="truck-open"
@@ -90,7 +84,8 @@ function AddvehicleForm() {
                     required: "This field is required",
                   })}
                   className="block w-full text-xs"
-                /><br/>
+                />
+                <br />
                 <Input
                   variant="outlined"
                   label="Model year"
@@ -101,7 +96,6 @@ function AddvehicleForm() {
                     required: "This field is required",
                   })}
                   className="block w-full text-xs"
-                  
                 />
                 <Input
                   variant="outlined"
@@ -129,7 +123,7 @@ function AddvehicleForm() {
               <FiUpload size={20} />
               <span className="text-xs">Upload RC book</span>
             </div>
-          <input id="doc" type="file" hidden {...register("rc_photo")} />
+            <input id="doc" type="file" hidden {...register("rc_photo")} />
           </label>
           {/* <Input
             id="vehicleImage"
@@ -148,9 +142,8 @@ function AddvehicleForm() {
             </div>
           </label>
         </div>
-        
+
         <div className="flex gap-5 mt-5 justify-end">
-          
           <Button
             className="text-xs p-2"
             type="reset"
@@ -159,8 +152,16 @@ function AddvehicleForm() {
               setShowAddVehicle(false);
               reset();
             }}
-          >Cancel</Button>
-          <Button type="submit" disabled={isCreating} className="text-xs p-2" variant="outlined" color="teal">
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={isCreating}
+            className="text-xs p-2"
+            variant="outlined"
+            color="teal"
+          >
             <div className="flex justify-center items-center p-0">
               <FaCaretRight size={15} />
               <span>{isCreating ? "Loading.." : "Submit"}</span>
