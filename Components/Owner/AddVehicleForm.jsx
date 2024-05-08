@@ -14,15 +14,18 @@ function AddvehicleForm() {
   const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
   const { errors } = formState;
   const onSubmit = async (newTruck) => {
-    console.log(newTruck.rc_photo[0].name);
-    createTruck(newTruck, {
-      onSuccess: () => {
-        toast.success("New Truck successfully created");
-      },
-      onError: () => {
-        toast.error("Something went wrong! Truck not created");
-      },
-    });
+    console.log(newTruck.rc_photo[0]);
+    createTruck(
+      { ...newTruck, rc_photo: newTruck.rc_photo[0] },
+      {
+        onSuccess: () => {
+          toast.success("New Truck successfully created");
+        },
+        onError: () => {
+          toast.error("Something went wrong! Truck not created");
+        },
+      }
+    );
     setShowAddVehicle(false);
     reset();
   };
