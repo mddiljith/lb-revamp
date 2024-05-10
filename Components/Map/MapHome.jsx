@@ -31,7 +31,6 @@ function MapHome({ position, path }) {
     }
     getData.features.push(feature_map)
   }
-  console.log({getData})
 
   const styleMap = {
     width: "100%",

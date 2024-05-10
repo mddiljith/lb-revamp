@@ -10,11 +10,11 @@ import { showAddvehicleState } from "@/context/VehicleAtom";
 function AddvehicleForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
 
-  const { isCreating, createTruck } = useAddVehicle();
+  const { isCreating,  } = useAddVehicle();
   const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
   const { errors } = formState;
   const onSubmit = async (newTruck) => {
-    console.log(newTruck.rc_photo[0].name);
+    console.log(newTruck);
     createTruck(newTruck, {
       onSuccess: () => {
         toast.success("New Truck successfully created");
