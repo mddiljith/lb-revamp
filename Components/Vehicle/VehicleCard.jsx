@@ -7,12 +7,11 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { useVehicle } from '@/hooks/vehicles/useVehicle';
+import Image from 'next/image';
 
 const VehicleCard = (vechicleId) => {
 
   const {isLoading, error, vehicle} = useVehicle(vechicleId)
-  console.log({error})
-  console.log({vehicle})
   return (
     <>
       {/* <Card className="w-full max-w-[48rem] flex-row m-0"> */}
@@ -22,7 +21,8 @@ const VehicleCard = (vechicleId) => {
           floated={false}
           className="m-0 w-2/5 shrink-0 rounded-r-none"
         >
-          <img src="/truck.jpg" alt="card-image" className="h-full w-full object-cover"/>
+          {/* <img src="/truck.jpg" alt="card-image" className="h-full w-full object-cover"/> */}
+          <Image src="/truck.jpg" alt="cardImage" className="h-full w-full object-cover"/>
         </CardHeader>
         <CardBody>
           <Typography variant="h6" color="gray" className="mb-4 uppercase">

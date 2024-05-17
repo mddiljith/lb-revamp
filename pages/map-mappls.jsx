@@ -7,8 +7,6 @@ function MapView() {
   const { isLoading, position, error, getPosition } = useGeolocation();
   const [path, setPath] = useState([]);
 
-  console.log(position);
-
   async function getCordinates() {
     const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/map/direction`;
     const result = await fetch(_url, {});

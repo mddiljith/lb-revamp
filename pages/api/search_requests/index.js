@@ -7,15 +7,14 @@ module.exports = async (req, res) => {
     res,
   });
   res.setHeader('Cache-Control', 'public', 's-maxage=10', 'stale-while-revalidate=59')
-  
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
   const userId = session.user.id
 
   if(req.method == "POST") {
     try {
+      console.log(req.body);
       const truckId = await getTruckId(req.body.truck_type)
       const { data, error } = await supabase
         .from('search_requests')
@@ -30,12 +29,10 @@ module.exports = async (req, res) => {
           duration: req.body.duration,
           distance: req.body.distance,
           user_id: userId,
-          source_eloc: req.body.eloc1,
-          destination_eloc: req.body.eloc2
+          source_eloc: req?.body?.eloc1,
+          destination_eloc: req?.body?.eloc2
         }).select();
-      
       console.log({error});
-      console.log(data[0]);
       const searchRequestData = data[0];
       
       res.status(200).json({search_request: searchRequestData});

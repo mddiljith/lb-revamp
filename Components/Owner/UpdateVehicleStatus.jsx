@@ -16,18 +16,18 @@ import { FaCaretRight } from "react-icons/fa";
 function UpdateVehicleStatus({ open, handleOpen, cacheKey }) {
   const [check, setcheck] = useState(true);
   const [selectedOption, setSelectedOption] = useState('');
-  const getSelectedVehicle = async () => {
-    const data = await fetchVehicleWithId(cacheKey);
-    if(data) {
-      if (data[0]?.statuses?.id == 2) {
-        setcheck(false)
-        const status_remarks = data[0]?.status_remarks
-        setSelectedOption(status_remarks)
+  
+  useEffect(() => {
+    const getSelectedVehicle = async () => {
+      const data = await fetchVehicleWithId(cacheKey);
+      if(data) {
+        if (data[0]?.statuses?.id == 2) {
+          setcheck(false)
+          const status_remarks = data[0]?.status_remarks
+          setSelectedOption(status_remarks)
+        }
       }
     }
-  }
-
-  useEffect(() => {
     getSelectedVehicle()
   }, [])
   

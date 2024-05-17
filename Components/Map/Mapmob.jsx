@@ -3,7 +3,7 @@ import React from "react";
 import { useGeolocation } from "@/hooks/map/useGeolocation";
 import { IconButton } from "@material-tailwind/react";
 import { MdGpsFixed } from "react-icons/md";
-import MapHome from "./Maphome";
+import MapHome from "./MapHome";
 function Mapmob({path}) {
   const { isLoading, position, error, getPosition } = useGeolocation();
   return (

@@ -30,27 +30,12 @@ const TripDetail = () => {
   const { isLoading, error, trip, tripStatus } = useTrip();
   const [open, setOpen] = useState(false);
   // const [orderStatus, setOrderStatus] = useState(tripStatus);
-  console.log("TripDetail", trip, error);
   const handleOpen = () => setOpen(!open);
   let duration;
-  // const source = trip[0]?.search_requests?.source;
-  // const destination = trip[0]?.search_requests?.destination;
-  // const price = trip[0]?.search_requests.payments[0].price;
-  // const vehicle_num = trip[0]?.vehicles.plate_number;
-  // const vehicle_model = trip[0]?.vehicles.model;
-  // const driver_name = trip[0]?.vehicles.users.name;
-
-  // const source = "abc";
-  // const destination = "abc";
-  // const price = "abc";
-  // const vehicle_num = "abc";
-  // const vehicle_model = "abc";
-  // const driver_name = "abc";
   if(trip){
     const duration_in_minutes = trip[0]?.search_requests?.duration
     duration = intervalToDuration({start: 0, end: duration_in_minutes*1000})
   }
-  console.log()
   return (
     <>
       <NavbarMain />

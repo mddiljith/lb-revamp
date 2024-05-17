@@ -24,7 +24,6 @@ export default async function GET(req, res) {
   } catch (error) {
       try {
         const newToken = await refreshToken()
-        console.log('New token generated', newToken)
         const autocompleteData = await fetchAutocompleteData(searchtext, newToken)
         await updateMapToken(newToken);
         res.status(200).json(autocompleteData);
@@ -51,7 +50,6 @@ async function fetchAutocompleteData(search, token) {
 }
 
 async function refreshToken() {
-  console.log('Refresh token generated')
   const tokenRequestBody = {
     'grant_type': 'client_credentials',
     'client_id': process.env.MAPPLS_CLIENT_ID,
@@ -68,10 +66,8 @@ async function refreshToken() {
 
   const data = await fetch('https://outpost.mapmyindia.com/api/security/oauth/token', tokenParams)
                 .then((response) => {
-                  console.log({response})
                   return response.json()
                 })
-                console.log(data);
   return data.access_token
 }
 

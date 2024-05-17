@@ -4,7 +4,6 @@ import { mappls, mappls_plugin } from "mappls-web-maps";
 //multiple marker setup
 
 function Map({ path }) {
-  console.log("path", path, [path[0]?.lat, path[0]?.lng]);
   let geoData = {
     type: "FeatureCollection",
     features: [
@@ -42,9 +41,7 @@ function Map({ path }) {
   let polylineObject;
   let points;
   const getPoints = (data) => {
-    console.log(data);
     points = data;
-    console.log(points);
   };
 
   mapplsClassObject.initialize("17ad22773438f5b91de7ef095b9aa1dc", () => {

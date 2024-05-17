@@ -22,11 +22,9 @@ module.exports = async (req, res) => {
       
       // Creates trip
       const trip = createTripForUser(searchRequestId)
-      console.log({trip});
 
       // Creates payment record and add trip id to it
       const paymentResult = createPaymentForTrip(trip, price);
-      console.log({paymentResult});
 
       res.status(200).json({ trip, paymentResult });
     }
@@ -37,7 +35,6 @@ module.exports = async (req, res) => {
 
   // Method to call Trip API /api/trips
   const createPaymentForTrip = async (trip, price) => {
-    console.log(':::Starting payment confirmation');
     let paymentResponse = null;
 
     let { data: role, error } = await supabaseServerClient
@@ -48,15 +45,11 @@ module.exports = async (req, res) => {
       trip_id: trip.id
     })
     .select();
-    console.log(":::Error in payment", error);
-    console.log(":::Payment confirmation", data);
-
     return data;
   }
 
   // Method to insert payment data 
   const createTripForUser = async (searchRequestId) => {
-    console.log(':::Creating a new Trip');
     let tripResponse = null; 
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/trips`, {
       method: "POST",
@@ -70,8 +63,6 @@ module.exports = async (req, res) => {
         tracking_id: generateTrackingId()
       })
     }).then((response) => {
-      console.log(':::Trip created successfully');
-      console.log(response);
       tripResponse = response;
     })
     return tripResponse;

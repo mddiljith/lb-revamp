@@ -13,10 +13,6 @@ export const getAccessToken = async () => {
   const grant_type = applConfig.api.mappls.token_api.grant_type
   const client_id = applConfig.api.mappls.token_api.client_id
   const client_secret = applConfig.api.mappls.token_api.client_secret
-  console.log(client_id);
-  console.log(client_secret);
-  console.log(grant_type);
-  console.log(apiUrl);
 
   if (!accessToken) {
     // Fetch a new access token from Mappls API
@@ -37,7 +33,6 @@ export const getAccessToken = async () => {
       }),
     })
     .then((response) => {
-      console.log({response})
       if (response.status == 200) {
         const data = response.json();
         accessToken = data.accessToken;
@@ -50,12 +45,7 @@ export const getAccessToken = async () => {
     .catch((error) => {
       console.log({error});
     });
-
-    // console.log('Response from token API', response);
-
-    
   }
-
   return accessToken;
 };
 

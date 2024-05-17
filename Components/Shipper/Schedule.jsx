@@ -5,20 +5,19 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import { useCreateSearch } from "@/hooks/search/useCreateSearch";
 import { useRouter } from "next/router";
 import { callApi } from "@/lib/utils/api";
+import JourneyStrip from "./JourneyStrip";
 
 function Schedule() {
   const [search, setSearch] = useRecoilState(searchReqState);
   const mapData = useRecoilValue(mapState);
-  const [option, setOption] = useState('');
+  const [option, setOption] = useState(1);
   const router = useRouter();
-
   const handleScheduleOption = (value) => {
     setOption(() => value);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(search);
     const { distance, duration, eloc1, eloc2 } = mapData;
     const requestParams = {
       method: "POST",
@@ -61,48 +60,52 @@ function Schedule() {
   };
   return (
     <>
-      <section>
-        <Typography variant="h3" className="py-5 mb-3">
-          When you want to get picked up ?
-        </Typography>
-        <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-          <div className="flex flex-col gap-5">
-            <select
-              onChange={(e) => handleScheduleOption(e.target.value)}
-              value={option}
-              label="Schedule"
-            >
-              <option value={1}>Pickup Now</option>
-              <option value={0}>Schedule later</option>
-            </select>
-            {option == 0 && (
-              <>
-                <Input
-                  type="date"
-                  label="Pickup Date"
-                  variant="static"
-                  name="scheduled_at"
-                  // disabled={option}
-                  value={search.scheduled_at}
-                  onChange={handleChange}
-                />
-                <Input
-                  type="time"
-                  label="Pickup time"
-                  variant="static"
-                  // disabled={option}
-                  name="scheduled_time"
-                  value={search.scheduled_time}
-                  onChange={handleChange}
-                />
-              </>
-            )}
-          </div>
-          <Button type="submit" color="deep-purple" className="mt-5">
-            <span>Submit</span>
-          </Button>
-        </form>
-      </section>
+      <JourneyStrip/>
+      <div className="flex flex-row justify-center bg-white w-full">
+        <div className="w-1/2">
+          <section>
+            <Typography variant="h3" className="mt-6 mb-6">
+              When you want to get picked up?
+            </Typography>
+            <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+              <div className="flex flex-col w-72 gap-8">
+                <select
+                  onChange={(e) => handleScheduleOption(e.target.value)}
+                  value={option}
+                  label="Schedule"
+                  size="lg"
+                >
+                  <option value={1}>Pickup Now</option>
+                  <option value={0}>Schedule later</option>
+                </select>
+                {option == 0 && (
+                  <>
+                    <Input
+                      type="date"
+                      label="Pickup Date"
+                      name="scheduled_at"
+                      // disabled={option}
+                      value={search.scheduled_at}
+                      onChange={handleChange}
+                    />
+                    <Input
+                      type="time"
+                      label="Pickup time"
+                      // disabled={option}
+                      name="scheduled_time"
+                      value={search.scheduled_time}
+                      onChange={handleChange}
+                    />
+                  </>
+                )}
+              </div>
+              <Button type="submit" className="mt-5">
+                <span>Submit</span>
+              </Button>
+            </form>
+          </section>
+        </div>
+      </div>
     </>
   );
 }

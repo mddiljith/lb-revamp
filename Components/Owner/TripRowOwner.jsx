@@ -8,7 +8,6 @@ import Table from "../ui/Table";
 
 function TripRowOwner({ row, index }) {
   // revalidate what need tio show for the ttr
-  console.log({ row });
   const {
     id,
     created_at,

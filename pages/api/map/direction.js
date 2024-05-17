@@ -23,7 +23,6 @@ export default async function GET(req, res) {
     duration: searchResult.routes[0].duration,
     distance: searchResult.routes[0].distance
   }
-  console.log({directionResponse});
   searchResult.routes[0].legs[0].steps.map((step) => {
     step.intersections.map((intersection) => {
       searchResultData.path.push({

@@ -18,11 +18,9 @@ import Link from "next/link";
 function AcceptedCard({trip, shipper, tracking_id, source_eloc}) {
   const { position, getPosition } = useGeolocation();
   const [pickupMap, setPickupMap] = useRecoilState(tripState);
-  console.log(pickupMap.route_path)
   const loadMap = async () => {
     console.log('Loading Map')
     await getPosition()
-    console.log(position, source_eloc)
     if (position && source_eloc) {
       const lat_lng = `${position.lng},${position.lat}`
       const mapResult = await getDirection(lat_lng, source_eloc);

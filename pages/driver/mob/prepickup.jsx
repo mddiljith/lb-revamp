@@ -13,9 +13,6 @@ function Prepickup() {
   const router = useRouter();
   const {tripId} = router.query;
   const { isLoading, error, trip, tripStatus } = useTrip();
-  console.log(isLoading)
-  console.log({trip})
-
   const { route_path, distance, duration } = useRecoilValue(tripState);
 
   return (

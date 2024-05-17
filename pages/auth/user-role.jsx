@@ -20,24 +20,19 @@ function RolePage({ initialSession, user }) {
   const supabase = useSupabaseClient();
   const [role, setRole] = useState(["shipper", 1]);
   const router = useRouter();
-  console.log(user?.user_metadata?.full_name);
   const handleSubmit = async () => {
     // session['user']['role_id'] = role;
     // write the role to database
 
     const updateUserRole = async (user, role) => {
-      console.log(user, role);
       const { data, error } = await supabase
         .from("users")
         .update([{ role_meta_data: { role_id: role[1], role_descr: role[0] } }])
         .eq("id", user.id)
         .select();
-
-      console.log("Response", data);
     };
 
     updateUserRole(user, role);
-    // console.log({ status });
 
     router.push("/auth/profile");
   };

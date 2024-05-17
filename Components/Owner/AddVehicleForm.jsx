@@ -14,7 +14,6 @@ function AddvehicleForm() {
   const setShowAddVehicle = useSetRecoilState(showAddvehicleState);
   const { errors } = formState;
   const onSubmit = async (newTruck) => {
-    console.log(newTruck.rc_photo[0]);
     createTruck(
       { ...newTruck, rc_photo: newTruck.rc_photo[0] },
       {

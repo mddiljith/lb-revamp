@@ -18,7 +18,6 @@ function Changepassword() {
   const { errors } = formState;
 
   const onSubmit = async ({ password }) => {
-    console.log("ONLCIK");
     const { data, error } = await supabase.auth.updateUser({ password });
 
     if (data) {

@@ -3,6 +3,8 @@ import SearchForm from "@/Components/Shipper/SearchForm";
 import TruckSelection from "@/Components/Shipper/TruckSelection";
 import Navbar from "@/Components/ui/NavbarMain";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
+import { Typography } from "@material-tailwind/react";
+
 import {
   mapState,
   showSearchState,
@@ -23,9 +25,7 @@ function Shipper() {
   const [token, setToken] = useRecoilState(mapTokenState);
 
   const getMapToken = async () => {
-    console.log("GetMapToken:")
     const tokenData = await callApi(`/api/map/map_token`)
-    console.log(tokenData);
     return tokenData
   }
 
@@ -46,11 +46,16 @@ function Shipper() {
   return (
     <>
       <Navbar />
-      <main
-        // style={homeImg}
-        className="flex flex-row justify-between  bg-fixed bg-bottom bg-cover  h-screen"
-      >
-        <div className=" top-10 bg-white w-96 ml-5 rounded-lg p-4 shadow-md">
+      <main className="flex flex-col justify-between bg-blue-400 relative">
+        <div className="">
+          <Typography variant="h2" className="ml-6 mb-2 mt-4 text-center">
+            { showSearch && "Book your Truck"}
+          </Typography>
+          <Typography variant="lead" className="ml-6 mb-2 mt-4 text-center">
+            { showSearch && "India's first Fleet Management & Truck Aggregator company."}
+          </Typography>
+        </div>
+        <div className="w-full">
           {showSearch && <SearchForm />}
 
           {!showSearch && showTruckSearch && <TruckSelection />}
@@ -59,10 +64,10 @@ function Shipper() {
           
           {/* <Schedule /> */}
         </div>
-        <div className="h-full w-full">
-          {!showSearch && route_path && <Map path={route_path} />}
-        </div>
       </main>
+      {/* <div className="h-full w-full">
+        {!showSearch && route_path && <Map path={route_path} />}
+      </div> */}
     </>
   );
 }

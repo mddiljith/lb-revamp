@@ -24,7 +24,6 @@ function SignInForm() {
 
   const onSubmit = ({ email, password }) => {
     if (!email || !password) return;
-    console.log(email);
     login(
       { email, password },
       {

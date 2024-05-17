@@ -16,15 +16,15 @@ import { useRecoilValue } from "recoil";
 import PriceCard from "@/Components/Shipper/PriceCard";
 import { PriceState } from "@/context/SearchAtom";
 import NavbarMain from "@/Components/ui/NavbarMain";
+import JourneyStrip from "@/Components/Shipper/JourneyStrip";
+
 function CheckoutConfirmation() {
   //verify the shipper satatus and update the billing address accordingly
   const router = useRouter();
   const { searchid } = router.query;
   const price = useRecoilValue(PriceState);
 
-  console.log("pricefromlocalstate", price);
   const createTripForRequest = async (searchid) => {
-    console.log("Creating Trip");
     const requestParams = {
       method: "POST",
       body: JSON.stringify({
@@ -34,11 +34,8 @@ function CheckoutConfirmation() {
     };
 
     const {data} = await callApi(`/api/trips`, requestParams);
-    console.log("TripData", data);
-    console.log(data[0]);
     // setTrip(data);
     let tripId = data[0].id;
-    console.log(tripId);
 
     router.push(`/shipper/trips/${tripId}`);
   };
@@ -50,6 +47,7 @@ function CheckoutConfirmation() {
   return (
     <>
       <NavbarMain />
+      <JourneyStrip/>
       <div className="flex flex-row justify-start ml-3 mt-5">
         <div className="w-3/5 flex flex-col p-2">
           <Card>

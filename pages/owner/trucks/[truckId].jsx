@@ -28,10 +28,7 @@ function TruckDetail() {
   };
 
   const userAutocomplete = (str) => {
-    console.log("String", str)
     const result = callApi(`api/auth/autocomplete-user.js?queryString=${str}`)
-    console.log('RESULT===>')
-    console.log(result)
   } 
   //api for default driver
 

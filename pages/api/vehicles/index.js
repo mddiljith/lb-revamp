@@ -21,7 +21,6 @@ module.exports = async (req, res) => {
   if (req.method == "GET") {
     responseData = await getVehicleData(user_field, session.user.id);
   } else if (req.method == "POST") {
-    console.log(req.body, "fromreq");
     const { newTruck } = req.body;
 
     if (newTruck) {

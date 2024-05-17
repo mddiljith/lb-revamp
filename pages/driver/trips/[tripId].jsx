@@ -26,7 +26,6 @@ import { IoCallOutline } from "react-icons/io5";
 const TripMain = () => {
   const { isLoading, error, trip, tripStatus }  = useTrip()
   const [open, setOpen] = useState(false);
-  console.log("TripDetail", tripStatus, error);
   const handleOpen = () => setOpen(!open);
 
   return (

@@ -19,7 +19,6 @@ export function useAddVehicle() {
 }
 
 const createVehicle = async (newTruck) => {
-  console.log(newTruck, "fromhook");
   const requestParams = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

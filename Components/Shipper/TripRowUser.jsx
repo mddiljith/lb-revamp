@@ -7,7 +7,6 @@ import { format } from "date-fns";
 import Table from "../ui/Table";
 
 function TripRowUser({ row, index }) {
-  console.log({row})
   const {
     created_at,
     tracking_id,

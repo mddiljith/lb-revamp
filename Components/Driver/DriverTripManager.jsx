@@ -18,20 +18,14 @@ const DriverTripManager = () => {
   const [activeTab, setActiveTab] = useState("5");
   const [trips, setTrips] = useState([]);
 
-  async function fetchTripsForDriver() {
-    console.log(activeTab)
-    const requestParams = {
-      headers: { "Content-Type": "application/json" }
-    }
-    const trips_data = await callApi(`/api/trips?status_id=${activeTab}`, requestParams);
-    setTrips(trips_data);
-  }
-
-  const handleTabChange = (tabId) => {
-    console.log(tabId);
-  }
-
   useEffect(() => {
+    async function fetchTripsForDriver() {
+      const requestParams = {
+        headers: { "Content-Type": "application/json" }
+      }
+      const trips_data = await callApi(`/api/trips?status_id=${activeTab}`, requestParams);
+      setTrips(trips_data);
+    }
     fetchTripsForDriver(activeTab);
   }, [activeTab]);
 

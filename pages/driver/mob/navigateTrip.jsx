@@ -26,7 +26,6 @@ function NavigateTrip() {
 
     const result = await updateTrip(payload)
     if(result) {
-      console.log({result})
       router.push(`/driver/mob/delivery?tripId=${tripId}`);
     } else {
       console.log('Something went wrong')

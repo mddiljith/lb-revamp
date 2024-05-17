@@ -49,7 +49,6 @@ const navList = (
 function NavbarHome({ userName }) {
   const router = useRouter();
   const [openNav, setOpenNav] = useState(false);
-  console.log("from navbar", userName);
   return (
     <Navbar className="mx-auto max-w-screen-2x2 max-w-screen lg:w-full px-4 py-2 lg:px-8 lg:py-4 sticky top-0 z-10 h-max rounded-none">
       <div className="flex justify-between">

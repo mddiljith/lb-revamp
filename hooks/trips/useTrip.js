@@ -8,7 +8,6 @@ export function useTrip() {
   const router = useRouter();
   const { tripId } = router.query;
   // const tripId = id;
-  console.log("initial", tripId, typeof tripId);
   const {
     isLoading,
     data: trip,
@@ -29,7 +28,6 @@ export function useTrip() {
 }
 
 const getTrip = async (id) => {
-  console.log(id);
   const _url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/trips/${id}`;
   const res = await fetch(_url);
   return res.json();

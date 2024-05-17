@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
       console.log({error})
       return error
     } else {
-      console.log({data})
       return data;
     }
   } 
@@ -36,7 +35,6 @@ module.exports = async (req, res) => {
       console.log({error});
       return error;
     } else {
-      console.log({data});
       return data;
     }
   }
@@ -46,11 +44,9 @@ module.exports = async (req, res) => {
     const trip_id = tripDocsParams.trip_id
     const status_id = tripDocsParams.status_id
     let data = null;
-    console.log({tripDocsParams})
 
     if(tripDocsParams.docs) {
       tripDocsParams.docs.map((tripDoc) => {
-        console.log({tripDoc})
         createTripDocs(trip_id, tripDoc)
       })
       

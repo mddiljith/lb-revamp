@@ -7,7 +7,6 @@ import { useTrips } from "@/hooks/trips/useTrips";
 
 function DriverHomeMob() {
   let {isLoading, trips, error} = useTrips()
-  console.log({trips})
   if(trips){
     trips = trips.filter(trip => trip.status_id === 4);
   }

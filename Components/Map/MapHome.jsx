@@ -5,8 +5,6 @@ import { getDate } from "date-fns";
 //multiple marker setup
 
 function MapHome({ position, path }) {
-  console.log("inside map geolocation", position);
-  
   let geoData = {
     type: "FeatureCollection",
     features: [
@@ -31,7 +29,6 @@ function MapHome({ position, path }) {
     }
     getData.features.push(feature_map)
   }
-  console.log({getData})
 
   const styleMap = {
     width: "100%",
@@ -55,9 +52,7 @@ function MapHome({ position, path }) {
   let polylineObject;
   let points;
   const getPoints = (data) => {
-    console.log(data);
     points = data;
-    console.log(points);
   };
 
   mapplsClassObject.initialize("17ad22773438f5b91de7ef095b9aa1dc", () => {

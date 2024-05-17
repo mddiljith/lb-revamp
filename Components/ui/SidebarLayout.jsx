@@ -23,7 +23,6 @@ function SidebarLayout({ sidelinks, children }) {
 function Sidebar({ sidelinks }) {
   const router = useRouter();
   const [open, setOpen] = useState(true);
-  console.log(router.pathname);
 
   return (
     <aside

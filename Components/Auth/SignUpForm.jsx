@@ -29,7 +29,6 @@ function SignUpForm() {
     errors?.passwordConfirm?.message;
 
   const onSubmit = ({ full_name, email, password }) => {
-    console.log(full_name, email, password);
     signup(
       { full_name, email, password },
       {

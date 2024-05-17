@@ -43,7 +43,7 @@ export default function Home() {
         router.push(`/${userRoleDesc}`);
       } else router.push(`/auth/profile`);
     }
-  }, [user]);
+  }, [router, user]);
 
   return (
     <>

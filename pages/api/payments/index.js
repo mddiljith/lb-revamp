@@ -24,8 +24,6 @@ module.exports = async (req, res) => {
           transaction_id: Math.floor(Math.random() * 999999),
           search_request_id: search_request_id 
         }).select();
-      console.log(data)
-      console.log(error)
       const payments = data[0];
         
       res.status(200).json({payments: payments});

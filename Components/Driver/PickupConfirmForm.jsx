@@ -34,14 +34,13 @@ function PickupConfirmForm() {
         }
       ] 
     };
-    console.log({payload})
     const tripPayload = {
       id: tripId,
       status_id: 6
     }
+    // Call API to create docs
     await createTripDoc(payload)
     const result = await updateTrip(tripPayload)
-    console.log({result})
     if(result) {
       router.push(`/driver/mob/navigateTrip?tripId=${tripId}`);
     }

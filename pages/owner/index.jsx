@@ -16,7 +16,6 @@ import { useTrips } from "@/hooks/trips/useTrips";
 function OwnerHome() {
   const { isLoading, error, vehicles } = useVehicles();
   const { isTripLoading, tripError, trips } = useTrips();
-  console.log({trips})
   return (
     <>
       <div className="flex flex-col"> 

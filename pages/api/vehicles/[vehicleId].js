@@ -13,7 +13,6 @@ export default async function handler(req, res) {
     //   return;
     // }
     if (req.method == "GET") {
-      console.log('GET /vehicles/id')
       let { data, error } = await supabase
         .from("vehicles")
         .select(`
@@ -31,18 +30,14 @@ export default async function handler(req, res) {
       if(error) {
         res.status(400).json(error)
       }
-      console.log(data);
       res.status(200).json(data);
     } else if (req.method == "PUT") {
       let vehicle = req.body;
-      console.log("VEHICLE", req);
       let { data, error } = await supabase
         .from("vehicles")
         .update(vehicle)
         .eq("id", vehicleId)
         .select();
-      console.log("PUT REQUEST RESP => ", data);
-      console.log("PUT REQUEST ERROR => ", error);
       res.status(200).json(vehicle);
     } else if (req.method == "DELETE") {
       const { error } = await supabase
