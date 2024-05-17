@@ -45,27 +45,28 @@ function SearchForm() {
     //3.get the distance and other details from the map and put in map context
   };
   return (
-    <section className="p-2 bg-neutral-500 rounded-lg">
-      <Typography variant="h3" className="py-5 mb-3">
-        Book your Truck!
-      </Typography>
-      <form className="flex flex-col gap-5">
-        <AutocompleteInput
-          label="Pickup"
-          name="source"
-          placeholder="e.g. Delhi"
-        />
+    <div className="flex flex-row justify-center bg-white w-full">
+      <div className="w-1/2">
+        <section className="p-8 bg-white">
+          <form className="flex flex-col gap-5">
+            <AutocompleteInput
+              label="Pickup from"
+              name="source"
+              placeholder="e.g. Delhi"
+            />
 
-        <AutocompleteInput
-          label="Drop"
-          name="destination"
-          placeholder="e.g. Delhi"
-        />
-        <Button onClick={onSubmit} color="deep-purple" className="mt-5">
-          <span>Get Quote</span>
-        </Button>
-      </form>
-    </section>
+            <AutocompleteInput
+              label="Drop at"
+              name="destination"
+              placeholder="e.g. Delhi"
+            />
+            <Button onClick={onSubmit} variant="filled" className="mt-5">
+              <span>Get Quote</span>
+            </Button>
+          </form>
+        </section>
+      </div>
+    </div>
   );
 }
 
