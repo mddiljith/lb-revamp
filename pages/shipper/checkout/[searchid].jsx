@@ -16,6 +16,8 @@ import { useRecoilValue } from "recoil";
 import PriceCard from "@/Components/Shipper/PriceCard";
 import { PriceState } from "@/context/SearchAtom";
 import NavbarMain from "@/Components/ui/NavbarMain";
+import JourneyStrip from "@/Components/Shipper/JourneyStrip";
+
 function CheckoutConfirmation() {
   //verify the shipper satatus and update the billing address accordingly
   const router = useRouter();
@@ -50,6 +52,7 @@ function CheckoutConfirmation() {
   return (
     <>
       <NavbarMain />
+      <JourneyStrip/>
       <div className="flex flex-row justify-start ml-3 mt-5">
         <div className="w-3/5 flex flex-col p-2">
           <Card>
