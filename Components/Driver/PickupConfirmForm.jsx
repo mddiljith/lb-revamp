@@ -39,6 +39,7 @@ function PickupConfirmForm() {
       id: tripId,
       status_id: 6
     }
+    // Call API to create docs
     await createTripDoc(payload)
     const result = await updateTrip(tripPayload)
     console.log({result})

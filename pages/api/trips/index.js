@@ -94,6 +94,11 @@ module.exports = async (req, res) => {
             name
           )
         ),
+        payments(
+          id,
+          price,
+          transaction_id
+        ),
         payment_status(
           id,
           statuses(
@@ -143,6 +148,11 @@ module.exports = async (req, res) => {
             name
           ),
           scheduled_at
+        ),
+        payments(
+          id,
+          price,
+          transaction_id
         ),
         payment_status(
           id,
