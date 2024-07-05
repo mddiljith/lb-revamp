@@ -14,7 +14,7 @@ function OtpConfirm() {
         <div>
           <Typography variant="h4">OTP Verification</Typography>
           <Typography variant="small">
-            We have sent a code to Reciever's registered mobile
+            We have sent a code to Reciever&apos;s registered mobile
           </Typography>
         </div>
         <div class="flex flex-col space-y-16">

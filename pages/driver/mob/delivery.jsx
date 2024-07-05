@@ -12,7 +12,6 @@ import {
 import { MdCall, MdCancel, MdOutlineChat } from "react-icons/md";
 import PickupConfirmForm from "@/Components/Driver/PickupConfirmForm";
 import DeliveryUpload from "@/Components/Driver/mob/DeliveryUpload";
-import OtpConfirm from "@/Components/Driver/mob/otpConfirm";
 
 function Delivery() {
   return (
