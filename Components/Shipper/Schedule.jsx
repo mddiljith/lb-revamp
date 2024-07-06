@@ -67,8 +67,8 @@ function Schedule() {
             <Typography variant="h3" className="mt-6 mb-6">
               When you want to get picked up?
             </Typography>
-            <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-              <div className="flex flex-col w-72 gap-8">
+            <form className="flex flex-col gap-5 mt-8" onSubmit={onSubmit}>
+              <div className="flex flex-col w-full gap-8">
                 <select
                   onChange={(e) => handleScheduleOption(e.target.value)}
                   value={option}
@@ -87,6 +87,7 @@ function Schedule() {
                       // disabled={option}
                       value={search.scheduled_at}
                       onChange={handleChange}
+                      className="mt-4"
                     />
                     <Input
                       type="time"
@@ -95,6 +96,7 @@ function Schedule() {
                       name="scheduled_time"
                       value={search.scheduled_time}
                       onChange={handleChange}
+                      className="mt-4"
                     />
                   </>
                 )}
