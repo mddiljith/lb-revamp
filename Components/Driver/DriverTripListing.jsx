@@ -20,8 +20,8 @@ const DriverTripListing = ({ row, index }) => {
     <Table.Row index={index}>
       <Table.RowItem>
         { status_id == 5 && <Link href={`/driver/trips/transit/${id}`}> 
-            <Typography className="text-sm font-semibold text-light-blue-900">
-              {tracking_id}
+            <Typography className="text-md font-semibold text-light-blue-900">
+              #{tracking_id}
             </Typography>
           </Link>
         }
@@ -53,6 +53,20 @@ const DriverTripListing = ({ row, index }) => {
         <Typography className="text-sm font-light text-blue-gray-900">
           {payment_status["statuses"]["name"]}
         </Typography>
+      </Table.RowItem>
+      <Table.RowItem>
+        { status_id == 5 && <Link href={`/driver/trips/transit/${id}`}> 
+            <Typography className="text-sm font-semibold text-light-blue-500">
+              View
+            </Typography>
+          </Link>
+        }
+        { status_id != 5 && <Link href={`/driver/trips/${id}`}> 
+            <Typography className="text-sm font-semibold text-light-blue-500">
+              View
+            </Typography>
+          </Link>
+        }
       </Table.RowItem>
     </Table.Row>
     </>

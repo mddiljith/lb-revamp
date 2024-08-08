@@ -31,56 +31,55 @@ const DriverTripManager = () => {
   }, [activeTab]);
 
   return (
-    <div className="mt-8 mb-8 flex flex-col gap-12 p-3">
-      <Card>
-        <CardBody>
-          <Tabs value={activeTab}>
-            <TabsHeader
-              indicatorProps={{
-                className: "bg-blue-500 text-blue-500",
-              }}
-            >
-               {DRIVER_TRIP_TABS.map(({label, key}) => (
-                <Tab 
-                  value={key} 
-                  key={key} 
-                  onClick={() => setActiveTab(key)}
-                  className="hover:font-semibold active:font-semibold hover:bg-light-blue-100 active:bg-light-blue-100 focus:bg-light-blue-100 {activeTab == key ? 'text-gray-900':''}" >
-                    {label}
-                </Tab>
-              ))}
-            </TabsHeader>
-            <TabsBody>
-                {DRIVER_TRIP_TABS.map(({label, secondary_label, key}) => (
-                  <TabPanel value={key} key={key}>
-                    <Table topCard={
-                      <Table.Top>
-                        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-                          <Typography variant="h5" color="blue-gray">
-                            {secondary_label} Trips
-                          </Typography>
-                        </div>
-                      </Table.Top>
-                    }>
-                    
-                    <Table.Header header={DRIVER_TRIP_HEADERS} />
-                    <Table.Body
-                      data={trips}
-                      render={(trip, i) => (
-                        <DriverTripListing 
-                          row={trip} 
-                          key={trip.id} 
-                          index={i} 
-                        />
-                      )}
-                    />
-                    </Table>
-                  </TabPanel>
-                ))}
-            </TabsBody>
-          </Tabs>
-        </CardBody>
-      </Card>
+    <div className="flex flex-col mt-8 mb-8 py-6 border">
+      
+      <Tabs value={activeTab} className="tab-main">
+        <TabsHeader
+          className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+          indicatorProps={{
+            className: "bg-transparent border-b-2 border-gray-50 shadow-none rounded-none",
+          }}
+        >
+            {DRIVER_TRIP_TABS.map(({label, key}) => (
+            <Tab 
+              value={key} 
+              key={key} 
+              onClick={() => setActiveTab(key)}
+              className={`${activeTab === key ? "font-semibold text-blue-900 driver-tab-active" : ""}`} >
+                {label}
+            </Tab>
+          ))}
+        </TabsHeader>
+        <TabsBody>
+          {DRIVER_TRIP_TABS.map(({label, secondary_label, key}) => (
+            <TabPanel value={key} key={key}>
+              <Table topCard={
+                <Table.Top>
+                  <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+                    <Typography variant="h5" color="blue-gray">
+                      {secondary_label} Trips
+                    </Typography>
+                  </div>
+                </Table.Top>
+              }>
+              
+              <Table.Header header={DRIVER_TRIP_HEADERS} />
+              <Table.Body
+                data={trips}
+                render={(trip, i) => (
+                  <DriverTripListing 
+                    row={trip} 
+                    key={trip.id} 
+                    index={i} 
+                  />
+                )}
+              />
+              </Table>
+            </TabPanel>
+          ))}
+        </TabsBody>
+      </Tabs>
+        
     </div>
   );
 };

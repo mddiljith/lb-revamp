@@ -12,6 +12,7 @@ import { DRIVER_TRIP_TABS, DRIVER_TRIP_HEADERS } from "@/lib/const/DashboardLink
 import { useUserRole } from "@/hooks/auth/useUserRole";
 import Image from "next/image";
 import TripRequest from "@/Components/ui/Dashboard/TripRequest";
+import Trips from "./trips";
 
 function DriverHome() {
   let {isLoading, trips, error} = useTrips()
@@ -55,26 +56,17 @@ function DriverHome() {
       </div>
       <div className="flex">
         <div className="flex flex-col w-full p-2">
-          {trips && trips.map((trip) => (
-            <div key={trip.id} className="flex ">
-              <TripRequest trip={trip}/>
-            </div>
-          ))}        
-          {/* <div className="flex">
+          <div className="w-full p-0">
+            {trips && trips.map((trip) => (
+              <div key={trip.id} className="flex ">
+                <TripRequest trip={trip}/>
+              </div>
+            ))}
+          </div>        
+          <div className="w-full">
             <Trips />
-          </div> */}
-        </div>
-        {/* {trips && trips.map((trip) => (
-          <div className="flex-1/2 mx-4 mt-10" key={trip.id}>
-            <ApprovalCard
-              source={trip.search_requests.source}
-              destination={trip.search_requests.destination}
-              scheduled_at={trip.scheduled_at}
-              trackingId={trip.tracking_id}
-              tripId={trip.id}
-            />
           </div>
-        ))} */}
+        </div>
       </div>
       <Link href={"/driver/mob"}>
         <Typography color="blue">Go to Mobile Version</Typography>

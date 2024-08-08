@@ -3,10 +3,10 @@
 }
 
 .sidebar {
-  border-right: 1px solid #e0e0e0;
+  border-right: 2px solid #eee;
 }
 .sidebar-open {
-  width: 12rem;
+  width: 14rem;
 }
 
 .sidebar-close {
@@ -16,4 +16,10 @@
 .sidebar-collapse-icon {
   padding-top: 25px;
   position: relative
+}
+
+.driver-tab-active {
+  border-bottom: 2px solid #37474f;
+  font-weight: 500;
+  color: #37474f
 }

@@ -13,15 +13,9 @@ const TableContext1 = createContext();
 
 function Table({ children, topCard, footer }) {
   return (
-    <Card className=" h-full w-full">
-      {topCard}
-      <CardBody className="overflow-auto px-0">
-        <table className="w-full min-w-max table-auto text-left">
-          {children}
-        </table>
-      </CardBody>
-      {footer}
-    </Card>
+    <table className="w-full min-w-max table-auto text-left">
+      {children}
+    </table>
   );
 }
 
