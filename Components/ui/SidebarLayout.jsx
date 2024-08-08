@@ -10,8 +10,8 @@ function SidebarLayout({ sidelinks, children }) {
   return (
     <div className=" flex flex-row justify-start ">
       <Sidebar sidelinks={sidelinks} />
-      <main className="flex-1 w-full  bg-gray-200 ">
-        <NavbarMain />
+      <main className="flex-1 w-full bg-gray-200 ml-5">
+        {/* <NavbarMain /> */}
         {/* <Suspense fallback={<h1>Loading....</h1>}> */}
         <section>{children}</section>
         {/* </Suspense> */}
@@ -26,9 +26,9 @@ function Sidebar({ sidelinks }) {
 
   return (
     <aside
-      className={`space-x-1 flex flex-col overflow-y-auto py-4 h-screen sticky top-0 duration-300 ${
-        open ? "w-1/8" : "w-20"
-      }`}
+      className={`flex flex-col sticky duration-300 ${
+        open ? "sidebar-open" : "sidebar-close"
+      } sidebar`}
     >
       <div className=" px-3 mb-4 flex items-center">
         <Avatar src="/shipping.png" alt="logo" />
@@ -50,7 +50,9 @@ function Sidebar({ sidelinks }) {
         onClick={() => setOpen(!open)}
         variant="text"
       >
-        <IoIosArrowDropleft />
+        {/* <div className="sidebar-collapse-icon">
+          <IoIosArrowDropleft />
+        </div> */}
       </div>
       <div className="flex-1 text-gray-900 p-3">
         {sidelinks.map((item) => (
