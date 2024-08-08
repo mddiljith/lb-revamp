@@ -27,6 +27,7 @@ const DriverTripManager = () => {
       setTrips(trips_data);
     }
     fetchTripsForDriver(activeTab);
+    console.log(activeTab)
   }, [activeTab]);
 
   return (

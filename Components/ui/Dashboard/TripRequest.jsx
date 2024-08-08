@@ -1,6 +1,32 @@
 import { Typography, Button, Chip } from '@material-tailwind/react';
-import React from 'react';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { callApi } from "@/lib/utils/api";
+
 const TripRequest = ({trip}) => {
+  console.log(trip)
+  const [status, setStatus] = useState(4)
+  const router = useRouter()
+
+  const tripId = trip.id
+  const acceptTrip = async () => {
+    const requestParams = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: tripId, status_id: 5 }), // Change status to inprogress
+    };
+    const result = await callApi(`/api/trips/${tripId}`, requestParams)
+    toast.success(
+      "Trip accepted successfully."
+      );
+      
+    setStatus(5)
+    // setStatus(result[0]?.status_id)
+    //Need an alert message here after trip is accepted.
+    router.push(`/driver/mob/prepickup?tripId=${tripId}`)
+  }
+
   return(
     <>
       <div className='border p-2 w-full'>
@@ -19,7 +45,7 @@ const TripRequest = ({trip}) => {
             <div className="flex gap-4 p-2">
               <Button size="sm">View in Map</Button>
               <Button color="gray" size="sm" variant='outlined'>Reject</Button>
-              <Button color="green" size="sm">Approve</Button>
+              <Button color="green" size="sm" onClick={acceptTrip}>Approve</Button>
             </div>
           </div>
         </div>

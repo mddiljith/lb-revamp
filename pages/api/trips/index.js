@@ -17,8 +17,7 @@ module.exports = async (req, res) => {
   const data = await getUserRole(session.user.id)
   const role = data[0]?.role_meta_data?.role_id
   const userId = session.user.id
-  const { status_id } = req.query
-
+  const statusId = req.query.status_id
   let userField = "";
   switch(role) {
     case '3':
@@ -61,7 +60,7 @@ module.exports = async (req, res) => {
       return {data};
   }
 
-  const getTrips = async (userId) => {
+  const getTrips = async (userId, statusId) => {
     let { data: trips, error } = await supabaseServerClient
       .from('trips')
       .select(`
@@ -105,7 +104,59 @@ module.exports = async (req, res) => {
         )   
       `)
       .eq(`vehicles.${userField}`, `${userId}`)
-      // .eq('status_id', status_id)
+      .eq('status_id', statusId)
+
+    if(error) {
+      console.log(error);
+      return error
+    }
+    return trips;
+  }
+
+  const getAllTrips = async (userId) => {
+    let { data: trips, error } = await supabaseServerClient
+      .from('trips')
+      .select(`
+        id, created_at, tracking_id,
+        statuses(
+          id,
+          name
+        ), 
+        status_id,
+        vehicles!inner(
+          id,
+          model,
+          plate_number,
+          driver_id,
+          users!vehicles_driver_id_fkey(
+            name,
+            email
+          ),
+          owner_id
+        ),
+        search_requests(
+          id,
+          source,
+          destination,
+          users(
+            email,
+            name
+          )
+        ),
+        payments(
+          id,
+          price,
+          transaction_id
+        ),
+        payment_status(
+          id,
+          statuses(
+            id,
+            name
+          )
+        )   
+      `)
+      .eq(`vehicles.${userField}`, `${userId}`)
 
     if(error) {
       console.log(error);
@@ -168,7 +219,11 @@ module.exports = async (req, res) => {
 
   if(req.method == "GET") {
     if (role != 1) {
-      tripResponse = await getTrips(userId);
+      if (statusId) {
+        tripResponse = await getTrips(userId, statusId);
+      } else {
+        tripResponse = await getAllTrips(userId);
+      }
     }
     else {
       tripResponse = await getShipperTrips(userId);

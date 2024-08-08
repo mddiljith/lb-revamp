@@ -2,7 +2,7 @@ import DriverLayout from "@/Components/Driver/DriverLayout";
 import React from "react";
 import { useState, useEffect } from "react";
 import GenericCard from "@/Components/ui/GenericCard";
-import Trips from "@/Components/ui/Dashboard/Trips";
+// import Trips from "@/Components/ui/Dashboard/Trips";
 import ApprovalCard from "@/Components/Driver/ApprovalCard";
 import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
@@ -60,9 +60,9 @@ function DriverHome() {
               <TripRequest trip={trip}/>
             </div>
           ))}        
-          <div className="flex">
+          {/* <div className="flex">
             <Trips />
-          </div>
+          </div> */}
         </div>
         {/* {trips && trips.map((trip) => (
           <div className="flex-1/2 mx-4 mt-10" key={trip.id}>

@@ -66,10 +66,10 @@ function MapHome({ position, path }) {
         clusters: true,
       });
 
-      // polylineObject = mapplsClassObject.Polyline({
-      //   map: mapObject,
-      //   path: path,
-      // });
+      polylineObject = mapplsClassObject.Polyline({
+        map: mapObject,
+        path: path,
+      });
     });
   });
 
