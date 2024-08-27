@@ -26,8 +26,8 @@ const DriverTripListing = ({ row, index }) => {
           </Link>
         }
         { status_id != 5 && <Link href={`/driver/trips/${id}`}> 
-            <Typography className="text-sm font-semibold text-light-blue-900">
-              {tracking_id}
+            <Typography className="text-md font-semibold text-light-blue-900">
+              #{tracking_id}
             </Typography>
           </Link>
         }

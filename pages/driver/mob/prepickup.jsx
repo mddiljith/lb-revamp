@@ -20,7 +20,7 @@ function Prepickup() {
       <NavbarMob />
       {trip && <div className=" flex-1 flex flex-col">
         <div className=" bg-blue-300 flex-1 overflow-hidden">
-          {/* <Mapmob path={route_path} /> */}
+          <Mapmob path={route_path} />
           {route_path && <Map path={route_path} />}
         </div>
         <div className="bottom-2 w-full fixed p-2 z-50 mb-12">

@@ -5,6 +5,7 @@ import { getDate } from "date-fns";
 //multiple marker setup
 
 function MapHome({ position, path }) {
+  let feature_map = {};
   let geoData = {
     type: "FeatureCollection",
     features: [
@@ -18,6 +19,7 @@ function MapHome({ position, path }) {
       }
     ]
   };
+  // Destination location path
   if(path) {
     feature_map = {
       type: "Feature",
@@ -27,7 +29,7 @@ function MapHome({ position, path }) {
         coordinates: [path[path.length - 1]?.lat, path[path.length - 1]?.lng],
       }
     }
-    getData.features.push(feature_map)
+    geoData.features.push(feature_map)
   }
 
   const styleMap = {
@@ -59,7 +61,6 @@ function MapHome({ position, path }) {
     mapObject = mapplsClassObject.Map({ id: "map", properties: mapProps });
     mapObject.on("load", () => {
       //Activites after mapload
-
       markerObject = mapplsClassObject.Marker({
         map: mapObject,
         position: geoData,
@@ -77,5 +78,3 @@ function MapHome({ position, path }) {
 }
 
 export default MapHome;
-
-//position: { lat: 10.8505, lng: 76.2711 }

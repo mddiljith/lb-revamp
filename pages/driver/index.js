@@ -32,7 +32,7 @@ function DriverHome() {
         <div class="flex-auto">
           <GenericCard
             title="Total Trips"
-            content="125"
+            content="0"
             notice="50 less than yesterday"
             icon="1"
           />
@@ -40,7 +40,7 @@ function DriverHome() {
         <div class="flex-auto">
           <GenericCard
             title="Average Rating"
-            content="4.5"
+            content="0"
             notice="120 less than last month"
             icon="2"
           />
@@ -48,7 +48,7 @@ function DriverHome() {
         <div class="flex-auto">
           <GenericCard
             title="Current Earnings"
-            content="13K"
+            content="0K"
             notice="5K less than last Year"
             icon="3"
           />

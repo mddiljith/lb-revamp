@@ -55,7 +55,7 @@ function Shipper() {
             { showSearch && "India's first Fleet Management & Truck Aggregator company."}
           </Typography>
         </div>
-        <div className="w-full">
+        <div className="w-1/2">
           {showSearch && <SearchForm />}
 
           {!showSearch && showTruckSearch && <TruckSelection />}
@@ -64,10 +64,10 @@ function Shipper() {
           
           {/* <Schedule /> */}
         </div>
+        <div className="w-1/2">
+          { route_path && <Map path={route_path} />}
+        </div>
       </main>
-      {/* <div className="h-full w-full">
-        {!showSearch && route_path && <Map path={route_path} />}
-      </div> */}
     </>
   );
 }
