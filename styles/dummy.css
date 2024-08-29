@@ -27,3 +27,7 @@
 .margin-auto {
   margin-top: auto;
 }
+
+.search-container {
+  margin-left: 2px;
+}

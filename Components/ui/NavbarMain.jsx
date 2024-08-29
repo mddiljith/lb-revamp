@@ -95,15 +95,16 @@ function NavbarMain() {
 export default NavbarMain;
 
 export const NavList = ({ role }) => {
+  console.log({role})
   return (
     <ul className="flex justify-between p-4 items-center gap-12 float-right ml-auto">
       <li>
-        <Link href="/" className="text-sm">
+        <Link href="/shipper" className="text-sm">
           Home
         </Link>
       </li>
       <li>
-        <Link href={`${role}/dashboard`} className="text-sm">
+        <Link href={`/${role}/dashboard`} className="text-sm">
           Dashboard
         </Link>
       </li>

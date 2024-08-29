@@ -15,7 +15,7 @@ import React from "react";
 import { useRecoilValue, useRecoilState} from "recoil";
 import Map from "@/Components/Map/Map";
 import { useQuery } from "@tanstack/react-query";
-
+import MapMyIndia from "@/Components/Map/MapMyIndia";
 import { callApi } from "@/lib/utils/api";
 
 function Shipper() {
@@ -47,26 +47,28 @@ function Shipper() {
     <>
       <Navbar />
       <main className="flex flex-col justify-between bg-blue-400 relative">
-        <div className="">
+        {showSearch && (<div>
           <Typography variant="h2" className="ml-6 mb-2 mt-4 text-center">
             { showSearch && "Book your Truck"}
           </Typography>
           <Typography variant="lead" className="ml-6 mb-2 mt-4 text-center">
             { showSearch && "India's first Fleet Management & Truck Aggregator company."}
           </Typography>
+        </div>)}
+        <div className={`flex ${route_path ? "flex-row" : "flex-col"} w-full`}>
+          <div className={`search-container ${route_path ? "w-1/2" : "w-full"}`}>
+            {showSearch && <SearchForm />}
+            {!showSearch && showTruckSearch && <TruckSelection />}
+            {!showSearch && !showTruckSearch && <Schedule />}
+          </div>
+          {route_path && (
+            <div className="w-1/2">
+              <MapMyIndia path={route_path}/>
+            </div>
+          )}
         </div>
-        <div className="w-1/2">
-          {showSearch && <SearchForm />}
-
-          {!showSearch && showTruckSearch && <TruckSelection />}
-
-          {!showSearch && !showTruckSearch && <Schedule />}
-          
-          {/* <Schedule /> */}
-        </div>
-        <div className="w-1/2">
-          { route_path && <Map path={route_path} />}
-        </div>
+        
+        {/* { route_path && <div className="w-1/2"><Map path={route_path} /></div>} */}
       </main>
     </>
   );

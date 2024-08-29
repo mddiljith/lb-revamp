@@ -36,6 +36,7 @@ const TripDetail = () => {
     const duration_in_minutes = trip[0]?.search_requests?.duration
     duration = intervalToDuration({start: 0, end: duration_in_minutes*1000})
   }
+  console.log({trip})
   return (
     <>
       <NavbarMain />
@@ -44,12 +45,12 @@ const TripDetail = () => {
       </div>}
       {trip && (
         <>
-          <Typography variant="h3" color="blue-gray" className="p-4">
-            consignment ID: #{trip[0]?.tracking_id}
+          <Typography variant="h3" color="blue-gray" className="px-4 py-4">
+            Tracking ID: #{trip[0]?.tracking_id}
           </Typography>
-          <div className="flex flex-row justify-start ml-3">
+          <div className="flex flex-row justify-start ml-2">
             <div className="w-3/5 flex flex-col p-2">
-              <Card className="mt-5 w-5/6 bg-gray-100">
+              <Card className="w-full bg-gray-100 rounded-none">
                 <CardBody>
                   <Timeline>
                     <TimelineItem>
@@ -225,7 +226,7 @@ const TripDetail = () => {
               </Card>
             </div>
             <div className="w-2/6 m-2">
-              <Card className="bg-gray-100">
+              <Card className="bg-gray-100 rounded-none">
                 <CardBody>
                   <div className="flex flex-col gap-5">
                     <Typography
@@ -253,7 +254,7 @@ const TripDetail = () => {
                   </div>
                 </CardBody>
               </Card>
-              <Card className="bg-gray-100 mt-3">
+              <Card className="bg-gray-100 mt-3 rounded-none">
                 <CardBody>
                   <Typography
                     variant="h6"
@@ -274,8 +275,8 @@ const TripDetail = () => {
                   </Typography>
                 </CardBody>
               </Card>
-              <Card className=" mt-3">
-                <CardBody>
+              <Card className="mt-3 rounded-none">
+                <CardBody className="mt-9">
                   <ButtonGroup variant="outlined" size="md" color="blue">
                     <Button>Download Invoice</Button>
                     <Button>Download POD </Button>

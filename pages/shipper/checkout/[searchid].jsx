@@ -32,7 +32,6 @@ function CheckoutConfirmation() {
       }),
       headers: { "Content-Type": "application/json" },
     };
-
     const {data} = await callApi(`/api/trips`, requestParams);
     // setTrip(data);
     let tripId = data[0].id;

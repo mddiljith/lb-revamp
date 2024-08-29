@@ -44,7 +44,8 @@ function Map({ path }) {
     points = data;
   };
 
-  mapplsClassObject.initialize("17ad22773438f5b91de7ef095b9aa1dc", () => {
+  // Previously used token: 17ad22773438f5b91de7ef095b9aa1dc
+  mapplsClassObject.initialize("7fd70b0cf2e27c9d464ef63732d44dff", () => {
     mapObject = mapplsClassObject.Map({ id: "map", properties: mapProps });
     mapObject.on("load", () => {
       //Activites after mapload

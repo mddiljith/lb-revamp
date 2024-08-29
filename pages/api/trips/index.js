@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
         vehicle_id: vehicle.id,
         distance: 100,
         tracking_id: trackingId,
-        payment_status_id: 7,
+        payment_status_id: 1,
         status_id: 4
         // payment_id: sr[0].id
       }).select();
