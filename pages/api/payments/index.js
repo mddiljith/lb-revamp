@@ -30,5 +30,8 @@ module.exports = async (req, res) => {
     } catch (error) {
       console.log({error});
     }
+  } else if(req.method == "GET") {
+    const id = req.query.id
+    console.log('Getting payment data: ', id)
   }
 }

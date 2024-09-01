@@ -8,6 +8,9 @@ import {
 import React from "react";
 
 function PriceCard({ price, onSubmit, isLoading }) {
+  let basePrice = parseFloat(price?.toFixed(2))
+  let gst = parseFloat((basePrice * 0.1).toFixed(2))
+  let total = parseFloat((basePrice + gst).toFixed(2))
   return (
     <>
       <Card>
@@ -16,15 +19,15 @@ function PriceCard({ price, onSubmit, isLoading }) {
             Price Details
           </Typography>
           <Typography variant="h6">
-            Base Price : {price?.toFixed(2)} INR
+            Base Price : {basePrice} INR
           </Typography>
-          <Typography variant="h6">Tax</Typography>
+          <Typography variant="h6">GST (10%) : {gst} INR</Typography>
           <hr />
         </CardBody>
-        <CardFooter>
-          <Typography variant="h6">Total : {price?.toFixed(2)} INR</Typography>
+        <CardFooter className="px-5 py-2">
+          <Typography variant="h6">Total : {total} INR</Typography>
           {onSubmit && (
-            <Button disabled={isLoading} onClick={onSubmit}>
+            <Button disabled={isLoading} onClick={onSubmit} className="mt-5">
               Confirm to Pay
             </Button>
           )}

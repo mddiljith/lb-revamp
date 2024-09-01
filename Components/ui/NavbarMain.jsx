@@ -95,7 +95,6 @@ function NavbarMain() {
 export default NavbarMain;
 
 export const NavList = ({ role }) => {
-  console.log({role})
   return (
     <ul className="flex justify-between p-4 items-center gap-12 float-right ml-auto">
       <li>

@@ -17,12 +17,14 @@ import PriceCard from "@/Components/Shipper/PriceCard";
 import { PriceState } from "@/context/SearchAtom";
 import NavbarMain from "@/Components/ui/NavbarMain";
 import JourneyStrip from "@/Components/Shipper/JourneyStrip";
+import { usePayment } from "@/hooks/search/usePayment";
 
 function CheckoutConfirmation() {
   //verify the shipper satatus and update the billing address accordingly
   const router = useRouter();
   const { searchid } = router.query;
   const price = useRecoilValue(PriceState);
+  const {isFetching, FetchPaymentById} = usePayment()
 
   const createTripForRequest = async (searchid) => {
     const requestParams = {
@@ -33,14 +35,19 @@ function CheckoutConfirmation() {
       headers: { "Content-Type": "application/json" },
     };
     const {data} = await callApi(`/api/trips`, requestParams);
-    // setTrip(data);
     let tripId = data[0].id;
 
     router.push(`/shipper/trips/${tripId}`);
   };
 
   async function handleSubmit(id) {
-    createTripForRequest(id);
+    FetchPaymentById(id, {
+      onSuccess: (data) => {
+        console.log('Payment data: ', data?.payments[0]?.id)
+        payment_id = data?.payments[0]?.id 
+      }
+    })
+    // createTripForRequest(id);
   }
 
   return (

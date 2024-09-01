@@ -27,7 +27,7 @@ function SearchConfirmation() {
   const { isCreating, CreatePayment } = usePayment();
   
   async function handleSubmit(__price) {
-    CreatePayment(__price);
+    CreatePayment({price: parseFloat(__price?.toFixed(2))});
   }
 
   return (
@@ -52,7 +52,7 @@ function SearchConfirmation() {
             <div className="flex flex-row justify-center">
 
             </div> */}
-            <div className="flex gap-5 p-4 mt-4 mx-auto w-full">
+            <div className="flex gap-3 p-2 mt-4 mx-auto w-full">
               
               <Card color="">
                 <CardBody className="p-5">
@@ -68,7 +68,7 @@ function SearchConfirmation() {
                     <Typography variant="h6">
                       Distance : {(SearchData[0]?.distance / 1000).toFixed(2)} KM
                     </Typography>
-                    <Typography variant="h6">
+                    <Typography variant="h6" className="py-2">
                       Estimated duration :
                       {(SearchData[0]?.duration / 3600).toFixed(2)} Hrs
                     </Typography>
